@@ -11,6 +11,7 @@
 
 // headers
 # include "../libft/includes/libft.h"
+# include "../dclst/dclst.h"
 # include "../minilibx-linux/mlx.h"
 
 // macros
