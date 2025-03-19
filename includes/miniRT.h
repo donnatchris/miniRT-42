@@ -45,6 +45,7 @@ typedef struct s_light
 
 typedef struct s_plane
 {
+	int			type;
 	t_vector	position;
 	t_vector	normal;
 	int			color;
@@ -52,6 +53,7 @@ typedef struct s_plane
 
 typedef struct s_sphere
 {
+	int			type;
 	t_vector	position;
 	double		diameter;
 	int			color;
@@ -59,6 +61,7 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
+	int			type;
 	t_vector	position;
 	t_vector	normal;
 	double		diameter;
@@ -74,5 +77,12 @@ typedef struct s_data
 	t_camera		camera;
 	t_light			light;
 }	t_data;
+
+typedef enum e_object
+{
+	PL,
+	SP,
+	CY
+}	t_object;
 
 #endif
