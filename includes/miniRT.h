@@ -1,3 +1,4 @@
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -13,6 +14,9 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
+# define WIDTH 800
+# define HEIGHT 600
+# define NAME_WINDOWS "miniRT by cdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
 # define RAD_TO_DEG(x) (x * 180 / PI)
 
@@ -69,14 +73,14 @@ typedef struct s_cylinder
 	int			color;
 }	t_cylinder;
 
-typedef struct s_data
+typedef struct s_program
 {
 	void		*mlx;
 	void		*win;
 	t_ambient_light	ambient_light;
 	t_camera		camera;
 	t_light			light;
-}	t_data;
+}	t_program;
 
 typedef enum e_object
 {
@@ -84,5 +88,13 @@ typedef enum e_object
 	SP,
 	CY
 }	t_object;
+
+/* ************************************************************************** */
+/* 							UTILS                                             */
+/* ************************************************************************** */
+
+int	ft_close_windows(t_program *program);
+int	ft_key_hook(int keycode, t_program *program);
+void	ft_print_error(int exit_code);
 
 #endif

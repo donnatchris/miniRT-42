@@ -1,28 +1,15 @@
 # Variables
-SRCS        =   src/close.c     \
-				src/color.c	    \
-                src/draw.c      \
-				src/error.c     \
-				src/init.c      \
-				src/init_utils.c\
-				src/isometrie.c \
-				src/key_handle.c\
-				src/main.c      \
-				src/menu.c      \
-                src/read.c      \
-				src/render.c    \
-				src/rotate.c    \
-				src/transform.c \
-				src/atoi_base.c \
-				src/utils.c
-
+SRCS        =   utils/utils_print.c \
+				utils/utils_close.c \
+				src/main.c 
+				
 OBJ_DIR     =   obj
 OBJS        =   $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
-HEADERS     =   includes/fdf.h     
+HEADERS     =   includes/miniRT.h     
 
-NAME        =   fdf
-NAME_BONUS  =   fdf_bonus
+NAME        =   miniRT
+NAME_BONUS  =   miniRT_bonus
 
 CC          =   cc
 CFLAGS      =   -Wall -Wextra -Werror -g -I./libft/srcs -Iincludes
@@ -47,7 +34,7 @@ $(NAME): $(OBJS) $(HEADERS)
 	@echo "$(CYAN)Linking...$(RESET)"
 	@$(CC) $(OBJS) -o $(NAME) $(FLAGS)
 	@echo "$(GREEN)Executable $(NAME) created! $(SMILEY2)$(RESET)"
-	@echo "$(GREEN)Usage: ./fdf [map.fdf]$(RESET)"
+	@echo "$(GREEN)Usage: ./miniRT [scenes.rt]$(RESET)"
 
 # Cible bonus
 bonus: libft mlx $(NAME_BONUS)
@@ -56,7 +43,7 @@ $(NAME_BONUS): $(OBJS) $(HEADERS)
 	@echo "$(CYAN)Linking bonus...$(RESET)"
 	@$(CC) $(OBJS) -o $(NAME_BONUS) $(FLAGS)
 	@echo "$(GREEN)Executable $(NAME_BONUS) created! $(SMILEY2)$(RESET)"
-	@echo "$(GREEN)Usage: ./fdf_bonus [map.fdf]$(RESET)"
+	@echo "$(GREEN)Usage: ./miniRT_bonus [scene.rt]$(RESET)"
 
 # Nettoyage des fichiers objets
 clean:
