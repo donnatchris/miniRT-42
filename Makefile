@@ -1,6 +1,7 @@
 # Variables
-SRCS        =   utils/utils_print.c \
-				utils/utils_close.c \
+SRCS        =   utils/utils_print.c  \
+				utils/utils_close.c  \
+				utils/utils_conert.c \
 				src/main.c 
 				
 OBJ_DIR     =   obj
