@@ -8,7 +8,7 @@ int	main(int ac, char **av)
 
 	program = (t_program *)malloc(sizeof(t_program));
 	if (!program)
-		return (NULL);
+		return (1);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)
