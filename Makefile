@@ -1,7 +1,8 @@
 # Variables
 SRCS        =   utils/utils_print.c  \
 				utils/utils_close.c  \
-				utils/utils_conert.c \
+				utils/utils_color.c \
+				utils/utils_double.c \
 				src/main.c 
 				
 OBJ_DIR     =   obj

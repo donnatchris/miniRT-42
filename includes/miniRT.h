@@ -98,6 +98,8 @@ int		ft_close_windows(t_program *program);
 int		ft_key_hook(int keycode, t_program *program);
 void	ft_print_error(int exit_code);
 double	ft_atod(char *str);
+int		ft_isdouble(char *str);
+int		ft_iscolor(char *str);
 int		ft_atoc(char *str);
 
 #endif
