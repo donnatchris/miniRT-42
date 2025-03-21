@@ -21,23 +21,23 @@ static int	store_sphere(t_file *file, char *line)
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
-		return (ft_free(arg), 1);
+		return (ft_free(arg), ft_free(sphere), 1);
 	store_vector(&sphere->position, arg);
 	start = start + ft_strlen(arg);
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
-		return (1);
+		return (ft_free(sphere), 1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_isdouble(arg))
-		return (ft_free(arg), 1);
+		return (ft_free(arg), ft_free(sphere), 1);
 	sphere->diameter = ft_atod(arg);
 	start = start + ft_strlen(arg);
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
-		return (1);
+		return (ft_free(sphere), 1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_iscolor(arg))
-		return (ft_free(arg), 1);
+		return (ft_free(arg), ft_free(sphere), 1);
 	sphere->color = ft_atoc(arg);
 	ft_free(arg);
 	node = dclst_add_back(file->obj_list, sphere);

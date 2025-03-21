@@ -83,7 +83,7 @@ static int	store_light(t_file *file, char *line)
 
 int store_scene(t_file *file, char *line)
 {
-	if (line[0] == 'A')
+	if (line[0] == 'A')	// manque a controler si jamais il y a plus d'un A
 	{
 		if (store_ambient(file, line))
 			return (1);
