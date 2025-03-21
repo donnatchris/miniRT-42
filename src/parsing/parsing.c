@@ -40,19 +40,29 @@ static int	store_object(t_file *file, char *line)
 		return (1);
 }
 
+static int	init_file_structure(t_file *file)
+{
+	ft_memset(file, 0, sizeof(file));
+	file->obj_list = (t_dclst **) malloc(sizeof(t_dclst *));
+	if (!file->obj_list)
+		return (perror("malloc failed"), ft_free(file), 1);
+	file->camera.direction.x = 1;
+	file->camera.fov = 1;
+	file->light.ratio = 1;
+	file->ambient_light.ratio = 1;
+	return (0);
+}
+
 static t_file	*parse_fd(int fd)
 {
-	
 	t_file	*file;
 	char	*line;
 
 	file = (t_file *) malloc(sizeof(t_file));
 	if (!file)
 		return (perror("malloc failed"), NULL);
-	ft_memset(file, 0, sizeof(file));
-	file->obj_list = (t_dclst **) malloc(sizeof(t_dclst *));
-	if (!file->obj_list)
-		return (perror("malloc failed"), ft_free(file), NULL);
+	if (init_file_structure(file))
+		return (NULL);
 	line = NULL;
 	while (1)
 	{
@@ -91,4 +101,3 @@ t_file	*parse_input(char *input)
 		return (perror("Error closing file"), NULL);	//passer par la fonction qui va tout free
 	return (file);
 }
-// Attention, une fois file retourné, il faut controler sa validité
