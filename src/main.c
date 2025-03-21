@@ -12,6 +12,7 @@ int	main(int ac, char **av)
 	program->file = parse_input(av[1]);
 	if (!program->file)
 		return (ft_free(program), 1);
+	printf("parsing ok\n");
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)

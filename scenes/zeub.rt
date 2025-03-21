@@ -1,0 +1,11 @@
+# Caméra : position (0, 0, -5), orientation (0, 0, 1), FOV 70°
+C 0,0,-5 0,0,1 70     
+
+# Lumière : position (10, 10, -10), intensité 0.8, couleur blanche
+L 10,10,-10 0.8 255,255,255    
+
+# Plan : position (0, -2, 0), orientation (0, 1, 0), couleur gris clair
+pl 0,-2,0 0,1,0 150,150,150    
+
+# Sphère : centre (0, 0, 0), rayon 1, couleur rouge
+sp 0,0,0 1 255,0,0
