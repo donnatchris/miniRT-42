@@ -120,3 +120,11 @@ void	print_object_list(t_dclst **head)
 			break ;
 	}
 }
+
+void	print_file(t_file *file)
+{
+	print_camera(program->file);
+	print_light(program->file);
+	print_ambient_light(program->file);
+	print_object_list(program->file->obj_list);
+}
