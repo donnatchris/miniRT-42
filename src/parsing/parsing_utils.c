@@ -1,35 +1,5 @@
 #include "../../includes/miniRT.h"
 
-// Function to count the size of an array of strings
-// Returns the size of the array or 0 if the array does not exist
-size_t	str_array_size(char **array)
-{
-	size_t	size;
-
-	if (!array)
-		return (0);
-	size = 0;
-	while (array[size])
-		size++;
-	return (size);
-}
-
-// Function to free an array of strings and put all its pointers to NULL
-void	delete_str_array(char **array)
-{
-	size_t	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		ft_free(array[i]);
-		i++;
-	}
-	ft_free(array);
-}
-
 char	*next_arg(char *line, size_t start)
 {
 	char	*arg;

@@ -1,6 +1,6 @@
 #include "../../includes/miniRT.h"
 
-static int	store_sphere(t_file *file, char *line)
+int	store_sphere(t_file *file, char *line)
 {
 	t_sphere *sphere;
 	t_dclst	*node;

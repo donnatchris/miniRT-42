@@ -4,6 +4,17 @@ SRCS        =   utils/utils_print.c  \
 				utils/utils_color.c \
 				utils/utils_double.c \
 				utils/utils_int.c \
+				utils/utils_array.c \
+				utils/utils_free.c \
+				src/parsing/parsing_utils.c \
+				src/parsing/parsing.c \
+				src/parsing/store_cylinder.c \
+				src/parsing/store_plane.c \
+				src/parsing/store_scene.c \
+				src/parsing/store_sphere.c \
+				dclst/dclst1.c \
+				dclst/dclst2.c \
+				dclst/dclst3.c \
 				src/main.c 
 				
 OBJ_DIR     =   obj
@@ -27,7 +38,7 @@ SMILEY2	    =   😎
 
 # Règle pour générer chaque fichier .o dans obj/
 $(OBJ_DIR)/%.o: src/%.c $(HEADERS)
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Cible principale

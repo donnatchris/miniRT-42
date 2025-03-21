@@ -1,6 +1,6 @@
 #include "../../includes/miniRT.h"
 
-static int	store_cylinder(t_file *file, char *line)
+int	store_cylinder(t_file *file, char *line)
 {
 	t_cylinder	*cylinder;
 	t_dclst		*node;

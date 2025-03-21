@@ -106,6 +106,24 @@ int		ft_close_windows(t_program *program);
 int		ft_key_hook(int keycode, t_program *program);
 void	ft_print_error(int exit_code);
 void    ft_free(void *ptr);
+int		ft_iscolor(char *str);
+int		ft_atoc(char *str);
+double 	ft_atod(char *str);
+int		ft_isdouble(char *str);
+int		ft_isint(char *str);
+int		ft_isvector(char *str);
+void	delete_str_array(char **array);
+size_t	str_array_size(char **array);
 
+/* ************************************************************************** */
+/* 							UTILS                                             */
+/* ************************************************************************** */
+t_file	*parse_input(char *input);
+int 	store_scene(t_file *file, char *line);
+int		store_sphere(t_file *file, char *line);
+int		store_plane(t_file *file, char *line);
+int		store_cylinder(t_file *file, char *line);
+char	*next_arg(char *line, size_t start);
+int		store_vector(t_vector *vector, char *arg);
 
 #endif

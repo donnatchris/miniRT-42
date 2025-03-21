@@ -1,14 +1,17 @@
 #include "../includes/miniRT.h"
 
-// int	main(int ac, char **av)
-// {
-// 	(void)av;
-// 	(void)ac;
-// 	t_program	*program;
+int	main(int ac, char **av)
+{
+	(void)av;
+	(void)ac;
+	t_program	*program;
 
 	program = (t_program *)malloc(sizeof(t_program));
 	if (!program)
 		return (1);
+	program->file = parse_input(av[1]);
+	if (!program->file)
+		return (ft_free(program), 1);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)
