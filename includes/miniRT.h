@@ -113,8 +113,9 @@ void	delete_str_array(char **array);
 size_t	str_array_size(char **array);
 
 /* ************************************************************************** */
-/* 							UTILS                                             */
+/* 							PARSING                                           */
 /* ************************************************************************** */
+
 t_file	*parse_input(char *input);
 int 	store_scene(t_file *file, char *line);
 int		store_sphere(t_file *file, char *line);
@@ -124,8 +125,18 @@ char	*next_arg(char *line, size_t start);
 int		store_vector(t_vector *vector, char *arg);
 
 /* ************************************************************************** */
-/* 							TEST                                             */
+/* 							VECTOR                                            */
 /* ************************************************************************** */
+
+int			is_inter_sphere(t_camera ray, t_sphere sphere, double *t);
+void		normalize_vector(t_vector *vector);
+double		dot_vector(t_vector a, t_vector b);
+t_vector	subtract_vector(t_vector a, t_vector b);
+
+/* ************************************************************************** */
+/* 							TEST                                              */
+/* ************************************************************************** */
+
 void		print_camera(t_file *file);
 void		print_light(t_file *file);
 void		print_ambient_light(t_file *file);

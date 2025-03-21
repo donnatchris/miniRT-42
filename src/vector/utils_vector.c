@@ -3,7 +3,6 @@
 int	ft_isvector(char *str)
 {
 	char **tab;
-	int		i;
 
 	tab = ft_split(str, ',');
 	if (!tab)
