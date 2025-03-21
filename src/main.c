@@ -6,12 +6,13 @@ int	main(int ac, char **av)
 	(void)ac;
 	t_program	*program;
 
-	program = (t_program *)malloc(sizeof(t_program));
+	program = ft_calloc(1, sizeof(t_program));
 	if (!program)
-		return (1);
+		return (perror("malloc failed"), 1);
+	// ft_memset(program->file, 0, sizeof(program->file));
 	program->file = parse_input(av[1]);
 	if (!program->file)
-		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
+		return (ft_putstr_fd("Invalid input\n", 2), ft_free((void **)&program), 1);
 	print_file(program->file);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);

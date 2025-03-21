@@ -1,11 +1,12 @@
 #include "../includes/miniRT.h"
 
-void    ft_free(void *ptr)
+// Function to free a pointer and set it to NULL
+void    ft_free(void **ptr)
 {
-	if (ptr)
+	if (*ptr)
 	{
-		free(ptr);
-		ptr = NULL;
+		free(*ptr);
+		*ptr = NULL;
 	}
 }
 
@@ -19,8 +20,33 @@ void	delete_str_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		ft_free(array[i]);
+		ft_free((void **)&array[i]);
 		i++;
 	}
-	ft_free(array);
+	ft_free((void **)&array);
+}
+
+// Function to free the file structure and all of its conponents
+// and set all pointers to NULL
+void	delete_file(t_file *file)
+{
+	if (!file)
+		return ;
+	if (file->obj_list)
+		dclst_clear(file->obj_list);
+	ft_free((void **)&file);
+}
+
+// Function to free the program structure and all of its conponents
+// and set all pointers to NULL
+void	delete_program(t_program *program)
+{
+	if (!program)
+		return ;
+	if (program->win)
+		mlx_destroy_window(program->mlx, program->win);
+	mlx_destroy_display(program->mlx);
+	ft_free((void **)&program->mlx);
+	delete_file(program->file);
+	ft_free((void **)&program);
 }

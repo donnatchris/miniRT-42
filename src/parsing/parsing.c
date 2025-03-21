@@ -42,15 +42,32 @@ static int	store_object(t_file *file, char *line)
 
 static int	init_file_structure(t_file *file)
 {
-	ft_memset(file, 0, sizeof(file));
-	file->obj_list = (t_dclst **) malloc(sizeof(t_dclst *));
+	ft_memset(file, 0, sizeof(t_file *));
+	file->obj_list = ft_calloc(1, sizeof(t_dclst *));
 	if (!file->obj_list)
-		return (perror("malloc failed"), ft_free(file), 1);
+		return (perror("malloc failed"), ft_free((void **)&file), 1);
 	file->camera.direction.x = 1;
 	file->camera.fov = 1;
 	file->light.ratio = 1;
 	file->ambient_light.ratio = 1;
 	return (0);
+}
+
+void	*end_parse_error(t_file *file, int fd)
+{
+	char	*line;
+
+	(void)file;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ft_free((void **)&line);
+	}
+	ft_free((void **)&line);
+	delete_file(file);
+	return (NULL);
 }
 
 static t_file	*parse_fd(int fd)
@@ -66,7 +83,7 @@ static t_file	*parse_fd(int fd)
 	line = NULL;
 	while (1)
 	{
-		ft_free(line);
+		ft_free((void **)&line);
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -75,15 +92,15 @@ static t_file	*parse_fd(int fd)
 		if (is_object(line))
 		{
 			if (store_object(file, line))
-				return (ft_free(line), NULL);	// fonction pour free line et ses objets
+				return (ft_free((void **)&line), end_parse_error(file, fd));
 		}
 		else if (is_scene(line))
 		{
 			if (store_scene(file, line))
-				return (ft_free(line), NULL);	// fonction pour free line et ses objets
+				return (ft_free((void **)&line), end_parse_error(file, fd));
 		}
 	}
-	return (ft_free(line), file);
+	return (ft_free((void **)&line), file);
 }
 
 t_file	*parse_input(char *input)
@@ -94,10 +111,11 @@ t_file	*parse_input(char *input)
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		return (perror("Error opening file"), NULL);
+	file = NULL;
 	file = parse_fd(fd);
 	if (!file)
 		return (NULL);
 	if (close(fd) == -1)
-		return (perror("Error closing file"), NULL);	//passer par la fonction qui va tout free
+		return (perror("Error closing file"),  delete_file(file), NULL);
 	return (file);
 }

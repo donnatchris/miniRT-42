@@ -102,14 +102,18 @@ typedef enum e_object
 int		ft_close_windows(t_program *program);
 int		ft_key_hook(int keycode, t_program *program);
 void	ft_print_error(int exit_code);
-void    ft_free(void *ptr);
 int		ft_iscolor(char *str);
 int		ft_atoc(char *str);
 double 	ft_atod(char *str);
 int		ft_isdouble(char *str);
 int		ft_isint(char *str);
-void	delete_str_array(char **array);
+int		ft_isvector(char *str);
 size_t	str_array_size(char **array);
+// utils_free.c
+void    ft_free(void **ptr);
+void	delete_str_array(char **array);
+void	delete_file(t_file *file);
+void	delete_program(t_program *program);
 
 /* ************************************************************************** */
 /* 							PARSING                                           */

@@ -14,17 +14,17 @@ static int	store_ambient(t_file *file, char *line)
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isratio(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	file->ambient_light.ratio = ft_atod(arg);
 	start = start + ft_strlen(arg) + 1;
-	ft_free(arg);
+	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_iscolor(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	file->ambient_light.color = ft_atoc(arg);
-	return (ft_free(arg), 0);
+	return (ft_free((void **)&arg), 0);
 }
 
 static int	store_camera(t_file *file, char *line)
@@ -39,25 +39,25 @@ static int	store_camera(t_file *file, char *line)
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	store_vector(&file->camera.origin, arg);
 	start = start + ft_strlen(arg) + 1;
-	ft_free(arg);
+	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_isorientation(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	store_vector(&file->camera.direction, arg);
 	start = start + ft_strlen(arg) + 1;
-	ft_free(arg);
+	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_isangle(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	file->camera.fov = ft_atoi(arg);
-	return (ft_free(arg), 0);
+	return (ft_free((void **)&arg), 0);
 }
 
 static int	store_light(t_file *file, char *line)
@@ -72,25 +72,25 @@ static int	store_light(t_file *file, char *line)
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	store_vector(&file->light.position, arg);
 	start = start + ft_strlen(arg) + 1;
-	ft_free(arg);
+	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_isratio(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	file->light.ratio = ft_atod(arg);
 	start = start + ft_strlen(arg) + 1;
-	ft_free(arg);
+	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
 	if (!arg || !ft_iscolor(arg))
-		return (ft_free(arg), 1);
+		return (ft_free((void **)&arg), 1);
 	file->light.color = ft_atoc(arg);
-	return (ft_free(arg), 0);
+	return (ft_free((void **)&arg), 0);
 }
 
 int store_scene(t_file *file, char *line)
