@@ -8,6 +8,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <limits.h>
 
 // headers
 # include "../libft/includes/libft.h"

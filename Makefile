@@ -3,6 +3,7 @@ SRCS        =   utils/utils_print.c  \
 				utils/utils_close.c  \
 				utils/utils_color.c \
 				utils/utils_double.c \
+				utils/utils_int.c \
 				src/main.c 
 				
 OBJ_DIR     =   obj
