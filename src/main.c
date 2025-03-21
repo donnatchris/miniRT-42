@@ -1,39 +1,39 @@
 #include "../includes/miniRT.h"
 
-int	main(int ac, char **av)
-{
-	(void)av;
-	(void)ac;
-	t_program	*program;
+// int	main(int ac, char **av)
+// {
+// 	(void)av;
+// 	(void)ac;
+// 	t_program	*program;
 
-	program = (t_program *)malloc(sizeof(t_program));
-	if (!program)
-		return (1);
-	program->file = parse_input(av[1]);
-	if (!program->file)
-		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
-	printf("parsing ok\n");
-	print_camera(program->file);
-	print_light(program->file);
-	print_ambient_light(program->file);
-	print_object_list(program->file->obj_list);
-	program->mlx = mlx_init();
-	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
-	if (!program->mlx)
-	{
-		ft_print_error(3);
-		return (free(program), 1);
-	}
-	if (!program->win)
-	{
-		ft_print_error(5);
-		mlx_destroy_display(program->mlx);
-		free(program->mlx);
-		free(program);
-		return (1);
-	}
-	mlx_hook(program->win, 17, 0, ft_close_windows, program);
-	mlx_key_hook(program->win, ft_key_hook, program);
-	mlx_loop(program->mlx);
-	return (0);
-}
+// 	program = (t_program *)malloc(sizeof(t_program));
+// 	if (!program)
+// 		return (1);
+// 	program->file = parse_input(av[1]);
+// 	if (!program->file)
+// 		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
+// 	printf("parsing ok\n");
+// 	print_camera(program->file);
+// 	print_light(program->file);
+// 	print_ambient_light(program->file);
+// 	print_object_list(program->file->obj_list);
+// 	program->mlx = mlx_init();
+// 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
+// 	if (!program->mlx)
+// 	{
+// 		ft_print_error(3);
+// 		return (free(program), 1);
+// 	}
+// 	if (!program->win)
+// 	{
+// 		ft_print_error(5);
+// 		mlx_destroy_display(program->mlx);
+// 		free(program->mlx);
+// 		free(program);
+// 		return (1);
+// 	}
+// 	mlx_hook(program->win, 17, 0, ft_close_windows, program);
+// 	mlx_key_hook(program->win, ft_key_hook, program);
+// 	mlx_loop(program->mlx);
+// 	return (0);
+// }

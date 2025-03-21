@@ -42,20 +42,3 @@ void	normalize_vector(t_vector *vector)
 		vector->z = vector->z / norm;
 	}
 }
-
-// Fonction pour calculer le produit scalaire
-double	dot_vector(t_vector a, t_vector b)
-{
-	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
-}
-
-// Fonction pour soustraire deux vecteurs
-t_vector	subtract_vector(t_vector a, t_vector b)
-{
-	t_vector	result;
-
-	result.x = a.x - b.x;
-	result.y = a.y - b.y;
-	result.z = a.z - b.z;
-	return (result);
-}
