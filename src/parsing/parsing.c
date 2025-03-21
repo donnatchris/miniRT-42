@@ -53,6 +53,23 @@ static int	init_file_structure(t_file *file)
 	return (0);
 }
 
+void	*end_parse_error(t_file *file, int fd)
+{
+	char	*line;
+
+	(void)file;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ft_free((void **)&line);
+	}
+	ft_free((void **)&line);
+	delete_file(file);
+	return (NULL);
+}
+
 static t_file	*parse_fd(int fd)
 {
 	t_file	*file;
@@ -75,12 +92,12 @@ static t_file	*parse_fd(int fd)
 		if (is_object(line))
 		{
 			if (store_object(file, line))
-				return (ft_free((void **)&line), delete_file(file), NULL);
+				return (ft_free((void **)&line), end_parse_error(file, fd));
 		}
 		else if (is_scene(line))
 		{
 			if (store_scene(file, line))
-				return (ft_free((void **)&line), delete_file(file), NULL);
+				return (ft_free((void **)&line), end_parse_error(file, fd));
 		}
 	}
 	return (ft_free((void **)&line), file);
