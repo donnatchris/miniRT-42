@@ -14,6 +14,7 @@ SRCS        =   utils/utils_print.c  \
 				src/parsing/store_sphere.c \
 				src/vector/intersection.c \
 				src/vector/utils_vector.c \
+				src/vector/utils_vector2.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \

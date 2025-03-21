@@ -136,6 +136,8 @@ int			is_inter_sphere(t_camera ray, t_sphere sphere, double *t);
 void		normalize_vector(t_vector *vector);
 double		dot_vector(t_vector a, t_vector b);
 t_vector	subtract_vector(t_vector a, t_vector b);
+t_vector	add_vector(t_vector a, t_vector b);
+t_vector	scale_vector(t_vector a, double scale);
 
 /* ************************************************************************** */
 /* 							TEST                                              */
