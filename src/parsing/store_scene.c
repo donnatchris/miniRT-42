@@ -10,8 +10,14 @@
 
 static int	store_ambient(t_file *file, char *line)
 {
-	size_t	start;
-	char	*arg;
+	size_t		start;
+	char		*arg;
+	static int	ambience = 0;
+
+	if (ambience > 0)
+		return (printf("Too many ambient in file\n"), 1);
+	ambience++;
+	start = 1;
 
 	start = 1;
 	arg = next_arg(line, start);
@@ -34,9 +40,13 @@ static int	store_ambient(t_file *file, char *line)
 
 static int	store_camera(t_file *file, char *line)
 {
-	size_t	start;
-	char	*arg;
+	size_t		start;
+	char		*arg;
+	static int	cam = 0;
 
+	if (cam > 0)
+		return (printf("Too many cameras in file\n"), 1);
+	cam++;
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
@@ -63,9 +73,13 @@ static int	store_camera(t_file *file, char *line)
 
 static int	store_light(t_file *file, char *line)
 {
-	size_t	start;
-	char	*arg;
+	size_t		start;
+	char		*arg;
+	static int	light = 0;
 
+	if (light > 0)
+		return (printf("Too many lights in file\n"), 1);
+	light++;
 	start = 1;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))

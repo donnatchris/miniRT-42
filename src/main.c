@@ -12,7 +12,6 @@ int	main(int ac, char **av)
 	program->file = parse_input(av[1]);
 	if (!program->file)
 		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
-	printf("parsing ok\n");
 	print_camera(program->file);
 	print_light(program->file);
 	print_ambient_light(program->file);
