@@ -22,6 +22,24 @@ static int	is_object(char *str)
 	return (0);
 }
 
+static int	store_object(t_file *file, char *line)
+{
+	if (!ft_strncmp(line, "sp", 2))
+	{
+		return(store_sphere(file, line));
+	}
+	else if (!ft_strncmp(line, "pl", 2))
+	{
+		return(store_plane(file, line));
+	}
+	else if (!ft_strncmp(line, "cy", 2))
+	{
+		return(store_cylinder(file, line));
+	}
+	else
+		return (1);
+}
+
 static t_file	*parse_fd(int fd)
 {
 	t_file	*file;
