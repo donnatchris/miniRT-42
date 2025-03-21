@@ -106,6 +106,7 @@ int	ft_isdouble(char *str)
 	return (1);
 }
 
+
 // int main()
 // {
 //     char *str1 = "123.456";

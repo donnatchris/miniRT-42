@@ -5,7 +5,7 @@ static void	print_vector(t_vector v, const char *label)
 	printf("%s: (%.6f, %.6f, %.6f)\n", label, v.x, v.y, v.z);
 }
 
-void	print_camera(t_file *file)
+static void	print_camera(t_file *file)
 {
 	if (!file)
 	{
@@ -15,7 +15,7 @@ void	print_camera(t_file *file)
 	printf("=== Camera ===\n");
 	print_vector(file->camera.origin, "Origin");
 	print_vector(file->camera.direction, "Direction");
-	printf("FOV: %.6f°\n", file->camera.fov);
+	printf("FOV: %d\n", file->camera.fov);
 }
 
 
@@ -29,7 +29,7 @@ static void	print_color(int color, const char *label)
 	printf("%s: R=%d, G=%d, B=%d\n", label, r, g, b);
 }
 
-void	print_light(t_file *file)
+static void	print_light(t_file *file)
 {
 	if (!file)
 	{
@@ -95,10 +95,11 @@ static void	print_cylinder(t_cylinder *cy)
 	print_color(cy->color, "Color");
 }
 
-void	print_object_list(t_dclst **head)
+static void	print_object_list(t_dclst **head)
 {
 	t_dclst	*current;
 
+	printf("=== Objetcs ===\n");
 	if (!head || !*head)
 	{
 		printf("No object to print\n");
@@ -123,8 +124,8 @@ void	print_object_list(t_dclst **head)
 
 void	print_file(t_file *file)
 {
-	print_camera(program->file);
-	print_light(program->file);
-	print_ambient_light(program->file);
-	print_object_list(program->file->obj_list);
+	print_camera(file);
+	print_light(file);
+	print_ambient_light(file);
+	print_object_list(file->obj_list);
 }

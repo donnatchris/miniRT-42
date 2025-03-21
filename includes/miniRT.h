@@ -18,7 +18,7 @@
 // macros
 # define WIDTH 800
 # define HEIGHT 600
-# define NAME_WINDOWS "miniRT by cdonnat / olthorel"
+# define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
 # define RAD_TO_DEG(x) (x * 180 / PI)
 # define WHITESPACE " \t\n\r\v\f"
@@ -40,7 +40,7 @@ typedef struct s_camera
 {
 	t_vector	origin;
 	t_vector	direction;
-	double		fov;
+	int			fov;
 }	t_camera;
 
 typedef struct s_light
@@ -121,8 +121,12 @@ int 	store_scene(t_file *file, char *line);
 int		store_sphere(t_file *file, char *line);
 int		store_plane(t_file *file, char *line);
 int		store_cylinder(t_file *file, char *line);
-char	*next_arg(char *line, size_t start);
 int		store_vector(t_vector *vector, char *arg);
+// parsing_utils.c
+char	*next_arg(char *line, size_t start);
+int		ft_isorientation(char *str);
+int		ft_isratio(char *str);
+int		ft_isangle(char *str);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */
@@ -136,11 +140,6 @@ t_vector	subtract_vector(t_vector a, t_vector b);
 /* ************************************************************************** */
 /* 							TEST                                              */
 /* ************************************************************************** */
-
-void		print_camera(t_file *file);
-void		print_light(t_file *file);
-void		print_ambient_light(t_file *file);
-void		print_object_list(t_dclst **head);
-
+void	print_file(t_file *file);
 
 #endif

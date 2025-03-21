@@ -1,10 +1,10 @@
 #include "../includes/miniRT.h"
 
-// int	main(int ac, char **av)
-// {
-// 	(void)av;
-// 	(void)ac;
-// 	t_program	*program;
+int	main(int ac, char **av)
+{
+	(void)av;
+	(void)ac;
+	t_program	*program;
 
 	program = (t_program *)malloc(sizeof(t_program));
 	if (!program)
@@ -12,11 +12,7 @@
 	program->file = parse_input(av[1]);
 	if (!program->file)
 		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
-	printf("parsing ok\n");
-	print_camera(program->file);
-	print_light(program->file);
-	print_ambient_light(program->file);
-	print_object_list(program->file->obj_list);
+	print_file(program->file);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)

@@ -2,29 +2,18 @@
 
 // need ft_isdouble ft_iscolor, ft_isvector, ft_isint
 
-// typedef struct ambient_light
-// {
-// 	double	ratio;
-// 	int		color;
-// }	t_ambient_light;
-
 static int	store_ambient(t_file *file, char *line)
 {
 	size_t		start;
 	char		*arg;
-	static int	ambience = 0;
+	static int	ambient = 0;
 
-	if (ambience > 0)
+	if (ambient > 0)
 		return (printf("Too many ambient in file\n"), 1);
-	ambience++;
-	start = 1;
-
+	ambient++;
 	start = 1;
 	arg = next_arg(line, start);
-
-	printf("ARG IN AMBIENT : %s\n", arg);
-
-	if (!arg || !ft_isdouble(arg))
+	if (!arg || !ft_isratio(arg))
 		return (ft_free(arg), 1);
 	file->ambient_light.ratio = ft_atod(arg);
 	start = start + ft_strlen(arg) + 1;
@@ -57,7 +46,7 @@ static int	store_camera(t_file *file, char *line)
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
-	if (!arg || !ft_isvector(arg))
+	if (!arg || !ft_isorientation(arg))
 		return (ft_free(arg), 1);
 	store_vector(&file->camera.direction, arg);
 	start = start + ft_strlen(arg) + 1;
@@ -65,9 +54,9 @@ static int	store_camera(t_file *file, char *line)
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
-	if (!arg || !ft_isdouble(arg))
+	if (!arg || !ft_isangle(arg))
 		return (ft_free(arg), 1);
-	file->camera.fov = ft_atod(arg);
+	file->camera.fov = ft_atoi(arg);
 	return (ft_free(arg), 0);
 }
 
@@ -90,7 +79,7 @@ static int	store_light(t_file *file, char *line)
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
 	arg = next_arg(line, start);
-	if (!arg || !ft_isdouble(arg))
+	if (!arg || !ft_isratio(arg))
 		return (ft_free(arg), 1);
 	file->light.ratio = ft_atod(arg);
 	start = start + ft_strlen(arg) + 1;
