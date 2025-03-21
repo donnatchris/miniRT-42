@@ -31,22 +31,6 @@ int	ft_isint(char *str)
 	return (1);
 }
 
-int	ft_isvector(char *str)
-{
-	char **tab;
-	int		i;
-
-	tab = ft_split(str, ',');
-	if (!tab)
-		return (0);
-	if (str_array_size(tab) != 3)
-		return (delete_str_array(tab), 0);
-	if (!ft_isdouble(tab[0]) || !ft_isdouble(tab[1]) || !ft_isdouble(tab[2]))
-		return (delete_str_array(tab), 0);
-	delete_str_array(tab);
-	return (1);
-}
-
 // int main()
 // {
 //     char *tests[] = {"42", "-2147483648", "2147483647", "2147483648", "-2147483649", "abc", "12a", "--42", "", NULL};
