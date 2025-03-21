@@ -20,7 +20,7 @@ int	store_plane(t_file *file, char *line)
     if (line[start] == '\0' || line[start] == '\n')
 		return (ft_free(plane), 1);
     arg = next_arg(line, start);
-	if (!arg || !ft_isvector(arg))
+	if (!arg || !ft_isorientation(arg))
 		return (ft_free(arg), ft_free(plane), 1);
 	store_vector(&plane->normal, arg);
 	start = start + ft_strlen(arg) + 1;

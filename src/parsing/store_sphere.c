@@ -23,7 +23,7 @@ int	store_sphere(t_file *file, char *line)
 	if (!arg || !ft_isdouble(arg))
 		return (ft_free(arg), ft_free(sphere), 1);
 	sphere->diameter = ft_atod(arg);
-	if (sphere->diameter < 0)	//controle
+	if (sphere->diameter <= 0)
 		return (ft_free(arg), ft_free(sphere), 1);
 	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
