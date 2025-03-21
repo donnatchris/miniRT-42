@@ -10,7 +10,6 @@ int	store_cylinder(t_file *file, char *line)
 	cylinder = (t_cylinder *) malloc(sizeof(t_cylinder));
 	if (!cylinder)
 		return (perror("malloc failed"), 1);
-	cylinder->type = CY;
 	start = 2;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
@@ -56,5 +55,6 @@ int	store_cylinder(t_file *file, char *line)
 	node = dclst_add_back(file->obj_list, cylinder);
 	if (!node)
 		return (ft_free(cylinder), perror("malloc failed"), 1);
+	node->type = CY;
 	return (0);
 }

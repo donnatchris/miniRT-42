@@ -10,7 +10,6 @@ int	store_plane(t_file *file, char *line)
 	plane = (t_plane *) malloc(sizeof(t_plane));
 	if (!plane)
 		return (perror("malloc failed"), 1);
-	plane->type = PL;
 	start = 2;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
@@ -36,5 +35,6 @@ int	store_plane(t_file *file, char *line)
     node = dclst_add_back(file->obj_list, plane);
 	if (!node)
 		return (ft_free(plane), perror("malloc failed"), 1);
+	node->type = PL;
 	return (0);
 }

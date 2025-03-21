@@ -52,7 +52,6 @@ typedef struct s_light
 
 typedef struct s_plane
 {
-	int			type;
 	t_vector	position;
 	t_vector	normal;
 	int			color;
@@ -60,7 +59,6 @@ typedef struct s_plane
 
 typedef struct s_sphere
 {
-	int			type;
 	t_vector	position;
 	double		diameter;
 	int			color;
@@ -68,7 +66,6 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	int			type;
 	t_vector	position;
 	t_vector	normal;
 	double		diameter;
@@ -132,6 +129,7 @@ int		store_vector(t_vector *vector, char *arg);
 void		print_camera(t_file *file);
 void		print_light(t_file *file);
 void		print_ambient_light(t_file *file);
+void		print_object_list(t_dclst **head);
 
 
 #endif

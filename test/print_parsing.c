@@ -53,3 +53,70 @@ void	print_ambient_light(t_file *file)
 	printf("Intensity Ratio: %.6f\n", file->ambient_light.ratio);
 	print_color(file->ambient_light.color, "Color");
 }
+
+static void	print_sphere(t_sphere *sp)
+{
+	if (!sp)
+	{
+		printf("Sphere: NULL pointer\n");
+		return;
+	}
+	printf("=== Sphere ===\n");
+	print_vector(sp->position, "Center");
+	printf("Diameter: %.6f\n", sp->diameter);
+	print_color(sp->color, "Color");
+}
+
+static void	print_plane(t_plane *pl)
+{
+	if (!pl)
+	{
+		printf("Plane: NULL pointer\n");
+		return;
+	}
+	printf("=== Plane ===\n");
+	print_vector(pl->position, "Position");
+	print_vector(pl->normal, "Normal");
+	print_color(pl->color, "Color");
+}
+
+static void	print_cylinder(t_cylinder *cy)
+{
+	if (!cy)
+	{
+		printf("Cylinder: NULL pointer\n");
+		return;
+	}
+	printf("=== Cylinder ===\n");
+	print_vector(cy->position, "Position");
+	print_vector(cy->normal, "Orientation (Normal)");
+	printf("Diameter: %.6f\n", cy->diameter);
+	printf("Height: %.6f\n", cy->height);
+	print_color(cy->color, "Color");
+}
+
+void	print_object_list(t_dclst **head)
+{
+	t_dclst	*current;
+
+	if (!head || !*head)
+	{
+		printf("No object to print\n");
+		return ;
+	}
+	current = *head;
+	while (1)
+	{
+		if (current->type == SP)
+			print_sphere((t_sphere *) current->data);
+		else if (current->type == PL)
+			print_plane((t_plane *) current->data);
+		else if (current->type == CY)
+			print_cylinder((t_cylinder *) current->data);
+		else
+			printf("ERROR: unknown object in list\n");
+		current = current -> next;
+		if (current == *head)
+			break ;
+	}
+}

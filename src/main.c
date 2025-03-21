@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 	print_camera(program->file);
 	print_light(program->file);
 	print_ambient_light(program->file);
+	print_object_list(program->file->obj_list);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)

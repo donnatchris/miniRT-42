@@ -42,6 +42,7 @@ static int	store_object(t_file *file, char *line)
 
 static t_file	*parse_fd(int fd)
 {
+	
 	t_file	*file;
 	char	*line;
 
@@ -52,7 +53,6 @@ static t_file	*parse_fd(int fd)
 	file->obj_list = (t_dclst **) malloc(sizeof(t_dclst *));
 	if (!file->obj_list)
 		return (perror("malloc failed"), ft_free(file), NULL);
-	file->obj_list = NULL;
 	line = NULL;
 	while (1)
 	{

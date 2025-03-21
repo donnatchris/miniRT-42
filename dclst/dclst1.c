@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 08:58:54 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/12 16:26:16 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:52:56 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_dclst	*dclst_create_node(void *data)
 	new = (t_dclst *) malloc(sizeof(t_dclst));
 	if (!new)
 		return (NULL);
+	ft_memset(new, 0, sizeof(new));
 	new->data = data;
 	new->next = new;
 	new->prev = new;

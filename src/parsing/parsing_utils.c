@@ -14,9 +14,6 @@ char	*next_arg(char *line, size_t start)
 	while (!ft_strchr(WHITESPACE, line[end]) && line[end] != '\0' && line[end] != '\n')
 		end++;
 	arg = ft_substr(line, start, end - start);
-
-	// printf("ARG : %s\n", arg);
-
 	return (arg);
 }
 

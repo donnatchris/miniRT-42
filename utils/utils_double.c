@@ -66,7 +66,6 @@ double ft_atod(char *str)
 		else
 			result = result * pow(10.0, exp);
     }
-	printf("VALEUR DANS ATOD: %f\n", result * sign);
     return (result * sign);
 }
 

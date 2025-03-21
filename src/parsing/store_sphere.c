@@ -10,7 +10,6 @@ int	store_sphere(t_file *file, char *line)
 	sphere = (t_sphere *) malloc(sizeof(t_sphere));
 	if (!sphere)
 		return (perror("malloc failed"), 1);
-	sphere->type = SP;
 	start = 2;
 	arg = next_arg(line, start);
 	if (!arg || !ft_isvector(arg))
@@ -38,5 +37,6 @@ int	store_sphere(t_file *file, char *line)
 	node = dclst_add_back(file->obj_list, sphere);
 	if (!node)
 		return (ft_free(sphere), perror("malloc failed"), 1);
+	node->type = SP;
 	return (0);
 }
