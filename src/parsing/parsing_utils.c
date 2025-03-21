@@ -38,12 +38,12 @@ char	*next_arg(char *line, size_t start)
 	arg = NULL;
 	while (ft_strchr(WHITESPACE, line[start]))
 		start++;
-	if (line[start] == '\0' || '\n')
+	if (line[start] == '\0' || line[start] == '\n')
 		return (NULL);
 	end = start + 1;
 	while (!ft_strchr(WHITESPACE, line[end]) && line[end] != '\0' && line[end] != '\n')
 		end++;
-	arg = ft_substr(line, start, end - start - 1);
+	arg = ft_substr(line, start, end - start);
 	return (arg);
 }
 
@@ -55,14 +55,10 @@ int	store_vector(t_vector *vector, char *arg)
 	coordonates = ft_split(arg, ',');
 	if (!coordonates || str_array_size(coordonates) != 3)
 		return (delete_str_array(coordonates), 1);
-	if (!ft_isint(coordonates[0]))
+	if (!ft_isint(coordonates[0]) || !ft_isint(coordonates[1]) || !ft_isint(coordonates[2]))
 		return (delete_str_array(coordonates), 1);
 	vector->x = ft_atoi(coordonates[0]);
-	if (!ft_isint(coordonates[1]))
-		return (delete_str_array(coordonates), 1);
-	vector->x = ft_atoi(coordonates[0]);
-	if (!ft_isint(coordonates[2]))
-		return (delete_str_array(coordonates), 1);
-	vector->x = ft_atoi(coordonates[0]);
-		return (delete_str_array(coordonates), 0);
+	vector->y = ft_atoi(coordonates[1]);
+	vector->z = ft_atoi(coordonates[2]);
+	return (delete_str_array(coordonates), 0);
 }

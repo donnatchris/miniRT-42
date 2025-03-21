@@ -2,20 +2,16 @@
 
 static int	is_scene(char *str)
 {
-	if (ft_strlen < 1)
+	if (ft_strlen(str) < 1)
 		return (0);
 	if (str[0] == 'A' || str[0] == 'C' || str[0] == 'L')
-		return (1);
-	if (!ft_strncmp(str, "pl", 2))
-		return (1);
-	if (!ft_strncmp(str, "cy", 2))
 		return (1);
 	return (0);
 }
 
 static int	is_object(char *str)
 {
-	if (ft_strlen < 2)
+	if (ft_strlen(str) < 2)
 		return (0);
 	if (!ft_strncmp(str, "sp", 2))
 		return (1);
@@ -24,6 +20,24 @@ static int	is_object(char *str)
 	if (!ft_strncmp(str, "cy", 2))
 		return (1);
 	return (0);
+}
+
+static int	store_object(t_file *file, char *line)
+{
+	if (!ft_strncmp(line, "sp", 2))
+	{
+		return(store_sphere(file, line));
+	}
+	else if (!ft_strncmp(line, "pl", 2))
+	{
+		return(store_plane(file, line));
+	}
+	else if (!ft_strncmp(line, "cy", 2))
+	{
+		return(store_cylinder(file, line));
+	}
+	else
+		return (1);
 }
 
 static t_file	*parse_fd(int fd)
@@ -38,6 +52,7 @@ static t_file	*parse_fd(int fd)
 	file->obj_list = (t_dclst **) malloc(sizeof(t_dclst *));
 	if (!file->obj_list)
 		return (perror("malloc failed"), ft_free(file), NULL);
+	file->obj_list = NULL;
 	line = NULL;
 	while (1)
 	{
@@ -64,6 +79,10 @@ t_file	*parse_input(char *input)
 	if (fd == -1)
 		return (perror("Error opening file"), NULL);
 	file = parse_fd(fd);
-	close(fd);
+	if (!file)
+		return (NULL);
+	if (close(fd) == -1)
+		return (perror("Error closing file"), NULL);	//passer par la fonction qui va tout free
 	return (file);
 }
+// Attention, une fois file retourné, il faut controler sa validité
