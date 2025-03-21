@@ -1,25 +1,17 @@
-# Caméra : position (0, 0, -5), orientation (0, 0, 1), FOV 70°
-C 0,0,-8 1,1,1 70     fgh dfgh df
+# Caméra : position (0, 0, -8), orientation (1,1,1), FOV 70°
+C 0,0,-8 1,1,1 70
 
-# Lumière : position (10, 10, -10), intensité 0.8, couleur blanche
-L 2.6,3,-10 2.8 255,255,255
+# Lumière : position (2.6, 3, -10), intensité 0.8, couleur blanche
+L 2.6,3,-10 0.8 255,255,255
 
-A 0.2 255,255,255 gdh gh 
+# Lumière ambiante : faible intensité blanche
+A 0.2 255,255,255
 
-# Cylindre : position (0,0,0), vertical, diamètre 2, hauteur 5, bleu clair
+# Cylindre : bleu clair
 cy 0,0,0 0,1,0 2 5 100,200,25
 
-# Plan : position (0, -2, 0), orientation (0, 1, 0), couleur gris clair
-pl 1,2,3 4,5,6 70,80,90    
+# Plan : orientation normalisée
+pl 1,2,3 0,1,0 70,80,90
 
-# Sphère : centre (0, 0, 0), rayon 1, couleur rouge
-sp 0,0,0 1 255,0,0
-
-# Cylindre : position (0,0,0), vertical, diamètre 2, hauteur 5, bleu clair
-cy 0,0,0 0,1,0 2 5 100,200,25
-
-# Plan : position (0, -2, 0), orientation (0, 1, 0), couleur gris clair
-pl 1,2,3 4,5,6 70,80,90    
-
-# Sphère : centre (0, 0, 0), rayon 1, couleur rouge
+# Sphère : rouge
 sp 0,0,0 1 255,0,0

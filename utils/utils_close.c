@@ -2,11 +2,12 @@
 
 int	ft_close_windows(t_program *program)
 {
-	if (program->win)
-		mlx_destroy_window(program->mlx, program->win);
-	mlx_destroy_display(program->mlx);
-	free(program->mlx);
-	free(program);
+	// if (program->win)
+	// 	mlx_destroy_window(program->mlx, program->win);
+	// mlx_destroy_display(program->mlx);
+	// free(program->mlx);
+	// free(program);
+	delete_program(program);
 	exit(0);
 	return (0);
 }
