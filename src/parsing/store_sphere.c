@@ -16,7 +16,7 @@ int	store_sphere(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), ft_free(sphere), 1);
 	store_vector(&sphere->position, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (ft_free(sphere), 1);
@@ -26,7 +26,7 @@ int	store_sphere(t_file *file, char *line)
 	sphere->diameter = ft_atod(arg);
 	if (sphere->diameter < 0)	//controle
 		return (ft_free(arg), ft_free(sphere), 1);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (ft_free(sphere), 1);

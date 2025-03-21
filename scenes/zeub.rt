@@ -1,11 +1,14 @@
 # Caméra : position (0, 0, -5), orientation (0, 0, 1), FOV 70°
-C 0,0,-5 0,0,1 70     
+# C 0,0,-8 1,1,1 70     fgh dfgh df
 
 # Lumière : position (10, 10, -10), intensité 0.8, couleur blanche
-L 10,10,-10 0.8 255,255,255    
+L 2.6,3e,-10 2.8 255,255,255    dfg gfh h
 
-# Plan : position (0, -2, 0), orientation (0, 1, 0), couleur gris clair
-pl 0,-2,0 0,1,0 150,150,150    
+# A 0.2 255,255,255 gdh gh 
+
+
+# # Plan : position (0, -2, 0), orientation (0, 1, 0), couleur gris clair
+# pl 0,-2,0 0,1,0 150,150,150    
 
 # Sphère : centre (0, 0, 0), rayon 1, couleur rouge
-sp 0,0,0 1 255,0,0
+# sp 0,0,0 1 255,0,0

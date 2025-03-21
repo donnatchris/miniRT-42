@@ -63,9 +63,15 @@ static t_file	*parse_fd(int fd)
 		if (line[0] == '\n' || line[0] == '\0')
 			continue ;
 		if (is_object(line))
-			store_object(file, line);
+		{
+			if (store_object(file, line))
+				return (ft_free(line), NULL);	// fonction pour free line et ses objets
+		}
 		else if (is_scene(line))
-			store_scene(file, line);
+		{
+			if (store_scene(file, line))
+				return (ft_free(line), NULL);	// fonction pour free line et ses objets
+		}
 	}
 	return (ft_free(line), file);
 }

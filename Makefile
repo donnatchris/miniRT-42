@@ -15,6 +15,7 @@ SRCS        =   utils/utils_print.c  \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
+				test/print_parsing.c \
 				src/main.c 
 				
 OBJ_DIR     =   obj

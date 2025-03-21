@@ -2,6 +2,12 @@
 
 // need ft_isdouble ft_iscolor, ft_isvector, ft_isint
 
+// typedef struct ambient_light
+// {
+// 	double	ratio;
+// 	int		color;
+// }	t_ambient_light;
+
 static int	store_ambient(t_file *file, char *line)
 {
 	size_t	start;
@@ -9,10 +15,13 @@ static int	store_ambient(t_file *file, char *line)
 
 	start = 1;
 	arg = next_arg(line, start);
+
+	printf("ARG IN AMBIENT : %s\n", arg);
+
 	if (!arg || !ft_isdouble(arg))
 		return (ft_free(arg), 1);
 	file->ambient_light.ratio = ft_atod(arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
@@ -33,7 +42,7 @@ static int	store_camera(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), 1);
 	store_vector(&file->camera.origin, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
@@ -41,7 +50,7 @@ static int	store_camera(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), 1);
 	store_vector(&file->camera.direction, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
@@ -62,7 +71,7 @@ static int	store_light(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), 1);
 	store_vector(&file->light.position, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);
@@ -70,7 +79,7 @@ static int	store_light(t_file *file, char *line)
 	if (!arg || !ft_isdouble(arg))
 		return (ft_free(arg), 1);
 	file->light.ratio = ft_atod(arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
 	if (line[start] == '\0' || line[start] == '\n')
 		return (1);

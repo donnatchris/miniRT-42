@@ -11,8 +11,11 @@ int	main(int ac, char **av)
 		return (1);
 	program->file = parse_input(av[1]);
 	if (!program->file)
-		return (ft_free(program), 1);
+		return (ft_putstr_fd("Invalid input\n", 2), ft_free(program), 1);
 	printf("parsing ok\n");
+	print_camera(program->file);
+	print_light(program->file);
+	print_ambient_light(program->file);
 	program->mlx = mlx_init();
 	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->mlx)

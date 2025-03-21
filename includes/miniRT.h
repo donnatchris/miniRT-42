@@ -126,4 +126,12 @@ int		store_cylinder(t_file *file, char *line);
 char	*next_arg(char *line, size_t start);
 int		store_vector(t_vector *vector, char *arg);
 
+/* ************************************************************************** */
+/* 							TEST                                             */
+/* ************************************************************************** */
+void		print_camera(t_file *file);
+void		print_light(t_file *file);
+void		print_ambient_light(t_file *file);
+
+
 #endif

@@ -16,7 +16,7 @@ int	store_plane(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), ft_free(plane), 1);
 	store_vector(&plane->position, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
     if (line[start] == '\0' || line[start] == '\n')
 		return (ft_free(plane), 1);
@@ -24,7 +24,7 @@ int	store_plane(t_file *file, char *line)
 	if (!arg || !ft_isvector(arg))
 		return (ft_free(arg), ft_free(plane), 1);
 	store_vector(&plane->normal, arg);
-	start = start + ft_strlen(arg);
+	start = start + ft_strlen(arg) + 1;
 	ft_free(arg);
     if (line[start] == '\0' || line[start] == '\n')
 		return (ft_free(plane), 1);
