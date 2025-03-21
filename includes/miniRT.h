@@ -108,7 +108,6 @@ int		ft_atoc(char *str);
 double 	ft_atod(char *str);
 int		ft_isdouble(char *str);
 int		ft_isint(char *str);
-int		ft_isvector(char *str);
 void	delete_str_array(char **array);
 size_t	str_array_size(char **array);
 
@@ -121,7 +120,6 @@ int 	store_scene(t_file *file, char *line);
 int		store_sphere(t_file *file, char *line);
 int		store_plane(t_file *file, char *line);
 int		store_cylinder(t_file *file, char *line);
-int		store_vector(t_vector *vector, char *arg);
 // parsing_utils.c
 char	*next_arg(char *line, size_t start);
 int		ft_isorientation(char *str);
@@ -133,11 +131,22 @@ int		ft_isangle(char *str);
 /* ************************************************************************** */
 
 int			is_inter_sphere(t_camera ray, t_sphere sphere, double *t);
-void		normalize_vector(t_vector *vector);
-double		dot_vector(t_vector a, t_vector b);
-t_vector	subtract_vector(t_vector a, t_vector b);
+int			is_inter_cylinder(t_camera ray, t_cylinder cylinder, double *t);
+int			is_inter_plane(t_camera ray, t_plane plane, double *t);
+int			ft_isvector(char *str);
+int			store_vector(t_vector *vector, char *arg);
+t_vector	reflect_vector(t_vector vector, t_vector nb);
+t_vector	refract_vector(t_vector a, t_vector b, double c);
+t_vector	vector(double x, double y, double z);
+double		len_vector(t_vector v);
+t_vector	sub_vector(t_vector a, t_vector b);
 t_vector	add_vector(t_vector a, t_vector b);
 t_vector	scale_vector(t_vector a, double scale);
+double		dot_vector(t_vector a, t_vector b);
+t_vector	cross_vector(t_vector a, t_vector b);
+double		distance_vector(t_vector a, t_vector b);
+t_vector	inv_vector(t_vector vector);
+void		normalize_vector(t_vector *vector);
 
 /* ************************************************************************** */
 /* 							TEST                                              */
