@@ -42,7 +42,7 @@ static int	store_object(t_file *file, char *line)
 
 static int	init_file_structure(t_file *file)
 {
-	ft_memset(file, 0, sizeof(t_file *));
+	ft_memset(file, 0, sizeof(t_file));
 	file->obj_list = ft_calloc(1, sizeof(t_dclst *));
 	if (!file->obj_list)
 		return (perror("malloc failed"), ft_free((void **)&file), 1);
