@@ -75,6 +75,8 @@ int	ft_isdouble(char *str)
 	int		point_count;
 	int		e_count;
 
+	if (!str || *str == '\0' || *str == '\n')
+		return (0);
 	i = 0;
 	point_count = 0;
 	e_count = 0;

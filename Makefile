@@ -107,12 +107,16 @@ SRCS        =   utils/utils_print.c  \
 				utils/utils_int.c \
 				utils/utils_array.c \
 				utils/utils_free.c \
-				src/parsing/parsing_utils.c \
-				src/parsing/parsing.c \
+				src/parsing/parsing_.c \
+				src/parsing/parsing_utils1.c \
+				src/parsing/parsing_utils2.c \
+				src/parsing/store_.c \
 				src/parsing/store_cylinder.c \
 				src/parsing/store_plane.c \
-				src/parsing/store_scene.c \
 				src/parsing/store_sphere.c \
+				src/parsing/store_scene.c \
+				src/parsing/store_utils1.c \
+				src/parsing/store_utils2.c \
 				src/vector/intersection.c \
 				src/vector/utils_vector.c \
 				src/vector/utils_vector2.c \

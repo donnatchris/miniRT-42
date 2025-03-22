@@ -1,39 +1,39 @@
 #include "../../includes/miniRT.h"
 
-int	store_sphere(t_file *file, char *line)
+// Function to fill the sphere structure from the line
+// Returns 0 if the sphere was filled successfully
+// Returns 1 if an error occured
+static int	fill_sphere_from_line(t_sphere *sphere, char *line)
 {
-	t_sphere *sphere;
-	t_dclst	*node;
 	size_t	start;
 	char	*arg;
 
-	sphere = (t_sphere *) malloc(sizeof(t_sphere));
-	if (!sphere)
-		return (perror("malloc failed"), 1);
 	start = 2;
 	arg = next_arg(line, start);
-	if (!arg || !ft_isvector(arg))
-		return (ft_free((void **)&arg), ft_free((void **)&sphere), 1);
-	store_vector(&sphere->position, arg);
-	start = start + ft_strlen(arg) + 1;
-	ft_free((void **)&arg);
-	if (line[start] == '\0' || line[start] == '\n')
+	if (store_vector(&sphere->position, arg, line))
+		return (ft_free((void **)&arg), 1);
+	arg = next_and_advance(line, &start, arg);
+	if (store_double(&sphere->diameter, arg, line) || sphere->diameter <= 0)
+		return (ft_free((void **)&arg), 1);
+	arg = next_and_advance(line, &start, arg);
+	if (store_color(&sphere->color, arg, line))
+		return (ft_free((void **)&arg), 1);
+	return (ft_free((void **)&arg), 0);
+}
+
+// Function to store the sphere in the file structure
+// Returns 0 if the sphere was stored successfully
+// Returns 1 if an error occured
+int	store_sphere(t_file *file, char *line)
+{
+	t_sphere	*sphere;
+	t_dclst		*node;
+
+	sphere = malloc(sizeof(t_sphere));
+	if (!sphere)
+		return (perror("malloc failed"), 1);
+	if (fill_sphere_from_line(sphere, line))
 		return (ft_free((void **)&sphere), 1);
-	arg = next_arg(line, start);
-	if (!arg || !ft_isdouble(arg))
-		return (ft_free((void **)&arg), ft_free((void **)&sphere), 1);
-	sphere->diameter = ft_atod(arg);
-	if (sphere->diameter <= 0)
-		return (ft_free((void **)&arg), ft_free((void **)&sphere), 1);
-	start = start + ft_strlen(arg) + 1;
-	ft_free((void **)&arg);
-	if (line[start] == '\0' || line[start] == '\n')
-		return (ft_free((void **)&sphere), 1);
-	arg = next_arg(line, start);
-	if (!arg || !ft_iscolor(arg))
-		return (ft_free((void **)&arg), ft_free((void **)&sphere), 1);
-	sphere->color = ft_atoc(arg);
-	ft_free((void **)&arg);
 	node = dclst_add_back(file->obj_list, sphere);
 	if (!node)
 		return (ft_free((void **)&sphere), perror("malloc failed"), 1);

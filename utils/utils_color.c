@@ -6,7 +6,7 @@ int	ft_iscolor(char *str)
 	int	num;
 	int	count;
 
-	if (!str|| !*str)
+	if (!str || *str == '\0' || *str == '\n')
 		return (0);
 	i = 0;
 	count = 0;
