@@ -22,7 +22,7 @@ int	store_cylinder(t_file *file, char *line)
 	arg = next_arg(line, start);
 	if (!arg || !ft_isorientation(arg))
 		return (ft_free((void **)&arg), ft_free((void **)&cylinder), 1);
-	store_vector(&cylinder->normal, arg);
+	store_vector(&cylinder->orientation, arg);
 	start = start + ft_strlen(arg) + 1;
 	ft_free((void **)&arg);
 	if (line[start] == '\0' || line[start] == '\n')

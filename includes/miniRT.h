@@ -50,6 +50,16 @@ typedef struct s_light
 	int			color;
 }	t_light;
 
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	t1;
+	double	t2;
+	double	delta;
+}	t_quadratic;
+
 typedef struct s_hit
 {
 	t_vector	normal;
@@ -76,7 +86,7 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	t_vector	position;
-	t_vector	normal;
+	t_vector	orientation;
 	t_vector	p1;
 	t_vector	p2;
 	t_vector	delta_p;
@@ -149,16 +159,20 @@ int		ft_isangle(char *str);
 
 int			is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit);
 int 		is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit);
-int			is_inter_cylinder(t_camera ray, t_cylinder cylinder, double *t);
+int			is_infinite_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
+int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
 int			ft_isvector(char *str);
 int			store_vector(t_vector *vector, char *arg);
+int			is_quadratic(t_quadratic *q);
+int 		is_zero_vector(t_vector v);
+t_vector	*ray_mul(t_vector *dst, t_camera *r, double t);
 t_vector	reflect_vector(t_vector vector, t_vector nb);
 t_vector	refract_vector(t_vector a, t_vector b, double c);
 t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);
 t_vector	sub_vector(t_vector a, t_vector b);
 t_vector	add_vector(t_vector a, t_vector b);
-t_vector	*scale_vector(t_vector *vector, t_camera *ray, double scale);
+t_vector	mul_vector(t_vector v, double f);
 double		dot_vector(t_vector a, t_vector b);
 t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);

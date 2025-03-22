@@ -89,7 +89,7 @@ static void	print_cylinder(t_cylinder *cy)
 	}
 	printf("=== Cylinder ===\n");
 	print_vector(cy->position, "Position");
-	print_vector(cy->normal, "Orientation (Normal)");
+	print_vector(cy->orientation, "Orientation (Normal)");
 	printf("Diameter: %.6f\n", cy->diameter);
 	printf("Height: %.6f\n", cy->height);
 	print_color(cy->color, "Color");

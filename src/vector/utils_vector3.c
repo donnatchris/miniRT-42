@@ -44,7 +44,7 @@ void	normalize_vector(t_vector *vector)
 	double	norm;
 
 	norm = sqrt((pow(vector->x, 2)) + (pow(vector->y, 2)) + (pow(vector->z, 2)));
-	if (norm != 0.0)
+	if (norm > 1e-6)
 	{
 		vector->x = vector->x / norm;
 		vector->y = vector->y / norm;

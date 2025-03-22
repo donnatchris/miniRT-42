@@ -36,10 +36,12 @@ t_vector	add_vector(t_vector a, t_vector b)
 	return (result);
 }
 // Fonction pour multiplier chaque composant par le scalaire
-t_vector	*scale_vector(t_vector *vector, t_camera *ray, double scale)
+t_vector	mul_vector(t_vector v, double f)
 {
-	vector->x = ray->origin.x + scale * ray->direction.x;
-	vector->y = ray->origin.y + scale * ray->direction.y;
-	vector->z = ray->origin.z + scale * ray->direction.z;
-	return (vector);
+	t_vector	dst;
+
+	dst.x = v.x * f;
+	dst.y = v.y * f;
+	dst.z = v.z * f;
+	return (dst);
 }
