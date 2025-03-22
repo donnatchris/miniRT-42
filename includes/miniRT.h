@@ -50,6 +50,14 @@ typedef struct s_light
 	int			color;
 }	t_light;
 
+typedef struct s_hit
+{
+	t_vector	normal;
+	t_vector	point;
+	double		distance;
+	int			color;
+}	t_hit;
+
 typedef struct s_plane
 {
 	t_vector	position;
@@ -61,6 +69,7 @@ typedef struct s_sphere
 {
 	t_vector	position;
 	double		diameter;
+	double		rayon2;
 	int			color;
 }	t_sphere;
 
@@ -68,8 +77,12 @@ typedef struct s_cylinder
 {
 	t_vector	position;
 	t_vector	normal;
+	t_vector	p1;
+	t_vector	p2;
+	t_vector	delta_p;
 	double		diameter;
 	double		height;
+	double		rayon2;
 	int			color;
 }	t_cylinder;
 
@@ -134,9 +147,9 @@ int		ft_isangle(char *str);
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
-int			is_inter_sphere(t_camera ray, t_sphere sphere, double *t);
+int			is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit);
+int 		is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit);
 int			is_inter_cylinder(t_camera ray, t_cylinder cylinder, double *t);
-int			is_inter_plane(t_camera ray, t_plane plane, double *t);
 int			ft_isvector(char *str);
 int			store_vector(t_vector *vector, char *arg);
 t_vector	reflect_vector(t_vector vector, t_vector nb);
@@ -145,7 +158,7 @@ t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);
 t_vector	sub_vector(t_vector a, t_vector b);
 t_vector	add_vector(t_vector a, t_vector b);
-t_vector	scale_vector(t_vector a, double scale);
+t_vector	*scale_vector(t_vector *vector, t_camera *ray, double scale);
 double		dot_vector(t_vector a, t_vector b);
 t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
