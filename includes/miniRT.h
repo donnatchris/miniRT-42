@@ -63,11 +63,12 @@ typedef struct s_quadratic
 
 typedef struct s_hit
 {
-	t_vector	normal;
-	t_vector	point;
-	double		distance;
-	int			color;
-}	t_hit;
+	int			hit;        // 0 = pas d'intersection, 1 = oui
+	double		t;          // distance d'intersection (minimale)
+	t_dclst		*object;    // pointeur vers l'objet touché
+	t_vector	point;      // coordonnées du point d'impact
+	t_vector	normal;     // normale à la surface à ce point
+} t_hit;
 
 typedef struct s_plane
 {
