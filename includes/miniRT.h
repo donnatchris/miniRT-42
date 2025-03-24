@@ -9,6 +9,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <limits.h>
+# include <float.h>
 
 // headers
 # include "../libft/includes/libft.h"
@@ -210,11 +211,11 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
-int			is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit);
-int 		is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit);
-// int			is_infinite_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
-// int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
-int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, double *t1, double *t2);
+int			is_inter_scene(t_ray *ray, t_file *file, t_hit *hit);
+int			is_inter_plane(t_ray *ray, t_plane *plane, t_hit *hit);
+int 		is_inter_sphere(t_ray ray, t_sphere sphere, t_hit *hit);
+int			is_infinite_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
+int 		is_inter_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
 int			ft_isvector(char *str);
 int			is_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);

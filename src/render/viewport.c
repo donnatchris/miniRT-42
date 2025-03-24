@@ -34,6 +34,18 @@ t_ray	generate_ray(t_viewport *view, int x, int y)
 	return (ray);
 }
 
+int get_color_pixel(t_ray *ray, t_file *file)
+{
+    t_hit hit;
+    int color;
+
+    if (is_inter_scene(ray, file->obj_list, &hit)) // Vérifie si le rayon intersecte un objet
+        color = hit.color; // Couleur de l'objet touché
+    else
+        color = file->ambient_light.color; // Couleur de fond (ambiance)
+    return (color);
+}
+
 void	render(t_program *prog)
 {
 	int			x;
@@ -41,14 +53,16 @@ void	render(t_program *prog)
 	t_ray		ray;
 	t_viewport	view;
 	char		*addr;
+	int			color;
 
 	view = viewport(prog);
-	prog->img = malloc(sizeof(t_img));
+	prog->img = (t_img *)malloc(sizeof(t_img));
 	if (!prog->img)
 	{
 		perror("malloc img failed");
 		// sortir proprement
 	}
+	//ft_memset()
 	prog->img->img_ptr = mlx_new_image(prog->mlx, WIDTH, HEIGHT);
 	addr = mlx_get_data_addr(prog->img->img_ptr, &prog->img->bpp, &prog->img->size_line, &prog->img->endian);
 	y = 0;
@@ -58,6 +72,7 @@ void	render(t_program *prog)
 		while (x < WIDTH)
 		{
 			ray = generate_ray(&view, x, y);
+			color = get_color_pixel(&ray, file); //recupere couleur du pixel
 			//ft_coeur du programme a coder
 			x++;
 		}

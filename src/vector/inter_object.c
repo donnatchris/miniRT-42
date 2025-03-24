@@ -1,6 +1,6 @@
 #include "../includes/miniRT.h"
 
-int is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit)
+int is_inter_plane(t_ray *ray, t_plane *plane, t_hit *hit)
 {
 	t_vector	normal;
 	t_vector	vector;
@@ -27,7 +27,7 @@ int is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit)
 	return (0);  // Retourner faux si aucune intersection n'a eu lieu
 }
 
-int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
+int	is_inter_sphere(t_ray ray, t_sphere sphere, t_hit *hit)
 {
 	t_vector	vector;
 	double		discriminant;
@@ -56,7 +56,7 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 	return (1);
 }
 
-// int infinite_cyl_inter(t_camera *ray, t_cylinder *cy, t_hit *hit)
+// int infinite_cyl_inter(t_ray *ray, t_cylinder *cy, t_hit *hit)
 // {
 //     t_quadratic q;
 //     t_vector u, v;
@@ -117,7 +117,7 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 //     return 1;
 // }
 
-// int	is_inter_cylinder(t_camera *ray, t_cylinder *cy, t_hit *hit)
+// int	is_inter_cylinder(t_ray *ray, t_cylinder *cy, t_hit *hit)
 // {
 // 	t_plane	pl;
 // 	t_hit	tmp_hit;
@@ -152,7 +152,7 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 
 //TEST IS_INTER_SPHERE
 // int main() {
-//     t_camera ray;
+//     t_ray ray;
 //     t_sphere sphere;
 //     t_hit hit;
 
@@ -231,7 +231,7 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 
 //TEST IS_INTER_PLANE
 // int main() {
-// 	t_camera ray;
+// 	t_ray ray;
 // 	t_plane plane;
 // 	t_hit hit;
 
@@ -289,7 +289,7 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 int main()
 {
     // Déclaration de rayons (avec origine et direction)
-    t_camera ray1, ray2, ray3;
+    t_ray ray1, ray2, ray3;
     ray1.origin = (t_vector){0.0f, 0.0f, 0.0f};
     ray1.direction = (t_vector){1.0f, 0.0f, 0.0f};  // Rayon orienté le long de l'axe X
 

@@ -16,7 +16,8 @@ SRCS        =   utils/utils_print.c  \
 				src/parsing/store_scene.c \
 				src/parsing/store_utils1.c \
 				src/parsing/store_utils2.c \
-				src/vector/intersection.c \
+				src/vector/inter_object.c \
+				src/vector/inter_scene.c \
 				src/vector/utils_vector.c \
 				src/vector/utils_vector2.c \
 				src/vector/utils_vector3.c \
