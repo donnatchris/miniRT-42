@@ -9,7 +9,7 @@ int	ft_isint(char *str)
 	i = 0;
 	sign = 1;
 	nb = 0;
-	if (!str || !str[i])
+	if (!str || *str == '\0' || *str == '\n')
 		return (0);
 	if (str[i] == '-' || str[i] == '+')
 	{

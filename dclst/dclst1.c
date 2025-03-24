@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dclst1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 08:58:54 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/21 14:52:56 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:51:59 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_dclst	*dclst_create_node(void *data)
 	new = (t_dclst *) malloc(sizeof(t_dclst));
 	if (!new)
 		return (NULL);
-	ft_memset(new, 0, sizeof(new));
+	ft_memset(new, 0, sizeof(t_dclst));
 	new->data = data;
 	new->next = new;
 	new->prev = new;

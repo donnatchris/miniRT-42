@@ -21,7 +21,7 @@
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
 # define RAD_TO_DEG(x) (x * 180 / PI)
-# define WHITESPACE " \t\n\r\v\f"
+# define WHITESPACE " \t\r\v\f"
 
 typedef struct s_vector
 {
@@ -141,17 +141,41 @@ void	delete_program(t_program *program);
 /* ************************************************************************** */
 /* 							PARSING                                           */
 /* ************************************************************************** */
-
+// parsing_.c
 t_file	*parse_input(char *input);
-int 	store_scene(t_file *file, char *line);
-int		store_sphere(t_file *file, char *line);
-int		store_plane(t_file *file, char *line);
-int		store_cylinder(t_file *file, char *line);
-// parsing_utils.c
-char	*next_arg(char *line, size_t start);
+// parsing_utils1.c
+int		is_scene(char *str);
+int		is_object(char *str);
+int		ft_isvector(char *str);
 int		ft_isorientation(char *str);
 int		ft_isratio(char *str);
+// parsing_utils2.c
 int		ft_isangle(char *str);
+int		check_input_file(char *input);
+char	*next_arg(char *line, size_t start);
+char	*next_and_advance(char *line, size_t *start, char *old_arg);
+int		pars_err_msg(char *msg, char *line);
+// store_.c
+int		store_scene(t_file *file, char *line);
+int		store_object(t_file *file, char *line);
+// store_cylinder.c
+int		store_cylinder(t_file *file, char *line);
+// store_plane.c
+int		store_plane(t_file *file, char *line);
+// store_scene.c
+int		store_camera(t_file *file, char *line);
+int		store_ambient(t_file *file, char *line);
+int		store_light(t_file *file, char *line);
+// store_sphere.c
+int		store_sphere(t_file *file, char *line);
+// store_utils1.c
+int		store_angle(int *storage, char *arg, char *line);
+int		store_double(double *storage, char *arg, char *line);
+int		store_ratio(double *storage, char *arg, char *line);
+int		store_color(int *storage, char *arg, char *line);
+// store_utils2.c
+int		store_vector(t_vector *vector, char *arg, char *line);
+int		store_orientation(t_vector *vector, char *arg, char *line);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */
