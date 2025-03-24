@@ -13,7 +13,7 @@ static int	fill_cylinder_from_line(t_cylinder *cylinder, char *line)
 	if (store_vector(&cylinder->position, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_orientation(&cylinder->normal, arg, line))
+	if (store_orientation(&cylinder->orientation, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
 	if (store_double(&cylinder->diameter, arg, line) || cylinder->diameter <= 0)
