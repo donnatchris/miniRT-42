@@ -104,11 +104,24 @@ typedef struct s_file
 	t_dclst			**obj_list;
 }	t_file;
 
+typedef struct s_viewport
+{
+	double		fov;
+	double		height;
+	double		width;
+	t_vector	world_up;
+	t_vector	forward;
+	t_vector	right;
+	t_vector	up;
+	t_vector	origin;
+}	t_viewport;
+
 typedef struct s_program
 {
-	void	*mlx;
-	void	*win;
-	t_file	*file;
+	void		*mlx;
+	void		*win;
+	t_file		*file;
+	t_viewport	*view;
 }	t_program;
 
 typedef enum e_object

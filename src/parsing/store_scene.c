@@ -13,7 +13,7 @@ int	store_camera(t_file *file, char *line)
 	if (store_vector(&file->camera.origin, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_vector(&file->camera.direction, arg, line))
+	if (store_orientation(&file->camera.direction, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
 	if (store_angle(&file->camera.fov, arg, line))
