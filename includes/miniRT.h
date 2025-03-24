@@ -107,6 +107,7 @@ typedef struct s_file
 typedef struct s_viewport
 {
 	double		fov;
+	double		asp_ratio;
 	double		height;
 	double		width;
 	t_vector	world_up;
@@ -116,10 +117,17 @@ typedef struct s_viewport
 	t_vector	origin;
 }	t_viewport;
 
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+}	t_ray;
+
 typedef struct s_program
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
 	t_file		*file;
 	t_viewport	*view;
 }	t_program;
