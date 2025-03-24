@@ -56,57 +56,100 @@ int	is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit)
 	return (1);
 }
 
-int	infinite_cyl_inter(t_camera *ray, t_cylinder *cy, t_hit *hit)
-{
-	t_quadratic	q;
-	t_vector		u;
-	t_vector		v;
+// int infinite_cyl_inter(t_camera *ray, t_cylinder *cy, t_hit *hit)
+// {
+//     t_quadratic q;
+//     t_vector u, v;
 
-	u = cross_vector(ray->direction, cy->orientation);
-	v = sub_vector(cy->position, ray->origin);
-	v = cross_vector(v, cy->orientation);
-	q.a = dot_vector(u, u);
-	q.b = 2 * dot_vector(u, v);
-	q.c = dot_vector(v, v) - cy->rayon2;
-	if (!is_quadratic(&q) || (q.t2 <= 1e-6 && q.t1 <= 1e-6))
-		return (0);
-	if (q.t1 <= 1e-6 || (q.t2 > 1e-6 && (q.t2 < q.t1)))
-		q.t1 = q.t2;
-	hit->distance = q.t1;
-	ray_mul(&hit->point, ray, q.t1);
-	v = sub_vector(cy->position, hit->point);
-	hit->normal = cross_vector(v, cy->orientation);
-	hit->normal = cross_vector(hit->normal, cy->orientation);
-	normalize_vector(&hit->normal);
-	if (dot_vector(hit->normal, ray->direction))
-		hit->normal = inv_vector(hit->normal);
-	return (1);
-}
+//     u = cross_vector(ray->direction, cy->orientation);
+//     v = sub_vector(cy->position, ray->origin);
+//     v = cross_vector(v, cy->orientation);
 
-int	is_inter_cylinder(t_camera *ray, t_cylinder *cy, t_hit *hit)
-{
-	t_plane	pl;
-	t_hit	tmp_hit;
+//     q.a = dot_vector(u, u);
+//     q.b = 2 * dot_vector(u, v);
+//     q.c = dot_vector(v, v) - cy->rayon2;
 
-	hit->distance = INFINITY;
-	pl.position = cy->p1;
-	pl.normal = cy->orientation;
-	if (is_inter_plane(ray, &pl, &tmp_hit)
-		&& distance_vector(tmp_hit.point, cy->p1)
-		<= cy->diameter * 0.5 && hit->distance > tmp_hit.distance)
-		*hit = tmp_hit;
-	pl.position = cy->p2;
-	if (is_inter_plane(ray, &pl, &tmp_hit)
-		&& distance_vector(tmp_hit.point, cy->p2) <= cy->diameter * 0.5
-		&& hit->distance > tmp_hit.distance)
-		*hit = tmp_hit;
-	if (infinite_cyl_inter(ray, cy, &tmp_hit)
-		&& pow(distance_vector(cy->position, tmp_hit.point), 2)
-		<= pow(cy->height * 0.5, 2) + cy->rayon2
-		&& hit->distance > tmp_hit.distance)
-		*hit = tmp_hit;
-	return (hit->distance < INFINITY && hit->distance > 1e-6);
-}
+//     printf("\n[DEBUG] Résolution quadratique :\n");
+//     printf("a = %f, b = %f, c = %f\n", q.a, q.b, q.c);
+
+//     if (q.a == 0)
+//     {
+//         printf("[ERREUR] a = 0, la direction du rayon est parallèle au cylindre !\n");
+//         return 0;
+//     }
+
+//     if (!is_quadratic(&q))
+//     {
+//         printf("[ERREUR] Pas de solution réelle pour l'intersection !\n");
+//         return 0;
+//     }
+
+//     printf("[DEBUG] Racines trouvées : t1 = %f, t2 = %f\n", q.t1, q.t2);
+
+//     if (q.t1 <= 1e-6 && q.t2 <= 1e-6)
+//         return 0;
+
+//     if (q.t1 > q.t2)
+//     {
+//         double tmp = q.t1;
+//         q.t1 = q.t2;
+//         q.t2 = tmp;
+//     }
+
+//     if (q.t1 <= 1e-6 || (q.t2 > 1e-6 && (q.t2 < q.t1)))
+//         q.t1 = q.t2;
+
+//     hit->distance = q.t1;
+//     ray_mul(&hit->point, ray, q.t1);  // Calcul du point d'impact avec t1
+
+//     printf("[DEBUG] Avant d'assigner, t1 = %f, t2 = %f\n", q.t1, q.t2);
+//     printf("[DEBUG] Intersection à t1 = %f\n", q.t1);
+//     printf("[DEBUG] Point d'impact : (%f, %f, %f)\n", hit->point.x, hit->point.y, hit->point.z);
+
+//     v = sub_vector(cy->position, hit->point);
+//     hit->normal = cross_vector(v, cy->orientation);
+//     hit->normal = cross_vector(hit->normal, cy->orientation);
+//     normalize_vector(&hit->normal);
+
+//     if (dot_vector(hit->normal, ray->direction))
+//         hit->normal = inv_vector(hit->normal);
+
+//     return 1;
+// }
+
+// int	is_inter_cylinder(t_camera *ray, t_cylinder *cy, t_hit *hit)
+// {
+// 	t_plane	pl;
+// 	t_hit	tmp_hit;
+
+// 	hit->distance = INFINITY;
+// 	pl.position = cy->p1;
+// 	pl.normal = cy->orientation;
+// 	if (is_inter_plane(ray, &pl, &tmp_hit)
+// 		&& distance_vector(tmp_hit.point, cy->p1)
+// 		<= cy->diameter * 0.5 && hit->distance > tmp_hit.distance)
+// 	{
+// 		printf("\n[DEBUG] Intersection avec une base trouvée !\n");
+// 		printf("Distance: %f\n", tmp_hit.distance);
+// 		printf("Point d'impact: (%f, %f, %f)\n", tmp_hit.point.x, tmp_hit.point.y, tmp_hit.point.z);
+// 		printf("Distance au centre de la base: %f\n", distance_vector(tmp_hit.point, pl.position));
+// 		*hit = tmp_hit;
+// 	}
+// 	else
+// 		printf("[DEBUG] Aucune intersection avec cette base.\n");
+// 	pl.position = cy->p2;
+// 	if (is_inter_plane(ray, &pl, &tmp_hit)
+// 		&& distance_vector(tmp_hit.point, cy->p2) <= cy->diameter * 0.5
+// 		&& hit->distance > tmp_hit.distance)
+// 		*hit = tmp_hit;
+// 	if (infinite_cyl_inter(ray, cy, &tmp_hit)
+// 		&& pow(distance_vector(cy->position, tmp_hit.point), 2)
+// 		<= pow(cy->height * 0.5, 2) + cy->rayon2
+// 		&& hit->distance > tmp_hit.distance)
+// 		*hit = tmp_hit;
+// 	return (hit->distance < INFINITY && hit->distance > 1e-6);
+// }
+
 //TEST IS_INTER_SPHERE
 // int main() {
 //     t_camera ray;
@@ -243,87 +286,29 @@ int	is_inter_cylinder(t_camera *ray, t_cylinder *cy, t_hit *hit)
 // }
 
 //TEST IS_INFINITE_CYLINDER
-int main()
-{
-    // Déclaration de rayons (avec origine et direction)
-    t_camera ray1, ray2, ray3;
-    ray1.origin = (t_vector){0.0f, 0.0f, 0.0f};
-    ray1.direction = (t_vector){1.0f, 0.0f, 0.0f};  // Rayon orienté le long de l'axe X
+// int main() {
+//     // Définir un rayon
+//     t_ray ray;
+//     ray.origin = (t_vector){0.0, 0.0, -10.0};  // Position de départ du rayon
+//     ray.direction = (t_vector){0.0, 0.0, 1.0};  // Direction du rayon (vers le haut)
 
-    ray2.origin = (t_vector){0.0f, 0.0f, -2.0f};
-    ray2.direction = (t_vector){0.0f, 0.0f, 1.0f};  // Rayon dirigé le long de l'axe Z
+//     // Définir un cylindre
+//     t_cylinder cylinder;
+//     cylinder.base = (t_vector){0.0, 0.0, 0.0};  // Position de la base du cylindre
+//     cylinder.axis = (t_vector){0.0, 0.0, 1.0};  // L'axe du cylindre est aligné sur l'axe Z
+//     cylinder.radius = 2.0;  // Rayon du cylindre
+//     cylinder.height = 10.0;  // Hauteur du cylindre
 
-    ray3.origin = (t_vector){-1.0f, 0.0f, 0.0f};
-    ray3.direction = (t_vector){1.0f, 0.0f, 0.0f};  // Rayon orienté le long de l'axe X, côté négatif
+//     // Variables pour stocker les valeurs des intersections
+//     double t1, t2;
 
-    // Déclaration de cylindres (avec position, orientation, rayon, et hauteur)
-    t_cylinder cyl1, cyl2, cyl3;
-    
-    cyl1.position = (t_vector){1.0f, 0.0f, 0.0f};  // Cylindre centré à (1, 0, 0)
-    cyl1.orientation = (t_vector){0.0f, 1.0f, 0.0f}; // Cylindre orienté le long de l'axe Y
-    cyl1.rayon2 = 1.0f;  // Rayon au carré du cylindre
-    cyl1.height = 5.0f;   // Hauteur du cylindre
-    cyl1.p1 = (t_vector){0.0f, -2.5f, 0.0f};  // Base inférieure
-    cyl1.p2 = (t_vector){0.0f, 2.5f, 0.0f};   // Base supérieure
+//     // Tester l'intersection
+//     if (intersect_cylinder(&ray, &cylinder, &t1, &t2)) {
+//         printf("Intersection trouvée !\n");
+//         printf("t1 = %lf, t2 = %lf\n", t1, t2);
+//     } else {
+//         printf("Pas d'intersection.\n");
+//     }
 
-    cyl2.position = (t_vector){0.0f, 0.0f, 0.0f};  // Cylindre centré à l'origine
-    cyl2.orientation = (t_vector){0.0f, 1.0f, 0.0f}; // Cylindre orienté le long de l'axe Y
-    cyl2.rayon2 = 0.5f;  // Rayon au carré du cylindre
-    cyl2.height = 4.0f;   // Hauteur du cylindre
-    cyl2.p1 = (t_vector){-0.25f, -2.0f, 0.0f};  // Base inférieure
-    cyl2.p2 = (t_vector){-0.25f, 2.0f, 0.0f};   // Base supérieure
-
-    cyl3.position = (t_vector){0.0f, 0.0f, 0.0f};  // Cylindre centré à l'origine
-    cyl3.orientation = (t_vector){1.0f, 0.0f, 0.0f}; // Cylindre orienté le long de l'axe X
-    cyl3.rayon2 = 2.0f;  // Rayon au carré du cylindre
-    cyl3.height = 5.0f;   // Hauteur du cylindre
-    cyl3.p1 = (t_vector){-1.0f, -2.5f, 0.0f};  // Base inférieure
-    cyl3.p2 = (t_vector){-1.0f, 2.5f, 0.0f};   // Base supérieure
-
-    // Variables pour stocker les résultats d'impact
-    t_hit hit1, hit2, hit3;
-
-    // Test 1 : Intersection entre le rayon 1 et cylindre 1
-    printf("Test 1 : Intersection entre ray1 et cylindre1\n");
-    if (is_inter_cylinder(&ray1, &cyl1, &hit1))
-    {
-        printf("Intersection trouvée!\n");
-        printf("Distance de l'impact: %f\n", hit1.distance);
-        printf("Point d'impact: (%f, %f, %f)\n", hit1.point.x, hit1.point.y, hit1.point.z);
-        printf("Normale à l'impact: (%f, %f, %f)\n", hit1.normal.x, hit1.normal.y, hit1.normal.z);
-    }
-    else
-    {
-        printf("Aucune intersection trouvée.\n");
-    }
-
-    // Test 2 : Intersection entre le rayon 2 et cylindre 2
-    printf("\nTest 2 : Intersection entre ray2 et cylindre2\n");
-    if (is_inter_cylinder(&ray2, &cyl2, &hit2))
-    {
-        printf("Intersection trouvée!\n");
-        printf("Distance de l'impact: %f\n", hit2.distance);
-        printf("Point d'impact: (%f, %f, %f)\n", hit2.point.x, hit2.point.y, hit2.point.z);
-        printf("Normale à l'impact: (%f, %f, %f)\n", hit2.normal.x, hit2.normal.y, hit2.normal.z);
-    }
-    else
-    {
-        printf("Aucune intersection trouvée.\n");
-    }
-
-    // Test 3 : Intersection entre le rayon 3 et cylindre 3
-    printf("\nTest 3 : Intersection entre ray3 et cylindre3\n");
-    if (is_inter_cylinder(&ray3, &cyl3, &hit3))
-    {
-        printf("Intersection trouvée!\n");
-        printf("Distance de l'impact: %f\n", hit3.distance);
-        printf("Point d'impact: (%f, %f, %f)\n", hit3.point.x, hit3.point.y, hit3.point.z);
-        printf("Normale à l'impact: (%f, %f, %f)\n", hit3.normal.x, hit3.normal.y, hit3.normal.z);
-    }
-    else
-    {
-        printf("Aucune intersection trouvée.\n");
-    }
-
-    return 0;
-}
+//     return 0;
+// }

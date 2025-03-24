@@ -159,8 +159,9 @@ int		ft_isangle(char *str);
 
 int			is_inter_plane(t_camera *ray, t_plane *plane, t_hit *hit);
 int 		is_inter_sphere(t_camera ray, t_sphere sphere, t_hit *hit);
-int			is_infinite_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
-int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
+// int			is_infinite_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
+// int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, t_hit *hit);
+int 		is_inter_cylinder(t_camera *ray, t_cylinder *cylinder, double *t1, double *t2);
 int			ft_isvector(char *str);
 int			store_vector(t_vector *vector, char *arg);
 int			is_quadratic(t_quadratic *q);
