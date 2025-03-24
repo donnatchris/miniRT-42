@@ -40,18 +40,28 @@ void	render(t_program *prog)
 	int			y;
 	t_ray		ray;
 	t_viewport	view;
+	char		*addr;
 
-	prog->img = mlx_new_image(prog->mlx, WIDTH, HEIGHT);
+	view = viewport(prog);
+	prog->img = malloc(sizeof(t_img));
+	if (!prog->img)
+	{
+		perror("malloc img failed");
+		// sortir proprement
+	}
+	prog->img->img_ptr = mlx_new_image(prog->mlx, WIDTH, HEIGHT);
+	addr = mlx_get_data_addr(prog->img->img_ptr, &prog->img->bpp, &prog->img->size_line, &prog->img->endian);
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			generate_ray(&view, &ray, x, y);
-			//ft_coeur du programme
+			ray = generate_ray(&view, x, y);
+			//ft_coeur du programme a coder
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(prog->mlx, prog->win, prog->img->img_ptr, 0, 0);
 }

@@ -123,11 +123,19 @@ typedef struct s_ray
 	t_vector	direction;
 }	t_ray;
 
+typedef struct s_image
+{
+	void	*img_ptr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_image;
+
 typedef struct s_program
 {
 	void		*mlx;
 	void		*win;
-	void		*img;
+	t_image		*img;
 	t_file		*file;
 	t_viewport	*view;
 }	t_program;
