@@ -9,7 +9,7 @@ t_viewport	viewport(t_program *prog)
 	view.asp_ratio = (double) WIDTH / HEIGHT;
 	view.fov = DEG_TO_RAD(prog->file->camera.fov);
 	view.height = 2.0 * tan(view.fov / 2.0);
-	view.width = view.height * ((double) WIDTH / HEIGHT);
+	view.width = view.height * view.asp_ratio;
 	view.world_up = vector(0, 1, 0);
 	view.forward = prog->file->camera.direction;
 	normalize_vector(&view.forward);
@@ -19,23 +19,32 @@ t_viewport	viewport(t_program *prog)
 	normalize_vector(&view.up);
 	horizontal = mul_vector(view.right, view.width);
 	vertical = mul_vector(view.up, view.height);
-	view.origin = sub_vector(add_vector(prog->file->camera.origin, view.forward), sub_vector(mul_vector(horizontal, 0.5), mul_vector(vertical, 0.5)));
+
+	// Correction : Bien positionner l'origine du viewport
+	view.origin = prog->file->camera.origin;
+	// view.origin = sub_vector(add_vector(prog->file->camera.origin, view.forward),
+	// 	add_vector(mul_vector(view.right, 0.5 * view.width), mul_vector(view.up, 0.5 * view.height)));
+
 	return (view);
 }
 
-t_ray	generate_ray(t_viewport *view, int x, int y)
-{
-	double		new_x;
-	double		new_y;
-	t_ray		ray;
+t_ray generate_ray(t_viewport *view, int x, int y) {
+    double new_x;
+    double new_y;
+    t_ray ray;
 
+    // Calcul des coordonnées x et y du rayon en prenant en compte l'aspiration de l'écran
+    new_x = ((x + 0.5) / WIDTH - 0.5) * view->width;
+    new_y = (0.5 - (y + 0.5) / HEIGHT) * view->height;
 
-	new_x = (2.0 * ((x + 0.5) / WIDTH) - 0.5) * view->width;
-	new_y = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * tan(view->fov / 2.0);
-	ray.direction = add_vector(add_vector(view->forward, mul_vector(view->right, new_x)), mul_vector(view->up, new_y));
-	normalize_vector(&ray.direction);
-	ray.origin = view->origin;
-	return (ray);
+    // Calcul de la direction du rayon
+    ray.direction = add_vector(add_vector(view->forward, mul_vector(view->right, new_x)), mul_vector(view->up, new_y));
+    normalize_vector(&ray.direction);
+
+    // L'origine du rayon vient de l'origine de la caméra
+    ray.origin = view->origin;
+
+    return ray;
 }
 
 t_ray	generate_light_ray(t_hit hit, t_light light)
@@ -151,14 +160,13 @@ void	render(t_program *prog)
 				if (shadow.hit)
 					color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
 				else
+				{
 					// color = lambert_color(shadow, prog->file->light);
 					color = hit.color;
-
-
-
-					// int diffuse = lambert_color(hit, prog->file->light);
-					// int ambient = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
-					// color = add_colors(ambient, diffuse);
+				}
+				// int diffuse = lambert_color(hit, prog->file->light);
+				// int ambient = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+				//color = add_colors(ambient, diffuse);
 			}
 			*(int *)(prog->img->addr + ((x + (y * WIDTH)) * (prog->img->bpp / 8))) = color;
 			x++;
