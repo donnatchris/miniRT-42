@@ -9,7 +9,7 @@ t_viewport	viewport(t_program *prog)
 	view.asp_ratio = (double) WIDTH / HEIGHT;
 	view.fov = DEG_TO_RAD(prog->file->camera.fov);
 	view.height = 2.0 * tan(view.fov / 2.0);
-	view.width = view.height * ((double) WIDTH / HEIGHT);
+	view.width = view.height * view.asp_ratio;
 	view.world_up = vector(0, 1, 0);
 	view.forward = prog->file->camera.direction;
 	normalize_vector(&view.forward);
@@ -19,7 +19,11 @@ t_viewport	viewport(t_program *prog)
 	normalize_vector(&view.up);
 	horizontal = mul_vector(view.right, view.width);
 	vertical = mul_vector(view.up, view.height);
-	view.origin = sub_vector(add_vector(prog->file->camera.origin, view.forward), sub_vector(mul_vector(horizontal, 0.5), mul_vector(vertical, 0.5)));
+	// view.origin = sub_vector(add_vector(prog->file->camera.origin, view.forward), sub_vector(mul_vector(horizontal, 0.5), mul_vector(vertical, 0.5)));
+	view.origin = sub_vector(
+	sub_vector(add_vector(prog->file->camera.origin, view.forward),
+	           mul_vector(horizontal, 0.5)),
+				mul_vector(vertical, 0.5));
 	return (view);
 }
 
@@ -30,8 +34,8 @@ t_ray	generate_ray(t_viewport *view, int x, int y)
 	t_ray		ray;
 
 
-	new_x = (2.0 * ((x + 0.5) / WIDTH) - 0.5) * view->width;
-	new_y = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * tan(view->fov / 2.0);
+	new_x = (2.0 * ((x + 0.5) / WIDTH) - 1) * view->width;
+	new_y = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * view->height;
 	ray.direction = add_vector(add_vector(view->forward, mul_vector(view->right, new_x)), mul_vector(view->up, new_y));
 	normalize_vector(&ray.direction);
 	ray.origin = view->origin;
@@ -160,7 +164,8 @@ void	render(t_program *prog)
 					// int ambient = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
 					// color = add_colors(ambient, diffuse);
 			}
-			*(int *)(prog->img->addr + ((x + (y * WIDTH)) * (prog->img->bpp / 8))) = color;
+			// *(int *)(prog->img->addr + ((x + (y * WIDTH)) * (prog->img->bpp / 8))) = color;
+			*(int *)(prog->img->addr + (y * prog->img->size_line + x * (prog->img->bpp / 8))) = color;
 			x++;
 		}
 		y++;
