@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 		free(program);
 		return (1);
 	}
+	render(program);
 	mlx_hook(program->win, 17, 0, ft_close_windows, program);
 	mlx_key_hook(program->win, ft_key_hook, program);
 	mlx_loop(program->mlx);

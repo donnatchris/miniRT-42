@@ -19,6 +19,7 @@
 // macros
 # define WIDTH 800
 # define HEIGHT 600
+# define PI 3.141592
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
 # define RAD_TO_DEG(x) (x * 180 / PI)
@@ -51,6 +52,19 @@ typedef struct s_light
 	int			color;
 }	t_light;
 
+typedef struct s_hit
+{
+	int			hit;
+	int			color;
+	double		distance;
+	t_dclst		*object;
+	t_vector	point;
+	t_vector	normal;
+}	t_hit;
+
+// typedef t_hit (*t_intersect_fn)(t_ray *ray, t_dclst *node);
+	// t_intersect_fn	intersect;
+
 typedef struct s_quadratic
 {
 	double	a;
@@ -61,20 +75,11 @@ typedef struct s_quadratic
 	double	delta;
 }	t_quadratic;
 
-typedef struct s_hit
-{
-	int			hit;        // 0 = pas d'intersection, 1 = oui
-	double		t;          // distance d'intersection (minimale)
-	t_dclst		*object;    // pointeur vers l'objet touché
-	t_vector	point;      // coordonnées du point d'impact
-	t_vector	normal;     // normale à la surface à ce point
-} t_hit;
-
 typedef struct s_plane
 {
-	t_vector	position;
-	t_vector	normal;
-	int			color;
+	t_vector		position;
+	t_vector		normal;
+	int				color;
 }	t_plane;
 
 typedef struct s_sphere
@@ -125,12 +130,14 @@ typedef struct s_ray
 	t_vector	direction;
 }	t_ray;
 
+
 typedef struct s_image
 {
 	void	*img_ptr;
 	int		bpp;
 	int		size_line;
 	int		endian;
+	char	*addr;
 }	t_image;
 
 typedef struct s_program
@@ -212,16 +219,16 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
-int			is_inter_scene(t_ray *ray, t_file *file, t_hit *hit);
-int			is_inter_plane(t_ray *ray, t_plane *plane, t_hit *hit);
-int 		is_inter_sphere(t_ray ray, t_sphere sphere, t_hit *hit);
-int			is_infinite_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
-int 		is_inter_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
+// int			is_inter_scene(t_ray *ray, t_file *file, t_hit *hit);
+// int			is_inter_plane(t_ray *ray, t_plane *plane, t_hit *hit);
+// int 		is_inter_sphere(t_ray ray, t_sphere sphere, t_hit *hit);
+// int			is_infinite_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
+// int 		is_inter_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
 int			ft_isvector(char *str);
 int			is_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
 t_vector	*ray_mul(t_vector *dst, t_camera *r, double t);
-t_vector	reflect_vector(t_vector vector, t_vector nb);
+// t_vector	reflect_vector(t_vector vector, t_vector nb);
 t_vector	refract_vector(t_vector a, t_vector b, double c);
 t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);
@@ -233,7 +240,24 @@ t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
 t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
-
+/* ************************************************************************** */
+/* 								RENDER                                        */
+/* ************************************************************************** */
+t_viewport	viewport(t_program *prog);
+t_ray		generate_ray(t_viewport *view, int x, int y);
+t_ray		generate_light_ray(t_hit hit, t_light light);
+int			init_img(t_program *prog);
+int			scale_color(int color, double factor);
+int			lambert_color(t_hit hit, t_light light);
+void		render(t_program *prog);
+/* ************************************************************************** */
+/* 								INTERSECTION                                  */
+/* ************************************************************************** */
+t_hit		inter_scene(t_ray *ray, t_file *file);
+t_hit 		inter_plane(t_ray *ray, t_dclst *node);
+t_hit 		inter_sphere(t_ray *ray, t_dclst *node);
+t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
+void		init_hit(t_hit *hit, t_dclst *node);
 /* ************************************************************************** */
 /* 							TEST                                              */
 /* ************************************************************************** */

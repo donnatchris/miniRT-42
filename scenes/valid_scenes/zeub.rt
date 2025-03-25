@@ -5,13 +5,13 @@ C 0,0,-8 1,1,1 70
 L 2.6,3,-10 0.8 255,255,255
 
 # Lumière ambiante : faible intensité blanche
-A 0.2 255,255,255
+A 0.2 120,120,120
 
 # Cylindre : bleu clair
-cy 0,0,0 0,1,0 2 5 100,200,25
+# cy 0,0,0 0,1,0 2 5 100,200,25
 
 # Plan : orientation normalisée
-pl 1,2,3 0,1,0 70,80,90
+# pl 1,2,3 0,1,0 70,80,90
 
 # Sphère : rouge
 sp 0,0,0 1 255,0,0
