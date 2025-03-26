@@ -1,0 +1,42 @@
+					color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+					color = mix_colors(color, hit.color);
+
+
+                    int	scale_color(int color, double factor)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ((color >> 16) & 0xFF) * factor;
+	g = ((color >> 8) & 0xFF) * factor;
+	b = (color & 0xFF) * factor;
+
+	if (r > 255) r = 255;
+	if (g > 255) g = 255;
+	if (b > 255) b = 255;
+
+	return ((r << 16) | (g << 8) | b);
+}
+
+
+int mix_colors(int color1, int color2)
+{
+    // Extraction des composantes RGB de la première couleur
+    int r1 = (color1 >> 16) & 0xFF;
+    int g1 = (color1 >> 8) & 0xFF;
+    int b1 = color1 & 0xFF;
+    
+    // Extraction des composantes RGB de la deuxième couleur
+    int r2 = (color2 >> 16) & 0xFF;
+    int g2 = (color2 >> 8) & 0xFF;
+    int b2 = color2 & 0xFF;
+    
+    // Calcul de la moyenne pour chaque composante
+    int mixed_r = (r1 + r2) / 2;
+    int mixed_g = (g1 + g2) / 2;
+    int mixed_b = (b1 + b2) / 2;
+    
+    // Reconstruction de la couleur mélangée
+    return (mixed_r << 16) | (mixed_g << 8) | mixed_b;
+}

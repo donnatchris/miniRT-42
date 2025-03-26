@@ -3,7 +3,7 @@
 # 255,255,255 = couleur blanche ➡️ C’est une lumière globale, uniforme, qui éclaire toute la scène sans direction.
 # Elle donne une lueur minimale aux objets même s’ils sont dans l’ombre.
 # A 0.2 100,100,255
-A 0.2 220,220,220
+A 0.1 220,220,220
 
 
 # 🎥 Caméra
