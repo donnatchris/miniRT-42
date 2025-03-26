@@ -89,7 +89,36 @@ int	scale_color(int color, double factor)
 	if (r > 255) r = 255;
 	if (g > 255) g = 255;
 	if (b > 255) b = 255;
+	if (r < 0) r = 0;
+	if (g < 0) g = 0;
+	if (b < 0) b = 0;
 
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	mix_color(int color1, int color2, double factor)
+{
+	int	r, g, b;
+
+	// Clamp le facteur entre 0 et 1
+	if (factor < 0) factor = 0;
+	if (factor > 1) factor = 1;
+
+	// Extraction des composants RGB
+	int r1 = (color1 >> 16) & 0xFF;
+	int g1 = (color1 >> 8) & 0xFF;
+	int b1 = color1 & 0xFF;
+
+	int r2 = (color2 >> 16) & 0xFF;
+	int g2 = (color2 >> 8) & 0xFF;
+	int b2 = color2 & 0xFF;
+
+	// Mélange des couleurs selon le facteur
+	r = (int)(r1 * (1 - factor) + r2 * factor);
+	g = (int)(g1 * (1 - factor) + g2 * factor);
+	b = (int)(b1 * (1 - factor) + b2 * factor);
+
+	// Reconstruction de la couleur
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -128,6 +157,43 @@ int	lambert_color(t_hit hit, t_light light)
 	return ((r << 16) | (g << 8) | b);
 }
 
+int	phong_lighting(t_hit hit, t_light light, t_program *prog)
+{
+	t_vector	light_dir;
+	t_vector	reflect_dir;
+	t_vector	view_dir;
+	double		diffuse;
+	double		specular;
+	double		intensity;
+	double		shininess;
+	int			r, g, b;
+
+	shininess = 32; //brillance specular
+	//vecteur lumere normalise
+	light_dir = sub_vector(light.position, hit.point);
+	normalize_vector(&light_dir);
+	//diffuse Lambert
+	diffuse = dot_vector(hit.normal, light_dir);
+	if (diffuse < 0)
+		diffuse = 0;
+	//specular Phong
+	reflect_dir = sub_vector(mul_vector(hit.normal, 2 * dot_vector(hit.normal, light_dir)), light_dir);
+    normalize_vector(&reflect_dir);
+    view_dir = sub_vector(prog->file->camera.origin, hit.point);
+    normalize_vector(&view_dir);
+    specular = pow(fmax(dot_vector(reflect_dir, view_dir), 0.0), shininess);
+	//intensite finale
+	intensity = (light.ratio * diffuse) + (0.5 * specular);
+    if (intensity > 1)
+	{
+        intensity = 1;
+	}
+	//application couleur
+	r = ((hit.color >> 16) & 0xFF) * ((light.color >> 16) & 0xFF) / 255 * intensity;
+    g = ((hit.color >> 8) & 0xFF) * ((light.color >> 8) & 0xFF) / 255 * intensity;
+    b = (hit.color & 0xFF) * (light.color & 0xFF) / 255 * intensity;
+    return ((r << 16) | (g << 8) | b);
+}
 
 void	render(t_program *prog)
 {
@@ -152,7 +218,7 @@ void	render(t_program *prog)
 			ray = generate_ray(&view, x, y);
 			hit = inter_scene(&ray, prog->file);
 			if (hit.hit == 0)
-				color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+				color = 0;
 			else
 			{
 				light_ray = generate_light_ray(hit, prog->file->light);
@@ -162,7 +228,7 @@ void	render(t_program *prog)
 				else
 				{
 					// color = lambert_color(shadow, prog->file->light);
-					color = hit.color;
+					color = phong_lighting(hit, prog->file->light, prog);
 				}
 				// int diffuse = lambert_color(hit, prog->file->light);
 				// int ambient = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);

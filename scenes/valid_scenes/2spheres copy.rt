@@ -51,22 +51,16 @@
 #pl 0,0,0 0,1.0,0 255,0,225
 
 # 🔆 Lumière ambiante
-A 0.1 255,255,255
+A 0.1 220,220,220
 
 # 🎥 Caméra
-C 0,0,0 0,0,1 70
+C 0,0,0 0,0,1 100
 
 # 💡 Lumière ponctuelle
-L 2.6,10,-10 0.8 255,255,255
+L 1,1,1 0.8 255,255,255
 
 # 🟢 Sphère verte
-sp 5,5,5 10 0,255,0
+sp 1,1,8 8 0,255,0
 
 # 🔴 Sphère rouge
-sp -5,5,10 5 255,0,0
-
-# 🟣 Plan rose (positionné devant la caméra, légèrement sur le côté)
-pl 0,-1,5 0,1,0 255,0,225
-
-# 🟦 Plan bleu (mur de fond)
-pl 0,0,10 0,0,-1 0,0,255
+sp 0,0,12 12 255,0,0

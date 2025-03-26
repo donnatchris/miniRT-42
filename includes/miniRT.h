@@ -229,6 +229,7 @@ int			is_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
 t_vector	*ray_mul(t_vector *dst, t_camera *r, double t);
 // t_vector	reflect_vector(t_vector vector, t_vector nb);
+int	phong_lighting(t_hit hit, t_light light, t_program *prog);
 t_vector	refract_vector(t_vector a, t_vector b, double c);
 t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);

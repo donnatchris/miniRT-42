@@ -1,40 +1,8 @@
-# 🔆 Lumière ambiante
 A 0.1 255,255,255
-
-# 🎥 Caméra
-# Position : 0,0,-20 (plus éloigné pour voir mieux la scène)
-# Regarde vers (0,0,1) (l'axe Z positif)
-C 0,0,-20 0,0,1 70
-
-# 💡 Lumière ponctuelle
-# Position : 2.6,10,-10 (à gauche et en haut)
-# Intensité : 0.8
+C 0,0,0 0,0,1 70
 L 2.6,10,-10 0.8 255,255,255
-
-# 🟢 Sphère verte
-# Position : 5,5,5 (devant la caméra, à droite)
-sp 5,5,5 10 0,255,0
-
-# 🔴 Sphère rouge
-# Position : -5,5,10 (devant la caméra, à gauche)
+sp 5,5,5 5 0,255,0
 sp -5,5,10 5 255,0,0
-
-# 🟣 Plan rose (sol, positionné sous la caméra)
-# Position : 0,-1,5
-# Normal : 0,1,0 (normal dirigée vers le haut)
 pl 0,-1,5 0,1,0 255,0,225
 
-# 🟦 Plan bleu (mur de fond)
-# Position : 0,0,10
-# Normal : 0,0,-1 (dirigée vers l'arrière, derrière la scène)
 pl 0,0,10 0,0,-1 0,0,255
-
-# 🟨 Mur gauche
-# Position : -10,0,0 (mur à gauche)
-# Normal : 1,0,0 (dirigée vers la droite)
-pl -10,0,0 1,0,0 255,255,0
-
-# 🟧 Mur droit
-# Position : 10,0,0 (mur à droite)
-# Normal : -1,0,0 (dirigée vers la gauche)
-pl 10,0,0 -1,0,0 255,165,0
