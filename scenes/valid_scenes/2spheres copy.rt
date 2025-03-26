@@ -2,8 +2,7 @@
 # 0.2 = intensité faible (20%)
 # 255,255,255 = couleur blanche ➡️ C’est une lumière globale, uniforme, qui éclaire toute la scène sans direction.
 # Elle donne une lueur minimale aux objets même s’ils sont dans l’ombre.
-# A 0.2 100,100,255
-A 0.1 220,220,220
+#A 0.1 255,255,255
 
 
 # 🎥 Caméra
@@ -14,7 +13,7 @@ A 0.1 220,220,220
 # Tout ce qui est situé devant la caméra (Z > 0) pourra être vu.
 # Les objets avec Z ≈ 5-10 seront bien visibles et centrés.
 # Si tu places un objet trop décalé en X/Y, il sortira du cadre.
-C 0,0,0 0,0,1 100
+#C 0,0,0 0,0,1 70
 
 # 💡 Lumière ponctuelle
 # Position : 2.6, 3, -10
@@ -25,7 +24,7 @@ C 0,0,0 0,0,1 100
 # Cette lumière éclaire depuis l’arrière en biais, elle va :
 # projeter des ombres vers l’avant
 # bien éclairer les faces orientées vers la caméra et vers le haut/droite
-L 1,1,1 0.8 255,255,255
+#L 2.6,3,-10 0.8 255,255,255
 
 # 🟢 Sphère verte
 # Position : 20,5,5
@@ -36,7 +35,7 @@ L 1,1,1 0.8 255,255,255
 # Couleur : verte
 # 🧠 Effet :
 # Cette sphère est haut et à droite, tu ne la verras que partiellement ou pas du tout, sauf si tu augmentes le FOV.
-sp 1,1,8 8 0,255,0
+#sp 5,5,5 10 0,255,0
 
 # 🔴 Sphère rouge
 # Position : 0,0,5
@@ -48,6 +47,20 @@ sp 1,1,8 8 0,255,0
 # C’est l’objet le plus visible à l’écran
 # Tu devrais le voir plein centre, bien éclairé
 # Ombres possibles si un objet passe entre lui et la lumière
-sp 0,0,12 12 255,0,0
+#sp -5,0,10 5 255,0,0
+#pl 0,0,0 0,1.0,0 255,0,225
 
-# pl 0,0,0 1,0,0 0,255,0
+# 🔆 Lumière ambiante
+A 0.1 220,220,220
+
+# 🎥 Caméra
+C 0,0,0 0,0,1 100
+
+# 💡 Lumière ponctuelle
+L 1,1,1 0.8 255,255,255
+
+# 🟢 Sphère verte
+sp 1,1,8 8 0,255,0
+
+# 🔴 Sphère rouge
+sp 0,0,12 12 255,0,0
