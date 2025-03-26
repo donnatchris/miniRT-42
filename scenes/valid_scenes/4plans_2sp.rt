@@ -1,8 +1,20 @@
-A 0.1 255,255,255
-C 0,0,0 0,0,1 70
-L 2.6,10,-10 0.8 255,255,255
-sp 5,5,5 5 0,255,0
-sp -5,5,10 5 255,0,0
-pl 0,-1,5 0,1,0 255,0,225
+# 🔆 Lumière ambiante
+A 0.02 80,80,80
 
-pl 0,0,10 0,0,-1 0,0,255
+# 🎥 Caméra (ajustée pour mieux voir la scène)
+C 0,3,-15 0,0,1 70
+
+# 💡 Lumière ponctuelle (déplacée pour un meilleur éclairage)
+L 2.6,10,-5 0.9 255,255,255
+
+# 🟢 Sphère verte (posée sur le plan, éloignée de la caméra)
+sp 5,3,0 10 0,255,0
+
+# 🔴 Sphère rouge (posée sur le plan, éloignée de la caméra)
+sp -5,3,0 10 255,0,0
+
+# 🟣 Plan magenta (sol)
+pl 0,-2,0 0,1,0 255,0,225
+
+# 🔵 Plan bleu (mur du fond, rapproché pour mieux être visible)
+pl 0,0,5 0,0,-1 0,0,255

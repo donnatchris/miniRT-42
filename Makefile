@@ -16,15 +16,13 @@ SRCS        =   utils/utils_print.c  \
 				src/parsing/store_scene.c \
 				src/parsing/store_utils1.c \
 				src/parsing/store_utils2.c \
-				src/vector/inter_object.c \
-				src/vector/inter_scene.c \
 				src/vector/utils_vector.c \
 				src/vector/utils_vector2.c \
 				src/vector/utils_vector3.c \
 				src/intersection/intersect_.c \
 				src/intersection/intersect_plan.c \
 				src/intersection/intersect_utils.c \
-				src/render/viewport_Chris.c \
+				src/render/viewport.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
