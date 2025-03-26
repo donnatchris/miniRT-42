@@ -179,7 +179,11 @@ int	phong_lighting(t_hit hit, t_light light, t_program *prog)
 	//specular Phong
 	reflect_dir = sub_vector(mul_vector(hit.normal, 2 * dot_vector(hit.normal, light_dir)), light_dir);
     normalize_vector(&reflect_dir);
-    view_dir = sub_vector(prog->file->camera.origin, hit.point);
+
+    // view_dir = sub_vector(prog->file->camera.origin, hit.point);
+    view_dir = sub_vector(prog->view->origin, hit.point);
+
+
     normalize_vector(&view_dir);
     specular = pow(fmax(dot_vector(reflect_dir, view_dir), 0.0), shininess);
 	//intensite finale
@@ -195,6 +199,28 @@ int	phong_lighting(t_hit hit, t_light light, t_program *prog)
     return ((r << 16) | (g << 8) | b);
 }
 
+
+int mix_colors(int color1, int color2)
+{
+    // Extraction des composantes RGB de la première couleur
+    int r1 = (color1 >> 16) & 0xFF;
+    int g1 = (color1 >> 8) & 0xFF;
+    int b1 = color1 & 0xFF;
+    
+    // Extraction des composantes RGB de la deuxième couleur
+    int r2 = (color2 >> 16) & 0xFF;
+    int g2 = (color2 >> 8) & 0xFF;
+    int b2 = color2 & 0xFF;
+    
+    // Calcul de la moyenne pour chaque composante
+    int mixed_r = (r1 + r2) / 2;
+    int mixed_g = (g1 + g2) / 2;
+    int mixed_b = (b1 + b2) / 2;
+    
+    // Reconstruction de la couleur mélangée
+    return (mixed_r << 16) | (mixed_g << 8) | mixed_b;
+}
+
 void	render(t_program *prog)
 {
 	int			x;
@@ -207,6 +233,7 @@ void	render(t_program *prog)
 	int			color;
 
 	view = viewport(prog);
+	prog->view = &view;
 	if (init_img(prog))
 		return ; // sortir proprement
 	y = 0;
@@ -224,7 +251,12 @@ void	render(t_program *prog)
 				light_ray = generate_light_ray(hit, prog->file->light);
 				shadow = inter_scene(&light_ray, prog->file);
 				if (shadow.hit)
-					color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+				{
+					// color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+					// color = mix_colors(color, hit.color);
+					color = scale_color(hit.color, prog->file->ambient_light.ratio);
+					// color = scale_color(prog->file->ambient_light.color, prog->file->ambient_light.ratio);
+				}
 				else
 				{
 					// color = lambert_color(shadow, prog->file->light);
@@ -240,6 +272,7 @@ void	render(t_program *prog)
 		y++;
 	}
 	mlx_put_image_to_window(prog->mlx, prog->win, prog->img->img_ptr, 0, 0);
+	printf("IMAGE OK\n");
 }
 
 
