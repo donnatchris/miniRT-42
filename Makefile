@@ -22,6 +22,10 @@ SRCS        =   utils/utils_print.c  \
 				src/intersection/intersect_.c \
 				src/intersection/intersect_plan.c \
 				src/intersection/intersect_utils.c \
+				src/render/color.c \
+				src/render/phong.c \
+				src/render/rays.c \
+				src/render/render.c \
 				src/render/viewport.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \

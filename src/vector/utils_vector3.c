@@ -51,3 +51,4 @@ void	normalize_vector(t_vector *vector)
 		vector->z = vector->z / norm;
 	}
 }
+

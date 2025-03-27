@@ -1,32 +1,56 @@
 #include "../includes/miniRT.h"
 
-t_hit inter_plane(t_ray *ray, t_dclst *node)
-{
-	t_hit		hit;
-	t_plane		*plane;
-	t_vector	vector;
-	t_vector	scaled_direction;
-	double		denom;
+t_hit inter_plane(t_ray *ray, t_dclst *node) {
+    t_hit      hit;
+    t_plane    *plane = (t_plane *)node->data;
+    t_vector   unit_normal = plane->normal;
+	normalize_vector(&unit_normal);
+    double     denom = dot_vector(unit_normal, ray->direction);
+    double     tolerance = 1e-3; // Ajustable
 
-	plane = (t_plane *) node->data;
-	init_hit(&hit, node);
-	denom = dot_vector(plane->normal, ray->direction);
-	if (fabs(denom) > 1e-6)
-	{
-		vector = sub_vector(plane->position, ray->origin);
-		hit.distance = dot_vector(vector, plane->normal) / denom;
-		if (hit.distance >= 1e-6)
-		{
-			scaled_direction = mul_vector(ray->direction, hit.distance);
-			hit.point = add_vector(ray->origin, scaled_direction);
-			hit.normal = plane->normal;
-			hit.color = plane->color;
-			hit.hit = 1;
-			return (hit);
-		}
-	}
-	return (hit);
+    init_hit(&hit, node);
+    
+    if (fabs(denom) > tolerance) {
+        t_vector vec_to_plane = sub_vector(plane->position, ray->origin);
+        hit.distance = dot_vector(vec_to_plane, unit_normal) / denom;
+        
+        if (hit.distance >= tolerance) {
+            hit.point = add_vector(ray->origin, mul_vector(ray->direction, hit.distance));
+            hit.normal = (denom < 0) ? unit_normal : mul_vector(unit_normal, -1);
+            hit.color = plane->color;
+            hit.hit = 1;
+        }
+    }
+    return hit;
 }
+
+// t_hit inter_plane(t_ray *ray, t_dclst *node)
+// {
+// 	t_hit		hit;
+// 	t_plane		*plane;
+// 	t_vector	vector;
+// 	t_vector	scaled_direction;
+// 	double		denom;
+
+// 	plane = (t_plane *) node->data;
+// 	init_hit(&hit, node);
+// 	denom = dot_vector(plane->normal, ray->direction);
+// 	if (fabs(denom) > 1e-6)
+// 	{
+// 		vector = sub_vector(plane->position, ray->origin);
+// 		hit.distance = dot_vector(vector, plane->normal) / denom;
+// 		if (hit.distance >= 1e-6)
+// 		{
+// 			scaled_direction = mul_vector(ray->direction, hit.distance);
+// 			hit.point = add_vector(ray->origin, scaled_direction);
+// 			hit.normal = plane->normal;
+// 			hit.color = plane->color;
+// 			hit.hit = 1;
+// 			return (hit);
+// 		}
+// 	}
+// 	return (hit);
+// }
 
 // t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 // {
