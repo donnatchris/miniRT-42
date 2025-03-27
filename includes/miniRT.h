@@ -17,8 +17,8 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
-# define WIDTH 3200
-# define HEIGHT 1600
+# define WIDTH 1200
+# define HEIGHT 800
 # define PI 3.141592
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
@@ -122,6 +122,8 @@ typedef struct s_viewport
 	t_vector	right;
 	t_vector	up;
 	t_vector	origin;
+	t_vector	horizontal;
+	t_vector	vertical;
 }	t_viewport;
 
 typedef struct s_ray
@@ -219,11 +221,6 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
-// int			is_inter_scene(t_ray *ray, t_file *file, t_hit *hit);
-// int			is_inter_plane(t_ray *ray, t_plane *plane, t_hit *hit);
-// int 		is_inter_sphere(t_ray ray, t_sphere sphere, t_hit *hit);
-// int			is_infinite_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
-// int 		is_inter_cylinder(t_ray *ray, t_cylinder *cylinder, t_hit *hit);
 int			ft_isvector(char *str);
 int			is_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
@@ -244,13 +241,18 @@ void		normalize_vector(t_vector *vector);
 /* ************************************************************************** */
 /* 								RENDER                                        */
 /* ************************************************************************** */
-t_viewport	viewport(t_program *prog);
+// color.c
+int			scale_color(int color, double factor);
+int			mix_colors(int color1, int color2);
+// phong.c
+int			phong_lighting(t_hit hit, t_light light, t_program *prog);
+// rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);
 t_ray		generate_light_ray(t_hit hit, t_light light);
-int			init_img(t_program *prog);
-int			scale_color(int color, double factor);
-int			lambert_color(t_hit hit, t_light light);
+// render.c
 void		render(t_program *prog);
+// viewport.c
+t_viewport	viewport(t_program *prog);
 /* ************************************************************************** */
 /* 								INTERSECTION                                  */
 /* ************************************************************************** */
