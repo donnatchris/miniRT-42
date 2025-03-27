@@ -1,32 +1,5 @@
 #include "../includes/miniRT.h"
 
-t_viewport	viewport(t_program *prog)
-{
-	t_viewport	view;
-	t_vector	horizontal;
-	t_vector	vertical;
-
-// 	view.asp_ratio = (double) WIDTH / HEIGHT;
-// 	view.fov = DEG_TO_RAD(prog->file->camera.fov);
-// 	view.height = 2.0 * tan(view.fov / 2.0);
-// 	view.width = view.height * view.asp_ratio;
-// 	view.world_up = vector(0, 1, 0);
-// 	view.forward = prog->file->camera.direction;
-// 	normalize_vector(&view.forward);
-// 	view.right = cross_vector(view.forward, view.world_up);
-// 	normalize_vector(&view.right);
-// 	view.up = cross_vector(view.right, view.forward);
-// 	normalize_vector(&view.up);
-// 	horizontal = mul_vector(view.right, view.width);
-// 	vertical = mul_vector(view.up, view.height);
-
-// 	// Correction : Bien positionner l'origine du viewport
-// 	view.origin = prog->file->camera.origin;
-// 	// view.origin = sub_vector(add_vector(prog->file->camera.origin, view.forward),
-// 	// 	add_vector(mul_vector(view.right, 0.5 * view.width), mul_vector(view.up, 0.5 * view.height)));
-
-// 	return (view);
-// }
 
 
 double vector_length(t_vector v)
