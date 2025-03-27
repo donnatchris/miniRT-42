@@ -17,9 +17,10 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 3200
+# define HEIGHT 1600
 # define PI 3.141592
+# define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
 # define RAD_TO_DEG(x) (x * 180 / PI)
@@ -222,7 +223,7 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 /* ************************************************************************** */
 
 int			ft_isvector(char *str);
-int			is_quadratic(t_quadratic *q);
+int			solve_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
 t_vector	*ray_mul(t_vector *dst, t_camera *r, double t);
 // t_vector	reflect_vector(t_vector vector, t_vector nb);

@@ -1,6 +1,6 @@
 #include "../includes/miniRT.h"
 
-int	is_quadratic(t_quadratic *q)
+int	solve_quadratic(t_quadratic *q)
 {
 	q->delta = q->b * q->b - 4 * q->a * q->c;
 	if (q->delta < 0)

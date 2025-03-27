@@ -2,13 +2,14 @@
 A 0.1 255,255,255
 
 # 🎥 Caméra (positionnée pour voir le cylindre)
-C 0,3,-10 0,0,1 70
+#C 0,3,-10 0,0,1 70
+C 0,1,-5 0,0,1 70
 
 # 💡 Lumière ponctuelle (positionnée pour éclairer la scène)
 L 2,5,-5 1 255,255,255
 
 # 🟣 Cylindre (posé au centre, vertical)
-cy 0,-2,0 0,1,0 2 6 255,255,0
+cy 0,0,0 0,1,0 2 6 255,255,0
 
 # 🟣 Plan magenta (sol)
 pl 0,-2,0 0,1,0 255,0,225

@@ -1,34 +1,35 @@
-# Lumière ambiante (A)
-# Intensité 0.2 et couleur blanche (255,255,255)
-A 0.2 255,255,255
+# 🔆 Lumière ambiante
+A 0.1 255,255,255
 
-# Caméra (C)
-# Position à (0,1,-10) : légèrement surélevée pour avoir une vue d'ensemble
-# Orientation (0,0,1) : la caméra regarde vers l'avant (axe Z positif)
-# FOV 70° : un champ de vision modéré
-C 0,1,-10 0,0,1 70
+# 🎥 Caméra (positionnée pour une vue d'ensemble)
+C 0,3,-15 0,0,1 70
 
-# Lumière ponctuelle (L)
-# Position (10,10,-10) : située en haut à droite, derrière la caméra (pour éclairer la scène)
-# Intensité 0.8 et couleur blanche
-L 10,10,-10 0.8 255,255,255
+# 💡 Lumière ponctuelle (positionnée pour éclairer la scène)
+L 2,5,-5 1 255,255,255
 
-# Sphères (sp)
-# Format : sp <position> <diamètre> <R,G,B>
-# Les positions sont choisies pour être disposées dans la profondeur et horizontalement
-sp -4,1,5 2 255,0,0      # Sphère 1 : position (-4,1,5), diamètre 2, couleur rouge
-sp -2,1,7 2 0,255,0      # Sphère 2 : position (-2,1,7), diamètre 2, couleur verte
-sp 0,1,9 2 0,0,255       # Sphère 3 : position (0,1,9), diamètre 2, couleur bleue (au centre)
-sp 2,1,7 2 255,255,0     # Sphère 4 : position (2,1,7), diamètre 2, couleur jaune
-sp 4,1,5 2 0,255,255     # Sphère 5 : position (4,1,5), diamètre 2, couleur cyan
-sp -2,2,11 2 255,0,255   # Sphère 6 : position (-2,2,11), diamètre 2, couleur magenta
-sp 2,2,11 2 200,200,0    # Sphère 7 : position (2,2,11), diamètre 2, couleur olive
+# 🟢 Sphère verte (posée sur le sol, à gauche)
+sp -6,1,0 2 0,255,0
 
-# Sol (plan) - pour simuler le sol ou le plafond
-# Format : pl <position> <orientation> <R,G,B>
-# Ici, le plan passe par (0,0,0) avec une normale (0,1,0), ce qui en fait un sol horizontal
-pl 0,0,0 0,1,0 100,100,100
+# 🔴 Sphère rouge (posée sur le sol, au centre)
+sp 0,1,0 2 255,0,0
 
-# Mur (plan) - pour ajouter une paroi latérale
-# Ce plan passe par (5,0,0) et a une normale (-1,0,0), donc il est vertical et positionné à droite
-pl -5,0,0 -1,0,0 150,150,150
+# 🔵 Sphère bleue (posée sur le sol, à droite)
+sp 6,1,0 2 0,0,255
+
+# 🟡 Sphère jaune (posée au-dessus du sol, légèrement à gauche)
+sp -3,3,0 1.5 255,255,0
+
+# 🟣 Sphère violette (posée au-dessus du sol, légèrement à droite)
+sp 3,3,0 1.5 128,0,128
+
+# 🟠 Sphère orange (posée au-dessus du sol, plus loin à gauche)
+sp -8,3,0 1 255,165,0
+
+# 🟤 Sphère marron (posée au-dessus du sol, plus loin à droite)
+sp 8,3,0 1 139,69,19
+
+# 🟣 Cylindre (posé au centre, verticalement)
+cy 0,-1,0 0,1,0 2 6 255,255,0
+
+# 🟣 Plan magenta (sol)
+pl 0,-2,0 0,1,0 255,0,225

@@ -20,7 +20,9 @@ SRCS        =   utils/utils_print.c  \
 				src/vector/utils_vector2.c \
 				src/vector/utils_vector3.c \
 				src/intersection/intersect_.c \
+				src/intersection/intersect_cylinder.c \
 				src/intersection/intersect_plan.c \
+				src/intersection/intersect_sphere.c \
 				src/intersection/intersect_utils.c \
 				src/render/color.c \
 				src/render/phong.c \
