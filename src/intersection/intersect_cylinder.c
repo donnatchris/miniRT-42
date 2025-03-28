@@ -1,77 +1,34 @@
 #include "../includes/miniRT.h"
 
-static double verif_inter_cylinder(t_cylinder *cy, t_ray *ray, t_quadratic *eq, t_hit *hit)
-{
-    t_vector inter1, inter2, hit_normal;
-    double t1, t2;
-    double proj1, proj2;
+// t_hit inter_cylinder(t_ray *ray, t_dclst *node)
+// {
+//     t_cylinder  *cy;
+//     t_hit       hit;
+//     t_quadratic q;
+//     t_vector    u;
+//     t_vector    v;
 
-    t1 = eq->t1;
-    t2 = eq->t2;
+//     cy = (t_cylinder *)node->data;
+//     init_hit(&hit, node);
+// 	normalize_vector(&cy->orientation);
+//     u = cross_vector(ray->direction, cy->orientation);
+//     v = sub_vector(cy->position, ray->origin);
+//     v = cross_vector(v, cy->orientation);
+//     q.a = dot_vector(u, u);
+//     q.b = 2 * dot_vector(u, v);
+//     q.c = dot_vector(v, v) - ((cy->diameter / 2.0) * (cy->diameter / 2.0));
+//     if (!solve_quadratic(&q) || (q.t2 <= EPS && q.t1 <= EPS))
+//         return (hit);
+//     if (q.t1 <= EPS || (q.t2 > EPS && (q.t2 < q.t1)))
+//         q.t1 = q.t2;
+//     hit.distance = q.t1;
+//     ray_mul(&hit.point, ray, q.t1);
+//     v = sub_vector(cy->position, hit.point);
+//     hit.normal = cross_vector(v, cy->orientation);
+//     hit.normal = cross_vector(hit.normal, cy->orientation);
+//     normalize_vector(&hit.normal);
+//     if (dot_vector(hit.normal, ray->direction))
+//         hit.normal = inv_vector(hit.normal);
+//     return (hit);
+// }
 
-    // Ignorer les valeurs négatives de t
-    if (t1 < 1e-6 && t2 < 1e-6)
-        return -1;
-
-    // Calcul des points d'intersection
-    inter1 = add_vector(ray->origin, mul_vector(ray->direction, t1));
-    inter2 = add_vector(ray->origin, mul_vector(ray->direction, t2));
-
-    // Projection des points d'intersection sur l'axe du cylindre
-    proj1 = dot_vector(sub_vector(inter1, cy->p1), cy->orientation);
-    proj2 = dot_vector(sub_vector(inter2, cy->p1), cy->orientation);
-
-    // Vérification des limites du cylindre et calcul de la normale
-    if (proj1 >= 0 && proj1 <= cy->height && t1 > 1e-6)
-    {
-        hit->point = inter1;
-        hit_normal = sub_vector(inter1, add_vector(cy->p1, mul_vector(cy->orientation, proj1)));
-        normalize_vector(&hit_normal);
-        return t1;
-    }
-    if (proj2 >= 0 && proj2 <= cy->height && t2 > 1e-6)
-    {
-        hit->point = inter2;
-        hit_normal = sub_vector(inter2, add_vector(cy->p1, mul_vector(cy->orientation, proj2)));
-        normalize_vector(&hit_normal);
-        return t2;
-    }
-
-    return -1; // Aucune intersection valide
-}
-
-t_hit inter_cylinder(t_ray *ray, t_dclst *node)
-{
-    t_hit       hit;
-    t_cylinder  *cylinder;
-    t_vector    co;
-    t_quadratic eq;
-    double      t;
-
-    cylinder = (t_cylinder *) node->data;
-    init_hit(&hit, node);
-
-    // Initialisation des solutions quadratiques
-    eq.t1 = -1;
-    eq.t2 = -1;
-
-    // Calcul des coefficients de l'équation quadratique
-    co = sub_vector(ray->origin, cylinder->p1);
-    eq.a = dot_vector(ray->direction, ray->direction) - pow(dot_vector(ray->direction, cylinder->orientation), 2);
-    eq.b = 2 * (dot_vector(ray->direction, co) - (dot_vector(ray->direction, cylinder->orientation) * dot_vector(co, cylinder->orientation)));
-    eq.c = dot_vector(co, co) - pow(dot_vector(co, cylinder->orientation), 2) - cylinder->rayon2;
-    
-    // Résolution de l'équation quadratique
-    if (!solve_quadratic(&eq))
-        return hit;
-
-    // Vérification des intersections avec le cylindre
-    t = verif_inter_cylinder(cylinder, ray, &eq, &hit);
-    if (t > 1e-6)
-    {
-        hit.distance = t;
-        hit.color = cylinder->color;
-        hit.hit = 1;
-    }
-    return hit;
-}

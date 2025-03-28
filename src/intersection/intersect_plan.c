@@ -1,6 +1,7 @@
 #include "../includes/miniRT.h"
 
-t_hit inter_plane(t_ray *ray, t_dclst *node) {
+t_hit inter_plane(t_ray *ray, t_dclst *node)
+{
     t_hit      hit;
     t_plane    *plane = (t_plane *)node->data;
     t_vector   unit_normal = plane->normal;
@@ -21,5 +22,5 @@ t_hit inter_plane(t_ray *ray, t_dclst *node) {
             hit.hit = 1;
         }
     }
-    return hit;
+    return (hit);
 }

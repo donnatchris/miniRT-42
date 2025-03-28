@@ -1,13 +1,22 @@
 #include "../includes/miniRT.h"
 
-int	solve_quadratic(t_quadratic *q)
+int solve_quadratic(t_quadratic *q)
 {
-	q->delta = q->b * q->b - 4 * q->a * q->c;
-	if (q->delta < 0)
-		return (0);
-	q->t1 = (-q->b - sqrt(q->delta)) / (q->a * 2);
-	q->t2 = (-q->b + sqrt(q->delta)) / (q->a * 2);
-	return (1);
+	
+    q->delta = q->b * q->b - 4 * q->a * q->c;
+
+    // Affichage de delta
+    //printf("Delta: %f\n", q->delta);
+
+    if (q->delta < 0) {
+        printf("Delta négatif, pas d'intersection\n");
+        return 0; // Pas d'intersection
+    }
+
+    q->t1 = (-q->b - sqrt(q->delta)) / (q->a * 2);
+    q->t2 = (-q->b + sqrt(q->delta)) / (q->a * 2);
+
+    return 1;
 }
 
 int is_zero_vector(t_vector v)
@@ -15,7 +24,7 @@ int is_zero_vector(t_vector v)
     return (v.x == 0.0 && v.y == 0.0 && v.z == 0.0);
 }
 
-t_vector	*ray_mul(t_vector *dst, t_camera *r, double t)
+t_vector	*ray_mul(t_vector *dst, t_ray *r, double t)
 {
 	dst->x = r->origin.x + t * r->direction.x;
 	dst->y = r->origin.y + t * r->direction.y;
