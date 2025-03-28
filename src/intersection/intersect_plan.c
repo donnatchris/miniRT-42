@@ -22,7 +22,7 @@ t_hit inter_plane(t_ray *ray, t_dclst *node)
             hit.hit = 1;
         }
     }
-    return hit;
+    return (hit);
 }
 
 t_hit	inter_sphere(t_ray *ray, t_dclst *node)

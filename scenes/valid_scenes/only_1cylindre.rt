@@ -1,15 +1,7 @@
-# 🔆 Lumière ambiante
-A 0.1 255,255,255
+A 0.5 255,255,255    # Lumière ambiante plus forte
+C 0,0,-10 0,0,1 70  # Caméra bien placée
+L -10,50,30 1.0 255,255,255  # Lumière puissante
 
-# 🎥 Caméra (positionnée pour voir le cylindre)
-#C 0,3,-10 0,0,1 70
-C 0,1,-5 0,0,1 70
-
-# 💡 Lumière ponctuelle (positionnée pour éclairer la scène)
-L 2,5,-5 1 255,255,255
-
-# 🟣 Cylindre (posé au centre, vertical)
-cy 0,0,0 0,1,0 2 6 255,255,0
-
-# 🟣 Plan magenta (sol)
-pl 0,-2,0 0,1,0 255,0,225
+# Cylindre géant pour assurer l'intersection
+cy 0.0,0.0,0 0.0,1,0.0 3 3 255,0,0
+#sp 0,0,0 3 255,0,0
