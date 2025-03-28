@@ -17,7 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
-# define WIDTH 3200
+# define WIDTH 2400
 # define HEIGHT 1600
 # define PI 3.141592
 # define EPS 1e-6
@@ -131,6 +131,7 @@ typedef struct s_ray
 {
 	t_vector	origin;
 	t_vector	direction;
+	double		distance;
 }	t_ray;
 
 
