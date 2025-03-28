@@ -95,12 +95,8 @@ typedef struct s_cylinder
 {
 	t_vector	position;
 	t_vector	orientation;
-	t_vector	p1;
-	t_vector	p2;
-	t_vector	delta_p;
 	double		diameter;
 	double		height;
-	double		rayon2;
 	int			color;
 }	t_cylinder;
 

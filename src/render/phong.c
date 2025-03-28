@@ -42,6 +42,41 @@ int phong_lighting(t_hit hit, t_light light, t_program *prog)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // int	phong_lighting(t_hit hit, t_light light, t_program *prog)
 // {
 // 	t_vector	light_dir;

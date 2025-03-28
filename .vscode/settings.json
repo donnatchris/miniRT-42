@@ -3,7 +3,9 @@
         "unistd.h": "c",
         "minirt.h": "c",
         "stdint.h": "c",
-        "chris": "cpp"
+        "chris": "cpp",
+        "cmath": "c",
+        "random": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
