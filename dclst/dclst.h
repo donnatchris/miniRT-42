@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dclst.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:13:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/25 09:12:47 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/28 23:09:16 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define DCLST_H
 
 // Libraries
+
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
 
 
 // Structures
+
 typedef struct s_dclst
 {
 	int				type;
