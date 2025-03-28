@@ -17,8 +17,8 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
-# define WIDTH 2400
-# define HEIGHT 1600
+# define WIDTH 1200
+# define HEIGHT 800
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -32,6 +32,25 @@ typedef struct s_vector
 	double	y;
 	double	z;
 }	t_vector;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
+typedef struct phong
+{
+	t_vector	light_dir;
+	t_vector	view_dir;
+	t_vector	reflect_dir;
+	double		ambient;
+	double		diffuse;
+	double		specular_coef;
+	double		intensity;
+	t_rgb		rgb;
+}	t_phong;
 
 typedef struct ambient_light
 {
@@ -242,6 +261,8 @@ void		normalize_vector(t_vector *vector);
 // color.c
 int			scale_color(int color, double factor);
 int			mix_colors(int color1, int color2);
+int			multiply_colors(int color1, int color2);
+int			add_colors(int color1, int color2);
 // phong.c
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
 // rays.c

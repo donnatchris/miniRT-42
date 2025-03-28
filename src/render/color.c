@@ -1,69 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/28 21:11:25 by christophed       #+#    #+#             */
+/*   Updated: 2025/03/28 21:59:42 by christophed      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/miniRT.h"
 
 int	scale_color(int color, double factor)
 {
-	int	r;
-	int	g;
-	int	b;
+	t_rgb	rgb;
 
-	r = ((color >> 16) & 0xFF) * factor;
-	g = ((color >> 8) & 0xFF) * factor;
-	b = (color & 0xFF) * factor;
-
-	if (r > 255) r = 255;
-	if (g > 255) g = 255;
-	if (b > 255) b = 255;
-	if (r < 0) r = 0;
-	if (g < 0) g = 0;
-	if (b < 0) b = 0;
-
-	return ((r << 16) | (g << 8) | b);
+	rgb.r = ((color >> 16) & 0xFF) * factor;
+	rgb.g = ((color >> 8) & 0xFF) * factor;
+	rgb.b = (color & 0xFF) * factor;
+	if (rgb.r > 255)
+		rgb.r = 255;
+	if (rgb.g > 255)
+		rgb.g = 255;
+	if (rgb.b > 255)
+		rgb.b = 255;
+	if (rgb.r < 0)
+		rgb.r = 0;
+	if (rgb.g < 0)
+		rgb.g = 0;
+	if (rgb.b < 0)
+		rgb.b = 0;
+	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
 }
 
-// int	mix_colors(int color1, int color2, double factor)
-// {
-// 	int	r, g, b;
-
-// 	// Clamp le facteur entre 0 et 1
-// 	if (factor < 0) factor = 0;
-// 	if (factor > 1) factor = 1;
-
-// 	// Extraction des composants RGB
-// 	int r1 = (color1 >> 16) & 0xFF;
-// 	int g1 = (color1 >> 8) & 0xFF;
-// 	int b1 = color1 & 0xFF;
-
-// 	int r2 = (color2 >> 16) & 0xFF;
-// 	int g2 = (color2 >> 8) & 0xFF;
-// 	int b2 = color2 & 0xFF;
-
-// 	// Mélange des couleurs selon le facteur
-// 	r = (int)(r1 * (1 - factor) + r2 * factor);
-// 	g = (int)(g1 * (1 - factor) + g2 * factor);
-// 	b = (int)(b1 * (1 - factor) + b2 * factor);
-
-// 	// Reconstruction de la couleur
-// 	return ((r << 16) | (g << 8) | b);
-// }
-
-
-int mix_colors(int color1, int color2)
+int	mix_colors(int color1, int color2)
 {
-    // Extraction des composantes RGB de la première couleur
-    int r1 = (color1 >> 16) & 0xFF;
-    int g1 = (color1 >> 8) & 0xFF;
-    int b1 = color1 & 0xFF;
-    
-    // Extraction des composantes RGB de la deuxième couleur
-    int r2 = (color2 >> 16) & 0xFF;
-    int g2 = (color2 >> 8) & 0xFF;
-    int b2 = color2 & 0xFF;
-    
-    // Calcul de la moyenne pour chaque composante
-    int mixed_r = (r1 + r2) / 2;
-    int mixed_g = (g1 + g2) / 2;
-    int mixed_b = (b1 + b2) / 2;
-    
-    // Reconstruction de la couleur mélangée
-    return (mixed_r << 16) | (mixed_g << 8) | mixed_b;
+	t_rgb	rgb1;
+	t_rgb	rgb2;
+	t_rgb	mix;
+
+	rgb1.r = (color1 >> 16) & 0xFF;
+	rgb1.g = (color1 >> 8) & 0xFF;
+	rgb1.b = color1 & 0xFF;
+	rgb2.r = (color2 >> 16) & 0xFF;
+	rgb2.g = (color2 >> 8) & 0xFF;
+	rgb2.b = color2 & 0xFF;
+	mix.r = (rgb1.r + rgb2.r) / 2;
+	mix.g = (rgb1.g + rgb2.g) / 2;
+	mix.b = (rgb1.b + rgb2.b) / 2;
+	return ((mix.r << 16) | (mix.g << 8) | mix.b);
+}
+
+int	multiply_colors(int color1, int color2)
+{
+	t_rgb	rgb;
+
+	rgb.r = ((color1 >> 16) & 0xFF) * ((color2 >> 16) & 0xFF) / 255;
+	rgb.g = ((color1 >> 8) & 0xFF) * ((color2 >> 8) & 0xFF) / 255;
+	rgb.b = (color1 & 0xFF) * (color2 & 0xFF) / 255;
+	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
+}
+
+int	add_colors(int color1, int color2)
+{
+	t_rgb	rgb;
+
+	rgb.r = fmin(0xFF, ((color1 >> 16) & 0xFF) + ((color2 >> 16) & 0xFF));
+	rgb.g = fmin(0xFF, ((color1 >> 8) & 0xFF) + ((color2 >> 8) & 0xFF));
+	rgb.b = fmin(0xFF, (color1 & 0xFF) + (color2 & 0xFF));
+	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
 }
