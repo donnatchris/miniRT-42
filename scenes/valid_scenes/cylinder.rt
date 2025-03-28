@@ -1,5 +1,5 @@
 # Camera (position, orientation, champ de vision)
-C 0,0,-10 0,0,1 70
+C 00,0,-10 0,0,1 70
 
 A 0.2 255,255,255
 

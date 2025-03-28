@@ -1,0 +1,21 @@
+# Camera (position, orientation, champ de vision)
+C 0,5,-15 0,-0.2,1 70
+
+# Lumière ambiante (ratio, couleur)
+A 0.2 255,255,255
+
+# Lumière directionnelle (position, ratio, couleur)
+L -10,10,-5 0.6 255,255,200
+
+# Plan au sol (position, normale, couleur)
+pl 0,-1,0 0,1,0 100,100,100
+
+# Plan mural arrière (position, normale, couleur)
+pl 0,0,10 0,0,-1 200,200,255
+
+# Sphère (optionnelle pour décor)
+sp 2.3,0,-1.5 2 255,200,200
+sp 3.7,0,-1.5 2 255,200,200
+cy 3,0,0 0,0.97,0 2 2 255,200,200
+sp 3,3.1,0 2 225,150,190
+
