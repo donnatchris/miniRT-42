@@ -1,9 +1,9 @@
 #include "../includes/miniRT.h"
 
-static int	hit_distance()
-{
+// static int	hit_distance()
+// {
 	
-}
+// }
 
 t_hit inter_cylinder(t_ray *ray, t_dclst *node)
 {//test
