@@ -10,11 +10,13 @@ t_hit inter_plane(t_ray *ray, t_dclst *node) {
 
     init_hit(&hit, node);
     
-    if (fabs(denom) > tolerance) {
+    if (fabs(denom) > tolerance)
+	{
         t_vector vec_to_plane = sub_vector(plane->position, ray->origin);
         hit.distance = dot_vector(vec_to_plane, unit_normal) / denom;
         
-        if (hit.distance >= tolerance) {
+        if (hit.distance >= tolerance)
+		{
             hit.point = add_vector(ray->origin, mul_vector(ray->direction, hit.distance));
             hit.normal = (denom < 0) ? unit_normal : mul_vector(unit_normal, -1);
             hit.color = plane->color;

@@ -88,7 +88,8 @@ void	render(t_program *prog)
 			{
 				light_ray = generate_light_ray(hit, prog->file->light);
 				shadow = inter_scene(&light_ray, prog->file);
-				if (shadow.hit)
+				// if (shadow.hit)
+				if (shadow.hit && shadow.distance < hit.distance)
 					color = ambient_lighting(hit, prog->file->ambient_light);
 				else
 					color = phong_lighting(hit, prog->file->light, prog);
