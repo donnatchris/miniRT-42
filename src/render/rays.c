@@ -28,6 +28,7 @@ t_ray	generate_light_ray(t_hit hit, t_light light)
 	ray.origin = add_vector(hit.point, mul_vector(hit.normal, 1e-4));
 	ray.direction = to_light;
 	normalize_vector(&ray.direction);
+    ray.distance = distance_vector(hit.point, light.position);
 	return (ray);
 }
 

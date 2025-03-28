@@ -11,7 +11,8 @@ C 0,1,-10 0,0,1 70
 # Lumière ponctuelle (L)
 # Position (10,10,-10) : située en haut à droite, derrière la caméra (pour éclairer la scène)
 # Intensité 0.8 et couleur blanche
-L 10,10,-10 0.8 255,255,255
+L 0,20,0 0.8 255,255,255
+
 
 # Sphères (sp)
 # Format : sp <position> <diamètre> <R,G,B>
@@ -21,8 +22,8 @@ sp -2,1,7 2 0,255,0      # Sphère 2 : position (-2,1,7), diamètre 2, couleur v
 sp 0,1,9 2 0,0,255       # Sphère 3 : position (0,1,9), diamètre 2, couleur bleue (au centre)
 sp 2,1,7 2 255,255,0     # Sphère 4 : position (2,1,7), diamètre 2, couleur jaune
 sp 4,1,5 2 0,255,255     # Sphère 5 : position (4,1,5), diamètre 2, couleur cyan
-sp -2,2,11 2 255,0,255   # Sphère 6 : position (-2,2,11), diamètre 2, couleur magenta
-sp 2,2,11 2 200,200,0    # Sphère 7 : position (2,2,11), diamètre 2, couleur olive
+sp -2,2,4 2 255,0,255   # Sphère 6 : position (-2,2,11), diamètre 2, couleur magenta
+sp 2,6,11 3 200,200,0    # Sphère 7 : position (2,2,11), diamètre 2, couleur olive
 
 # Sol (plan) - pour simuler le sol ou le plafond
 # Format : pl <position> <orientation> <R,G,B>
@@ -32,3 +33,4 @@ pl 0,0,0 0,1,0 100,100,100
 # Mur (plan) - pour ajouter une paroi latérale
 # Ce plan passe par (5,0,0) et a une normale (-1,0,0), donc il est vertical et positionné à droite
 pl -5,0,0 -1,0,0 150,150,150
+pl 5,0,0 1,0,0 150,150,150

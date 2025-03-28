@@ -17,8 +17,8 @@
 # include "../minilibx-linux/mlx.h"
 
 // macros
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 2400
+# define HEIGHT 1600
 # define PI 3.141592
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define DEG_TO_RAD(x) (x * PI / 180)
@@ -130,6 +130,7 @@ typedef struct s_ray
 {
 	t_vector	origin;
 	t_vector	direction;
+	double		distance;
 }	t_ray;
 
 

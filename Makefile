@@ -43,7 +43,7 @@ NAME_BONUS  =   miniRT_bonus
 
 CC          =   cc
 CFLAGS      =   -Wall -Wextra -Werror -g -I./libft/srcs -Iincludes
-FLAGS       =   -lm -L./minilibx-linux -lmlx -L./libft -lft -lXext -lX11
+# FLAGS       =   -lm -L./minilibx-linux -lmlx -L./libft -lft -lXext -lX11
 # flags for linux:
 # FLAGS		=	-L./minilibx-linux -L/opt/X11/lib -lmlx -lXext -lX11 -lm
 # flags for macos:
