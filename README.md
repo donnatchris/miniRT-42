@@ -30,6 +30,10 @@ compile the program and suppress the .o files:
 execute the program with a file.rt (representing a scene) as argument
 
 	./minirt <scene_file.rt>
+ 
+for exemple you can use the Uranus_Neptune_Jupiter_Venus.rt file in the scenes/valid_scenes directory
+
+	./minirt scenes/valid_scenes/Uranus_Neptune_Jupiter_Venus.rt
 
  execute the program with valgrind excluding readline() leaks:
 
@@ -40,6 +44,9 @@ execute the program with a file.rt (representing a scene) as argument
 - dclst/ directory with functions and header for using doubly circular linked list
 - include/ directory for headers
 - libft/ directory with the libft (+ get_next_line and ft_printf)
+- scenes/ directory with scenes to be used as argument for the program
+	- invalid_scenes/ directory with invalid scene files
+	- valid_scenes/ directory with valid scene files
 - src/ directory containing the main files of the project
 - utils/ directory for secondary files
 Makefile (with rules: make bonus clean fclean re)
