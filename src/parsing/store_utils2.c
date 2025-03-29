@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:06 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:14:10 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:48:14 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	store_orientation(t_vector *vector, char *arg, char *line)
 {
 	char	**coordonates;
 
-	if (!ft_isorientation(arg))
-		return (pars_err_msg("invalid normalised vector", line));
+	if (!ft_isvector(arg))
+		return (pars_err_msg("invalid vector", line));
 	coordonates = NULL;
 	coordonates = ft_split(arg, ',');
 	if (!coordonates || str_array_size(coordonates) != 3)
@@ -47,5 +47,6 @@ int	store_orientation(t_vector *vector, char *arg, char *line)
 	vector->x = ft_atod(coordonates[0]);
 	vector->y = ft_atod(coordonates[1]);
 	vector->z = ft_atod(coordonates[2]);
+	normalize_vector(vector);
 	return (delete_str_array(coordonates), 0);
 }

@@ -55,10 +55,9 @@ t_file	*parse_input(char *input);
 int		is_scene(char *str);
 int		is_object(char *str);
 int		ft_isvector(char *str);
-int		ft_isorientation(char *str);
 int		ft_isratio(char *str);
-// parsing_utils2.c
 int		ft_isangle(char *str);
+// parsing_utils2.c
 int		check_input_file(char *input);
 char	*next_arg(char *line, size_t *start);
 char	*next_and_advance(char *line, size_t *start, char *old_arg);
@@ -89,7 +88,6 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
-int			ft_isvector(char *str);
 int			solve_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
 t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);

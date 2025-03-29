@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:13:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:46:49 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,6 @@ int	ft_isvector(char *str)
 	return (1);
 }
 
-// Function to check if the argument is a valid normal vector
-// Returns 1 if the argument is a valid normal vector
-// Returns 0 if the argument is not a valid normal vector
-int	ft_isorientation(char *str)
-{
-	char	**tab;
-	double	n[3];
-	int		i;
-
-	if (!str || *str == '\0' || *str == '\n')
-		return (0);
-	if (!ft_isvector(str))
-		return (0);
-	tab = ft_split(str, ',');
-	if (!tab)
-		return (0);
-	i = -1;
-	while (++i < 3)
-		n[i] = ft_atod(tab[i]);
-	i = -1;
-	while (++i < 3)
-	{
-		if (n[i] < -1 || n[i] > 1)
-			return (pars_err_msg("invalid vector", str),
-				delete_str_array(tab), 0);
-	}
-	if (n[0] == 0 && n[1] == 0 && n[2] == 0)
-		return (pars_err_msg("invalid vector", str), delete_str_array(tab), 0);
-	return (delete_str_array(tab), 1);
-}
-
 // Function to check if the argument is a valid ratio
 // Returns 1 if the argument is a valid ratio
 // Returns 0 if the argument is not a valid ratio
@@ -108,6 +77,23 @@ int	ft_isratio(char *str)
 		return (0);
 	n = ft_atod(str);
 	if (n < 0 || n > 1)
+		return (0);
+	return (1);
+}
+
+// Function to check if the argument is a valid angle
+// Returns 1 if the argument is a valid angle
+// Returns 0 if the argument is not a valid angle
+int	ft_isangle(char *str)
+{
+	int	n;
+
+	if (!str || *str == '\0' || *str == '\n')
+		return (0);
+	if (!ft_isint(str))
+		return (0);
+	n = ft_atoi(str);
+	if (n <= 0 || n >= 180)
 		return (0);
 	return (1);
 }
