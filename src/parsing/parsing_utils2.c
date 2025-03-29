@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:13:36 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:30:41 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ int	check_input_file(char *input)
 // Function to find the next argument in a string
 // Returns the next argument in the string
 // Returns NULL if there is no argument
-char	*next_arg(char *line, size_t start)
+char	*next_arg(char *line, size_t *start)
 {
 	char	*arg;
 	int		end;
 
-	if (line[start] == '\0' || line[start] == '\n')
+	if (line[*start] == '\0' || line[*start] == '\n')
 		return (NULL);
 	arg = NULL;
-	while (ft_strchr(WHITESPACE, line[start]))
-		start++;
-	if (line[start] == '\0' || line[start] == '\n')
+	while (ft_strchr(WHITESPACE, line[*start]))
+		(*start)++;
+	if (line[*start] == '\0' || line[*start] == '\n')
 		return (NULL);
-	end = start + 1;
+	end = *start + 1;
 	while (!ft_strchr(WHITESPACE, line[end])
 		&& line[end] != '\0' && line[end] != '\n')
 		end++;
-	arg = ft_substr(line, start, end - start);
+	arg = ft_substr(line, *start, end - *start);
 	return (arg);
 }
 
@@ -71,7 +71,7 @@ char	*next_and_advance(char *line, size_t *start, char *old_arg)
 		*start += ft_strlen(old_arg) + 1;
 		ft_free((void **)&old_arg);
 	}
-	return (next_arg(line, *start));
+	return (next_arg(line, start));
 }
 
 // Function to print an error message while parsing

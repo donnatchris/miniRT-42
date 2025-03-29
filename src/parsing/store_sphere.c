@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:14:00 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:30:56 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	fill_sphere_from_line(t_sphere *sphere, char *line)
 	char	*arg;
 
 	start = 2;
-	arg = next_arg(line, start);
+	arg = next_arg(line, &start);
 	if (store_vector(&sphere->position, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);

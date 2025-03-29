@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:13:45 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:30:47 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	fill_cylinder_from_line(t_cylinder *cylinder, char *line)
 	char	*arg;
 
 	start = 2;
-	arg = next_arg(line, start);
+	arg = next_arg(line, &start);
 	if (store_vector(&cylinder->position, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
