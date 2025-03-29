@@ -37,7 +37,13 @@ execute the program with a file.rt (representing a scene) as argument
 
 ## ARCHITECTURE:
 
-
+- dclst/ directory with functions and header for using doubly circular linked list
+- include/ directory for headers
+- libft/ directory with the libft (+ get_next_line and ft_printf)
+- src/ directory containing the main files of the project
+- utils/ directory for secondary files
+Makefile (with rules: make bonus clean fclean re)
+readme.md for explanations and main commands of the project
 
 ## PROJECT OVERVIEW (of the mandatory part):
 
