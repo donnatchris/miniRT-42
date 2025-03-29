@@ -84,11 +84,7 @@ Examples:
 - Computing **reflections** (a ray bounces based on the surface normal)
 - Handling **refraction** (according to Snell’s Law)
 
-### 🖼️ Illustration
-
-The image below summarizes all of the above concepts:
-
-![Vector Concepts](./A_2D_digital_diagram_in_this_image_illustrates_vec.png)
+![Vector Concepts](vecteurs explanied.png)
 
 ---
 
