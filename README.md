@@ -21,11 +21,7 @@ execute the program with a file.rt (representing a scene) as argument
 
 ## ARCHITECTURE:
 
-Ton texte est très clair dans l’ensemble, bravo ! ✅ Il y a quelques fautes de grammaire, conjugaison et formulation à corriger pour que ça soit fluide, propre et professionnel en anglais.
 
-Voici la version **corrigée et légèrement reformulée** :
-
----
 
 ## PROJECT OVERVIEW:
 
