@@ -360,4 +360,85 @@ In **miniRT**, the viewport:
 
 Accurate viewport computation ensures your rays align with the camera’s view and that your rendered image matches the intended field of vision.
 
+Très bonne remarque ! Tu as raison, l’étape du **rayon d’ombre (shadow ray)** est essentielle dans le **ray casting complet**. Voici la version mise à jour avec cette étape intégrée proprement dans le déroulement logique — toujours en anglais, et formatée pour ton `README.md` :
+
+---
+
+## RAY CASTING STEP BY STEP
+
+Once the **viewport** is set up, the next major step is to generate a **ray** for each pixel of the final image. This is the core of the ray tracing process.
+
+Here’s how ray casting works in **miniRT**:
+
+### 1. Loop Through Each Pixel
+
+Iterate over every pixel in the image using two nested loops:
+
+```c
+for (y = 0; y < image_height; y++)
+    for (x = 0; x < image_width; x++)
+```
+
+### 2. Compute Normalized Screen Coordinates (u, v)
+
+Convert pixel coordinates `(x, y)` into normalized viewport coordinates:
+
+```c
+u = (float)x / (image_width - 1);
+v = (float)y / (image_height - 1);
+```
+
+### 3. Get the Point on the Viewport
+
+Using the viewport vectors:
+
+```c
+point_on_viewport = lower_left_corner + u * horizontal + v * vertical;
+```
+
+### 4. Generate the Primary Ray
+
+```c
+ray.origin = camera_origin;
+ray.direction = normalize(point_on_viewport - camera_origin);
+```
+
+This ray simulates the path of light from the camera through a pixel.
+
+### 5. Find the First Intersection (Primary Hit)
+
+Check if this ray intersects any object in the scene:
+
+- If no hit is found → use the background color.
+- If a hit is found → go to the next step.
+
+### 6. Cast Shadow Rays (for Lighting)
+
+For each light source in the scene:
+
+- Create a **shadow ray** from the intersection point **toward the light source**.
+- Check if any object **blocks this ray before it reaches the light**.
+
+If **no object blocks the shadow ray**, then:
+- The point is **lit** by this light source.
+- Compute **diffuse** and **specular** lighting using the light’s direction and intensity.
+
+If an object **blocks the shadow ray**, then:
+- The point is **in shadow** for that light.
+- Only apply **ambient lighting**.
+
+### 7. Compute the Final Color
+
+Combine:
+- Object color
+- Lighting contributions (diffuse, specular, ambient)
+- Visibility from each light (shadows)
+
+Clamp or normalize the result into a valid RGB color.
+
+### 8. Store the Color
+
+Write the computed color to the image buffer at the corresponding pixel location.
+
+
 
