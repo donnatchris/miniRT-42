@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/28 23:54:16 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:17:16 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

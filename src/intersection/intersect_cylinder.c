@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 11:06:21 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:17:07 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

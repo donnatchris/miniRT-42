@@ -92,7 +92,7 @@ int		store_orientation(t_vector *vector, char *arg, char *line);
 int			ft_isvector(char *str);
 int			solve_quadratic(t_quadratic *q);
 int 		is_zero_vector(t_vector v);
-t_vector	*ray_mul(t_vector *dst, t_camera *r, double t);
+t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
 // t_vector	reflect_vector(t_vector vector, t_vector nb);
 int	phong_lighting(t_hit hit, t_light light, t_program *prog);
 t_vector	refract_vector(t_vector a, t_vector b, double c);
