@@ -89,7 +89,7 @@ Examples:
 
 Vectors are not only used to represent points and directions — they also support many operations essential for 3D rendering and ray tracing. Below are the most common vector operations used in miniRT.
 
-### **Vector Addition**
+### 🔣 **Vector Addition**
 
 Formula:  
 > v3 = v1 + v2
@@ -105,7 +105,7 @@ Component-wise:
 Example:  
 If v1 = position and v2 = offset, then v1 + v2 gives a new position translated in space.
 
-### **Vector Subtraction**
+### 🔣 **Vector Subtraction**
 
 Formula:  
 > v3 = v1 - v2  
@@ -121,7 +121,7 @@ Component-wise:
 Example:  
 If v1 = pointB and v2 = pointA, then v1 - v2 gives a vector that points from A to B.
 
-### **Scalar Multiplication**
+### 🔣 **Scalar Multiplication**
 
 Formula:  
 > v2 = s * v1  
@@ -137,7 +137,7 @@ Component-wise:
 Example:  
 If v1 is a direction and s = 5, then s * v1 gives a new vector pointing in the same direction but 5 times longer.
 
-### **Vector Magnitude (Norm)**
+### 🔣 **Vector Magnitude (Norm)**
 
 Formula:  
 > ||v|| = sqrt(v.x² + v.y² + v.z²)  
@@ -149,7 +149,7 @@ Formula:
 Example:  
 Used to calculate the distance between two points (after subtracting them).
 
-### **Normalization (Unit Vector)**
+### 🔣 **Normalization (Unit Vector)**
 
 Formula:  
 > unit_v = v / ||v||  
@@ -163,7 +163,7 @@ If v is a ray direction, you typically normalize it to ensure consistent lightin
 
 Note: When we say a vector is “normalized,” we mean it has been converted into a unit vector.
 
-### **Dot Product (Scalar Product)**
+### 🔣 **Dot Product (Scalar Product)**
 
 Formula:  
 > dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z  
@@ -181,7 +181,7 @@ Interpretation:
 Example:  
 Used to compute how much light hits a surface depending on its orientation.
 
-### **Cross Product**
+### 🔣 **Cross Product**
 
 Formula:  
 > cross.x = v1.y * v2.z - v1.z * v2.y  
