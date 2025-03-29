@@ -199,4 +199,106 @@ The resulting vector is perpendicular to the plane formed by v1 and v2.
 Example:  
 Used when constructing the camera's orientation or computing the normal of a triangle surface.
 
+Parfait, avec ces deux précisions essentielles pour miniRT :
+
+- Le **FOV est horizontal** (pas vertical comme dans beaucoup de moteurs 3D)
+- La **distance entre la caméra et le viewport est configurable**
+
+Voici la version corrigée et bien adaptée pour ton `README.md` — en anglais et prête à intégrer :
+
+---
+
+## VIEWPORT
+
+In ray tracing, the **viewport** is a virtual rectangular screen placed in front of the camera.
+It acts as the **projection plane** — rays are cast from the camera origin through this viewport, one per pixel, to simulate how light interacts with the 3D scene.
+Each pixel corresponds to a point on the viewport.
+The path of the ray from the camera through that point determines what the pixel will display in the final image.
+
+### **Viewport Parameters and Construction**
+
+In miniRT, the viewport is calculated based on:
+
+- **Camera origin** → the position of the camera (a 3D point) - given in the scene
+- **Camera direction** → a normalized vector pointing where the camera looks - given in the scene
+- **FOV** → the field of view is the angle that defines how wide the camera can "see" — a larger FOV captures more of the scene, while a smaller FOV zooms in on a narrower portion. In miniRT it's horizontaly but it can be verticaly - given in the scene
+- **Distance to viewport** → a configurable distance between the camera and the viewport, set to 1 in the project
+- **Aspect ratio** → image width divided by height (`ResX / ResY`)
+
+### **1. Building the Camera's Coordinate System**
+
+To position the viewport in 3D space, we first define a local coordinate system for the camera:
+
+- **Forward vector** → normalized camera direction - given in the scene as the camera direction
+- **Right vector** → points horizontally, perpendicular to forward  
+- **Up vector** → points vertically, perpendicular to both right and forward
+
+```c
+forward = normalize(camera.direction);
+right = normalize(cross(world_up, forward));
+up = cross(forward, right);
+```
+
+> 📌 `world_up` is typically `(0, 1, 0)`, unless the camera is oriented vertically.
+
+### **2. Calculating Viewport Dimensions**
+
+Since the FOV is **horizontal**, we compute the **viewport width** directly from it and the distance to the viewport.
+Note that since the FOV is given as an angle in degrees in the scene, it must first be converted to radians using the formula:
+> fov_radians = fov_degrees × (π / 180).
+
+```c
+viewport_width = 2 * distance * tan(fov_radians / 2);
+viewport_height = viewport_width / aspect_ratio;
+```
+
+Remember:
+- `distance` is the configurable distance from the camera to the viewport (set to 1 in the project)
+- `fov_radians` is in **radians**
+- `aspect_ratio = ResX / ResY`
+
+### **3. Placing the Viewport in Space**
+
+We now determine the actual position and size of the viewport in 3D:
+
+```c
+horizontal = right * viewport_width;
+vertical = up * viewport_height;
+```
+
+The **center** of the viewport is placed in front of the camera:
+
+```c
+center = camera_origin + forward * distance;
+```
+
+From that, we compute the **lower-left corner** of the viewport:
+
+```c
+lower_left_corner = center - (horizontal / 2) - (vertical / 2);
+```
+
+### **4. Generating Rays Through the Viewport**
+
+To cast a ray for a pixel located at normalized coordinates (u, v) in [0, 1]:
+
+```c
+point_on_viewport = lower_left_corner + u * horizontal + v * vertical;
+ray.origin = camera_origin;
+ray.direction = normalize(point_on_viewport - camera_origin);
+```
+
+This ray will pass through the correct position on the viewport, simulating perspective projection. 
+
+### **Summary**
+
+In **miniRT**, the viewport:
+
+- Is placed at a variable distance in front of the camera
+- Has dimensions based on **horizontal FOV**
+- Adjusts height using the **aspect ratio**
+- Allows rays to simulate **realistic perspective projection**
+
+Accurate viewport computation ensures your rays align with the camera’s view and that your rendered image matches the intended field of vision.
+
 
