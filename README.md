@@ -21,7 +21,66 @@ execute the program with a file.rt (representing a scene) as argument
 
 ## ARCHITECTURE:
 
-## ABOUT OUR PROJECT:
+Ton texte est très clair dans l’ensemble, bravo ! ✅ Il y a quelques fautes de grammaire, conjugaison et formulation à corriger pour que ça soit fluide, propre et professionnel en anglais.
+
+Voici la version **corrigée et légèrement reformulée** :
+
+---
+
+## PROJECT OVERVIEW:
+
+To build a working ray tracer like **miniRT**, the rendering process follows these main steps:
+
+### 1. Scene Parsing
+
+- Read the scene description from a `.rt` file.
+- Extract objects (spheres, planes, cylinders...), lights, and camera settings.
+- Store all elements in appropriate data structures.
+
+### 2. Viewport Setup
+
+Construct the viewport in 3D space using a local camera coordinate system, based on the following camera parameters:
+
+- Origin and direction  
+- Horizontal FOV (given in degrees → must be converted to radians)  
+- Distance to the viewport (set to 1 by default)  
+- Image resolution (`ResX × ResY`)
+
+The next steps will determine, for each point on the viewport, which color to assign to the corresponding pixel in the output image.
+
+### 3. Ray Casting (Per Pixel)
+
+For each pixel in the output image:
+
+- Compute normalized coordinates `(u, v)` on the viewport  
+- Generate a ray from the camera origin through the corresponding point on the viewport  
+- Normalize the ray direction
+
+### 4. Ray-Object Intersection
+
+Check whether the ray intersects any object in the scene:
+
+- Keep the **closest** intersection point (if any)  
+- For each object type (sphere, plane, cylinder...), implement a specific intersection function
+
+### 5. Lighting & Shading
+
+- If the ray hits nothing, assign the background color to the pixel (black) 
+- If the ray hits an object:
+  - Compute the **surface normal** at the intersection point  
+  - **Check for shadows** by casting a secondary ray from the intersection point toward each light source  
+  - If there is **no object** between the intersection point and the light, compute the pixel color using the object’s color and **diffuse + specular lighting** (based on light position and intensity defined in the scene)  
+  - If the point is **in shadow**, compute the pixel color using the object’s color and the **ambient light** defined in the scene
+
+### 6. Color Output
+
+Write the computed pixel color to the image buffer.
+
+### 7. Display / Export
+
+Once all pixels are computed and stored in the buffer, display the final image in a window using a graphics library (e.g., MiniLibX).
+
+---
 
 # DOCUMENTATION:
 
