@@ -163,7 +163,8 @@ If v1 = position and v2 = offset, then v1 + v2 gives a new position translated i
 ### 🔣 **Vector Subtraction**
 
 Formula:  
-> v3 = v1 - v2  
+> v3 = v1 - v2
+
 Component-wise:  
 > v3.x = v1.x - v2.x  
 > v3.y = v1.y - v2.y  
@@ -179,7 +180,8 @@ If v1 = pointB and v2 = pointA, then v1 - v2 gives a vector that points from A t
 ### 🔣 **Scalar Multiplication**
 
 Formula:  
-> v2 = s * v1  
+> v2 = s * v1
+
 Component-wise:  
 > v2.x = s * v1.x  
 > v2.y = s * v1.y  
