@@ -431,6 +431,9 @@ If an object **blocks the shadow ray**, then:
 Combine:
 - Object color
 - Lighting contributions (diffuse, specular, ambient)
+  	- Diffuse lighting → depends on the angle between the surface normal and the light direction (Lambert's law)
+  	- Specular highlights → depend on the viewer’s position and the angle of reflection
+  	- Ambient lighting → a constant low light applied even in shadow
 - Visibility from each light (shadows)
 
 Clamp or normalize the result into a valid RGB color.
