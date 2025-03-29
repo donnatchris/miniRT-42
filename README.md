@@ -3,7 +3,31 @@ By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan,
 
 ## AIM OF THE PROJECT:
 
+The goal of miniRT is to build a simple yet functional ray tracer that renders 3D scenes using basic geometric primitives and lighting.
+
+- Parse a .rt scene file describing:
+  - A camera
+  - Light sources
+  - Objects: spheres, planes, and cylinders
+- Implement ray casting and intersection detection
+- Compute lighting using:
+  - Ambient light
+  - Diffuse and specular reflections (Phong model)
+  - Shadows (via shadow rays)
+- Render the final image and display it in a window using MiniLibX
+
 ### BONUS PART:
+
+Bonus features:
+
+- Add new object types: cones, disks, cubes, etc.
+- Implement reflections and recursive ray tracing
+- Add anti-aliasing (e.g., supersampling)
+- Enable camera movement or scene animation
+- Implement multi-light support, colored lights, or spotlights
+- Export the rendered image to a file (e.g., .bmp, .png)
+- Support textures and normal mapping
+- Add GUI elements or interactive scene manipulation
 
 ## SOME COMMANDS YOU CAN USE:
 
