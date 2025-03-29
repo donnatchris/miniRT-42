@@ -6,13 +6,13 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/28 23:42:47 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 10:20:13 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
-static int	hit_distance(t_ray *ray, t_sphere *sphere,
+static int	sp_hit_distance(t_ray *ray, t_sphere *sphere,
 		t_vector oc, double *hit_distance)
 {
 	double		a;
@@ -45,7 +45,7 @@ t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 	sphere = (t_sphere *) node->data;
 	init_hit(&hit, node);
 	oc = sub_vector(ray->origin, sphere->position);
-	if (hit_distance(ray, sphere, oc, &hit.distance) == -1)
+	if (sp_hit_distance(ray, sphere, oc, &hit.distance) == -1)
 		return (hit);
 	scaled_direction = mul_vector(ray->direction, hit.distance);
 	hit.point = add_vector(ray->origin, scaled_direction);

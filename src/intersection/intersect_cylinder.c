@@ -1,59 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_cylinder.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
+/*   Updated: 2025/03/29 11:06:21 by christophed      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/miniRT.h"
 
-// static int	hit_distance()
-// {
-	
-// }
+static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
+{
+	t_chd	chd;
 
-t_hit inter_cylinder(t_ray *ray, t_dclst *node)
-{//test
-    t_hit      hit;
-    t_cylinder *cyl;
-    t_vector   OC, CP;
-	double		rayon2;
-    double     a, b, c, delta, m;
-    double     t1, t2, t;
-
-    init_hit(&hit, node);
-    cyl = (t_cylinder *)node->data;
-	rayon2 = (cyl->diameter / 2) * (cyl->diameter / 2);
-    
-    // Vecteur origine-rayon → centre-cylindre
-    OC = sub_vector(ray->origin, cyl->position);
-    
-    // Coefficients de l'équation quadratique
-    a = dot_vector(ray->direction, ray->direction) - 
-        pow(dot_vector(ray->direction, cyl->orientation), 2);
-    
-    b = 2 * (dot_vector(OC, ray->direction) - 
-             dot_vector(OC, cyl->orientation) * dot_vector(ray->direction, cyl->orientation));
-    
-    c = dot_vector(OC, OC) - 
-        pow(dot_vector(OC, cyl->orientation), 2) - 
-        rayon2;
-    
-    delta = b*b - 4*a*c;
-    if (delta < 0)
-        return (hit);  // Pas d'intersection
-    
-    t1 = (-b - sqrt(delta)) / (2*a);
-    t2 = (-b + sqrt(delta)) / (2*a);
-    
-    // Sélection de la solution valide la plus proche
-    t = (t1 > EPS) ? fmin(t1, t2) : t2;
-    if (t < EPS)
-        return (hit);  // Intersection derrière ou trop proche
-    
-    // Calcul du point et de la normale
-    hit.point = add_vector(ray->origin, mul_vector(ray->direction, t));
-    CP = sub_vector(hit.point, cyl->position);
-    m = dot_vector(CP, cyl->orientation);
-    hit.normal = sub_vector(CP, mul_vector(cyl->orientation, m));
-	normalize_vector(&hit.normal);
-    hit.hit = 1;
-    hit.distance = t;
-    hit.color = cyl->color;
-    hit.hit = 1;
-    return (hit);
+	chd.rayon2 = (cyl->diameter / 2) * (cyl->diameter / 2);
+	chd.oc = sub_vector(ray->origin, cyl->position);
+	chd.a = dot_vector(ray->direction, ray->direction)
+		- pow(dot_vector(ray->direction, cyl->orientation), 2);
+	chd.b = 2 * (dot_vector(chd.oc, ray->direction)
+			- dot_vector(chd.oc, cyl->orientation)
+			* dot_vector(ray->direction, cyl->orientation));
+	chd.c = dot_vector(chd.oc, chd.oc)
+		- pow(dot_vector(chd.oc, cyl->orientation), 2) - chd.rayon2;
+	chd.delta = chd.b * chd.b - 4 * chd.a * chd.c;
+	if (chd.delta < 0)
+		return (-1);
+	chd.t1 = (-chd.b - sqrt(chd.delta)) / (2 * chd.a);
+	chd.t2 = (-chd.b + sqrt(chd.delta)) / (2 * chd.a);
+	if (chd.t1 > EPS)
+		chd.parametric_distance = fmin(chd.t1, chd.t2);
+	else
+		chd.parametric_distance = chd.t2;
+	if (chd.parametric_distance < EPS)
+		return (-1);
+	hit->distance = chd.parametric_distance;
+	return (0);
 }
 
+t_hit	inter_cylinder(t_ray *ray, t_dclst *node)
+{
+	t_hit		hit;
+	t_cylinder	*cyl;
+	t_vector	cp;
+	double		m;
+
+	cyl = (t_cylinder *)node->data;
+	init_hit(&hit, node);
+	if (cy_hit_distance(ray, cyl, &hit) == -1)
+		return (hit);
+	hit.point = add_vector(ray->origin,
+			mul_vector(ray->direction, hit.distance));
+	cp = sub_vector(hit.point, cyl->position);
+	m = dot_vector(cp, cyl->orientation);
+	hit.normal = sub_vector(cp, mul_vector(cyl->orientation, m));
+	normalize_vector(&hit.normal);
+	hit.hit = 1;
+	hit.color = cyl->color;
+	hit.hit = 1;
+	return (hit);
+}

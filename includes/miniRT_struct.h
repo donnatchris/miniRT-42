@@ -15,6 +15,19 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
+typedef struct s_chd
+{
+	double		rayon2;
+	double		a;
+	double		b;
+	double		c;
+	double		delta;
+	double		parametric_distance;
+	double		t1;
+	double		t2;
+	t_vector	oc;
+}	t_chd;
+
 typedef struct phong
 {
 	t_vector	light_dir;
