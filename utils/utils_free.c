@@ -1,7 +1,6 @@
 #include "../includes/miniRT.h"
 
-// Function to free a pointer and set it to NULL
-void    ft_free(void **ptr)
+void	ft_free(void **ptr)
 {
 	if (*ptr)
 	{
@@ -10,7 +9,6 @@ void    ft_free(void **ptr)
 	}
 }
 
-// Function to free an array of strings and put all its pointers to NULL
 void	delete_str_array(char **array)
 {
 	size_t	i;
@@ -26,8 +24,6 @@ void	delete_str_array(char **array)
 	ft_free((void **)&array);
 }
 
-// Function to free the file structure and all of its conponents
-// and set all pointers to NULL
 void	delete_file(t_file *file)
 {
 	if (!file)
@@ -37,8 +33,6 @@ void	delete_file(t_file *file)
 	ft_free((void **)&file);
 }
 
-// Function to free the program structure and all of its conponents
-// and set all pointers to NULL
 void	delete_program(t_program *program)
 {
 	if (!program)

@@ -7,7 +7,7 @@ void	ft_print_error(int exit_code)
 	else if (exit_code == 1)
 		ft_putstr_fd("Wrong usage -> ./miniRT scenes/...rt\n", 2);
 	else if (exit_code == 2)
-		ft_putstr_fd("Cannot read file. Wrong usage -> ./miniRT scenes/...rt\n", 2);
+		ft_putstr_fd("Cannot read file.\n", 2);
 	else if (exit_code == 3)
 		ft_putstr_fd("Cannot init miniRT.\n", 2);
 	else if (exit_code == 4)
