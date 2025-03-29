@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils1.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/29 10:13:31 by christophed       #+#    #+#             */
+/*   Updated: 2025/03/29 10:13:32 by christophed      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 // Function to check if the line is a scene line ('A', 'C' or 'L')

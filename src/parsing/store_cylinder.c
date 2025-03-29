@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   store_cylinder.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
+/*   Updated: 2025/03/29 10:13:45 by christophed      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 // Function to fill the cylinder structure from the line

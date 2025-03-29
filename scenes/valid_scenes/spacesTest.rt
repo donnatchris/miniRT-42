@@ -1,0 +1,14 @@
+# 🔆 Lumière ambiante
+A 0.2 80,80,80
+
+# 🎥 Caméra
+C 0,0,-10 0,0,1 100
+
+# 💡 Lumière ponctuelle
+L 0,10,0 0.9 255,255,255
+
+# 🟢 Sphère verte
+sp 5,1,5 6 0,255,0
+
+# 🔴 Sphère rouge
+sp -2,0,5 4 255,0,0
