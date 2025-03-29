@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:13:55 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/29 13:31:58 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	store_camera(t_file *file, char *line)
 	if (cam++ > 0)
 		return (printf("Too many cameras in file\n"), 1);
 	start = 1;
-	arg = next_arg(line, start);
+	arg = next_arg(line, &start);
 	if (store_vector(&file->camera.origin, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
@@ -42,7 +42,7 @@ int	store_ambient(t_file *file, char *line)
 	if (ambient++ > 0)
 		return (printf("Too many ambient in file\n"), 1);
 	start = 1;
-	arg = next_arg(line, start);
+	arg = next_arg(line, &start);
 	if (store_ratio(&file->ambient_light.ratio, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
@@ -60,7 +60,7 @@ int	store_light(t_file *file, char *line)
 	if (light++ > 0)
 		return (printf("Too many lights in file\n"), 1);
 	start = 1;
-	arg = next_arg(line, start);
+	arg = next_arg(line, &start);
 	if (store_vector(&file->light.position, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);

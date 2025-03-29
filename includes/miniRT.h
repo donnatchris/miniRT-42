@@ -60,7 +60,7 @@ int		ft_isratio(char *str);
 // parsing_utils2.c
 int		ft_isangle(char *str);
 int		check_input_file(char *input);
-char	*next_arg(char *line, size_t start);
+char	*next_arg(char *line, size_t *start);
 char	*next_and_advance(char *line, size_t *start, char *old_arg);
 int		pars_err_msg(char *msg, char *line);
 // store_.c
