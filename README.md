@@ -3,18 +3,12 @@ By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan,
 
 ## AIM OF THE PROJECT:
 
-The goal of miniRT is to build a simple yet functional ray tracer that renders 3D scenes using basic geometric primitives and lighting.
+The goal of the miniRT project is to create a small, real-time ray tracer capable of rendering 3D scenes described in a simple text format.
+The program should generate a realistic image using basic geometric objects, lighting, and camera setup, and display the result in a graphical window.
 
-- Parse a .rt scene file describing:
-  - A camera
-  - Light sources
-  - Objects: spheres, planes, and cylinders
-- Implement ray casting and intersection detection
-- Compute lighting using:
-  - Ambient light
-  - Diffuse and specular reflections (Phong model)
-  - Shadows (via shadow rays)
-- Render the final image and display it in a window using MiniLibX
+From a pedagogical standpoint, miniRT is an introduction to computer graphics.
+It allows students to understand the fundamentals of ray tracing, including vector math, camera transformations, light/surface interaction.
+It also emphasizes clean code structure, geometric reasoning, and the importance of performance in rendering systems.
 
 ### BONUS PART:
 
