@@ -12,8 +12,6 @@ It also emphasizes clean code structure, geometric reasoning, and the importance
 
 ### BONUS PART:
 
-Bonus features:
-
 - Add new object types: cones, disks, cubes, etc.
 - Implement reflections and recursive ray tracing
 - Add anti-aliasing (e.g., supersampling)
