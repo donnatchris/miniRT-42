@@ -39,7 +39,7 @@ execute the program with a file.rt (representing a scene) as argument
 
 
 
-## PROJECT OVERVIEW:
+## PROJECT OVERVIEW (of the mandatory part):
 
 To build a working ray tracer like **miniRT**, the rendering process follows these main steps:
 
