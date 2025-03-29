@@ -148,6 +148,7 @@ Vectors are not only used to represent points and directions — they also suppo
 
 Formula:  
 > v3 = v1 + v2
+
 Component-wise:  
 > v3.x = v1.x + v2.x  
 > v3.y = v1.y + v2.y  
