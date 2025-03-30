@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_atod.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/30 17:25:14 by olthorel          #+#    #+#             */
+/*   Updated: 2025/03/30 17:25:14 by olthorel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/miniRT.h"
 
 static void	ft_handle_sign(char **str, double *sign)
@@ -10,6 +22,17 @@ static void	ft_handle_sign(char **str, double *sign)
 	}
 }
 
+static void	ft_handle_digit(char **str, double *result, double *div, int point)
+{
+	if (point)
+	{
+		*div *= 10.0;
+		*result = *result + (**str - '0') / *div;
+	}
+	else
+		*result = *result * 10.0 + (**str - '0');
+}
+
 static void	ft_parse_decimal(char **str, double *result, double *div)
 {
 	int		point;
@@ -18,15 +41,7 @@ static void	ft_parse_decimal(char **str, double *result, double *div)
 	while (**str)
 	{
 		if (ft_isdigit(**str))
-		{
-			if (point)
-			{
-				*div *= 10.0;
-				*result = *result + (**str - '0') / *div;
-			}
-			else
-				*result = *result * 10.0 + (**str - '0');
-		}
+			ft_handle_digit(str, result, div, point);
 		else if (**str == '.')
 		{
 			if (point)

@@ -1,12 +1,12 @@
 # Variables
-SRCS        =   utils/utils_print.c  \
-				utils/utils_array.c \
-				utils/utils_atod.c \
-				utils/utils_close.c  \
-				utils/utils_color.c \
-				utils/utils_double.c \
-				utils/utils_int.c \
-				utils/utils_free.c \
+SRCS        =   src/utils/utils_print.c  \
+				src/utils/utils_array.c \
+				src/utils/utils_atod.c \
+				src/utils/utils_close.c  \
+				src/utils/utils_color.c \
+				src/utils/utils_double.c \
+				src/utils/utils_int.c \
+				src/utils/utils_free.c \
 				src/parsing/parsing_.c \
 				src/parsing/parsing_utils1.c \
 				src/parsing/parsing_utils2.c \
