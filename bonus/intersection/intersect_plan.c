@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 16:04:03 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:40:20 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	choose_pl_color(t_plane *plane, t_hit hit)
 	int			choose;
 	
 	local = sub_vector(hit.point, plane->position);
-	x = dot_vector(local, plane->u) / plane->scale;
-	y = dot_vector(local, plane->v) / plane->scale;
+	x = dot_vector(local, plane->u) * plane->scale;
+	y = dot_vector(local, plane->v) * plane->scale;
 	choose = (int) (floor(x) + floor(y)) % 2;
 	if (!choose)
 		return (plane->color);
