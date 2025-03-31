@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 15:55:42 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:47:01 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,11 @@ typedef struct s_plane
 	t_vector		position;
 	t_vector		normal;
 	int				color;
-	int				color2;
-	int				scale;
 	t_vector		u;
 	t_vector		v;
+	int				chessboard;
+	int				color2;
+	int				scale;
 }	t_plane;
 
 typedef struct s_sphere
@@ -109,6 +110,9 @@ typedef struct s_sphere
 	double		diameter;
 	double		rayon2;
 	int			color;
+	int			chessboard;
+	int			color2;
+	int			scale;
 }	t_sphere;
 
 typedef struct s_cylinder
@@ -118,6 +122,9 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	int			color;
+	int			chessboard;
+	int			color2;
+	int			scale;
 }	t_cylinder;
 
 typedef struct s_triangle

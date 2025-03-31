@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:02 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 16:01:25 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:47:54 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	store_color(int *storage, char *arg, char *line)
 int	store_scale(int *storage, char *arg, char *line)
 {
 	if (!ft_isint(arg))
-		return (pars_err_msg("Invalid scale (has been put to 10)", line));
+		return (pars_err_msg("Invalid scale", line));
 	*storage = ft_atoi(arg);
 	if (storage <= 0)
-		return (pars_err_msg("Invalid scale (has been put to 10)", line));
+		return (pars_err_msg("Invalid scale", line));
 	return (0);
 }

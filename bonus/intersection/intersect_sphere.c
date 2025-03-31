@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:04 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:01:05 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static int choose_sp_color(t_sphere *sphere, t_hit hit)
+{
+	t_vector	normal;
+	double		u;
+	double		v;
+	int			x;
+	int			y;
+
+	if (!sphere->chessboard)
+		return (sphere->color);
+	normal = sub_vector(hit.point, sphere->position);
+	normalize_vector(&normal);
+	u = 0.5 + atan2(normal.z, normal.x) / (2 * M_PI);
+	v = 0.5 - asin(normal.y) / M_PI;
+	x = (int)(floor(u * sphere->scale));
+	y = (int)(floor(v * sphere->scale));
+	if ((x + y) % 2 == 0)
+		return (sphere->color);
+	else
+		return (sphere->color2);
+}
+
 
 static int	sp_hit_distance(t_ray *ray, t_sphere *sphere,
 		t_vector oc, double *hit_distance)
@@ -51,7 +74,7 @@ t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 	hit.point = add_vector(ray->origin, scaled_direction);
 	hit.normal = sub_vector(hit.point, sphere->position);
 	normalize_vector(&hit.normal);
-	hit.color = sphere->color;
+	hit.color = choose_sp_color(sphere, hit);
 	hit.hit = 1;
 	return (hit);
 }

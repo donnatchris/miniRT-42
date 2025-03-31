@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:31:57 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:59:33 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static int choose_cy_color(t_cylinder *cyl, t_hit hit)
+{
+	t_vector	dir;
+	t_vector	axis;
+	double		u, v;
+	int			x, y;
+
+	if (!cyl->chessboard)
+		return (cyl->color);
+	axis = cyl->orientation;
+	dir = sub_vector(hit.point, cyl->position);
+	t_vector radial = sub_vector(dir, mul_vector(axis, dot_vector(dir, axis)));
+	u = 0.5 + atan2(radial.z, radial.x) / (2 * M_PI);
+	v = dot_vector(dir, axis) / cyl->height;
+	x = (int)(floor(u * cyl->scale));
+	y = (int)(floor(v * cyl->scale));
+	if ((x + y) % 2 == 0)
+		return (cyl->color);
+	else
+		return (cyl->color2);
+}
+
 
 static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
 {
@@ -58,7 +81,6 @@ t_hit	inter_cylinder(t_ray *ray, t_dclst *node)
 	hit.normal = sub_vector(cp, mul_vector(cyl->orientation, m));
 	normalize_vector(&hit.normal);
 	hit.hit = 1;
-	hit.color = cyl->color;
-	hit.hit = 1;
+	hit.color = choose_cy_color(cyl, hit);
 	return (hit);
 }

@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:27 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:15:37 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+// Function to store the chessboard parameters in the structure
+// (The chessboard parameters are the color and the scale)
+// Returns 0 if the chessboard was stored successfully
+// Returns 1 if an error occured
+static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_color(&cylinder->color2, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&cylinder->scale, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	cylinder->chessboard = 1;
+	return (arg);
+}
+
+// Function to store the plane bonus parameters in the structure
+// Returns 0 if the plane was stored successfully
+// Returns 1 if an error occured
+static int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg, size_t *start)
+{
+	while (1)
+	{
+		arg = next_and_advance(line, start, arg);
+		if (!arg)
+			break ;
+		if (!ft_strncmp(arg, "ch", 2))
+			arg = store_cy_chessboard(cylinder, arg, line, start);
+		if (!arg)
+			break ;
+	}
+	return (0);
+}
 
 // Function to fill the cylinder structure from the line
 // Returns 0 if the cylinder was filled successfully
@@ -36,7 +70,9 @@ static int	fill_cylinder_from_line(t_cylinder *cylinder, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&cylinder->color, arg, line))
 		return (ft_free((void **)&arg), 1);
-	return (ft_free((void **)&arg), 0);
+	if (store_cy_bonus(cylinder, line, arg, &start))
+		return (1);
+	return (0);
 }
 
 // Function to store the cylinder in the file structure
@@ -50,6 +86,7 @@ int	store_cylinder(t_file *file, char *line)
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
 		return (perror("Error\nMalloc failed"), 1);
+	ft_memset(cylinder, 0, sizeof(t_cylinder));
 	if (fill_cylinder_from_line(cylinder, line))
 		return (ft_free((void **)&cylinder), 1);
 	node = dclst_add_back(file->obj_list, cylinder);

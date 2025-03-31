@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 16:00:04 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:03:12 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
 t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
+void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 /* ************************************************************************** */
 /* 								RENDER                                        */
 /* ************************************************************************** */

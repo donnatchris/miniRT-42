@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 17:40:20 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 22:42:48 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	choose_pl_color(t_plane *plane, t_hit hit)
 	t_vector	local;
 	double		x;
 	double		y;
-	int			choose;
-	
+
+	if (!plane->chessboard)
+		return (plane->color);
 	local = sub_vector(hit.point, plane->position);
 	x = dot_vector(local, plane->u) * plane->scale;
 	y = dot_vector(local, plane->v) * plane->scale;
-	choose = (int) (floor(x) + floor(y)) % 2;
-	if (!choose)
+	if ((int) (floor(x) + floor(y)) % 2 == 0)
 		return (plane->color);
 	else
 		return (plane->color2);

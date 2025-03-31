@@ -3,27 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 16:00:13 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:20:19 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
-static void	create_pl_ortho(t_plane *plane)
+// Function to store the chessboard parameters in the structure
+// (The chessboard parameters are the color and the scale)
+// Returns 0 if the chessboard was stored successfully
+// Returns 1 if an error occured
+static char	*store_pl_chessboard(t_plane *plane, char *arg, char *line, size_t *start)
 {
-	t_vector	up;
+	arg = next_and_advance(line, start, arg);
+	if (store_color(&plane->color2, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&plane->scale, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	plane->chessboard = 1;
+	return (arg);
+}
 
-	if (fabs(plane->normal.y) < 0.999)
-		up = (t_vector){0, 1, 0};
-	else
-		up = (t_vector){1, 0, 0};
-	plane->u = cross_vector(up, plane->normal);
-	normalize_vector(&plane->u);
-	plane->v = cross_vector(plane->normal, plane->u);
-	normalize_vector(&plane->v);
+// Function to store the plane bonus parameters in the structure
+// Returns 0 if the plane was stored successfully
+// Returns 1 if an error occured
+static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
+{
+	create_ortho_basis(plane->normal, &plane->u, &plane->v);
+	while (1)
+	{
+		arg = next_and_advance(line, start, arg);
+		if (!arg)
+			break ;
+		if (!ft_strncmp(arg, "ch", 2))
+			arg = store_pl_chessboard(plane, arg, line, start);
+		if (!arg)
+			break ;
+	}
+	return (0);
 }
 
 // Function to fill the plane structure from the line
@@ -44,21 +65,9 @@ static int	fill_plane_from_line(t_plane *plane, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&plane->color, arg, line))
 		return (ft_free((void **)&arg), 1);
-	arg = next_and_advance(line, &start, arg);
-	if (!arg)
-	{
-		plane->color2 = plane->color;
-		plane->scale = 10;
-	}
-	else
-	{
-		if (store_color(&plane->color2, arg, line))
-			return (ft_free((void **)&arg), 1);
-		arg = next_and_advance(line, &start, arg);
-		if (store_scale(&plane->scale, arg, line))
-			plane->scale = 10;
-	}
-	return (ft_free((void **)&arg), 0);
+	if (store_pl_bonus(plane, line, arg, &start))
+		return (1);
+	return (0);
 }
 
 // Function to store the plane in the file structure
@@ -72,12 +81,12 @@ int	store_plane(t_file *file, char *line)
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
 		return (perror("Error\nMalloc failed"), 1);
+	ft_memset(plane, 0, sizeof(t_plane));
 	if (fill_plane_from_line(plane, line))
 		return (ft_free((void **)&plane), 1);
 	node = dclst_add_back(file->obj_list, plane);
 	if (!node)
 		return (ft_free((void **)&plane), perror("Error\nMalloc failed"), 1);
-	create_pl_ortho(plane);
 	node->type = PL;
 	return (0);
 }

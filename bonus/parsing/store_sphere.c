@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:38 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:20:44 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+// Function to store the chessboard parameters in the structure
+// (The chessboard parameters are the color and the scale)
+// Returns 0 if the chessboard was stored successfully
+// Returns 1 if an error occured
+static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_color(&sphere->color2, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&sphere->scale, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	sphere->chessboard = 1;
+	return (arg);
+}
+
+// Function to store the plane bonus parameters in the structure
+// Returns 0 if the plane was stored successfully
+// Returns 1 if an error occured
+static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start)
+{
+	while (1)
+	{
+		arg = next_and_advance(line, start, arg);
+		if (!arg)
+			break ;
+		if (!ft_strncmp(arg, "ch", 2))
+			arg = store_sp_chessboard(sphere, arg, line, start);
+		if (!arg)
+			break ;
+	}
+	return (ft_free((void **)&arg), 0);
+}
 
 // Function to fill the sphere structure from the line
 // Returns 0 if the sphere was filled successfully
@@ -30,7 +64,9 @@ static int	fill_sphere_from_line(t_sphere *sphere, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&sphere->color, arg, line))
 		return (ft_free((void **)&arg), 1);
-	return (ft_free((void **)&arg), 0);
+	if (store_sp_bonus(sphere, line, arg, &start))
+		return (1);
+	return (0);
 }
 
 // Function to store the sphere in the file structure
@@ -44,6 +80,7 @@ int	store_sphere(t_file *file, char *line)
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		return (perror("Error\nMalloc failed"), 1);
+	ft_memset(sphere, 0, sizeof(t_sphere));
 	if (fill_sphere_from_line(sphere, line))
 		return (ft_free((void **)&sphere), 1);
 	node = dclst_add_back(file->obj_list, sphere);
