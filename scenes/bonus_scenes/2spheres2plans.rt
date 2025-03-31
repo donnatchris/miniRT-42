@@ -14,7 +14,7 @@ sp 5,3,0 4 0,255,0
 sp -5,3,0 5 255,0,0
 
 # 🟣 Plan magenta (sol)
-pl 0,-2,0 0,1,0 255,0,225 0,255,0
+pl 0,-2,0 0,1,0 255,0,225 215,215,215 1
 
 # 🔵 Plan bleu (mur du fond, rapproché pour mieux être visible)
 pl 0,0,5 0,0,-1 0,0,255

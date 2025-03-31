@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 13:48:45 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:00:04 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int			store_angle(int *storage, char *arg, char *line);
 int			store_double(double *storage, char *arg, char *line);
 int			store_ratio(double *storage, char *arg, char *line);
 int			store_color(int *storage, char *arg, char *line);
+int			store_scale(int *storage, char *arg, char *line);
 // store_utils2.c
 int			store_vector(t_vector *vector, char *arg, char *line);
 int			store_orientation(t_vector *vector, char *arg, char *line);

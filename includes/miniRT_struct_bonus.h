@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 13:49:53 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:55:42 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ typedef struct s_plane
 	t_vector		position;
 	t_vector		normal;
 	int				color;
+	int				color2;
+	int				scale;
+	t_vector		u;
+	t_vector		v;
 }	t_plane;
 
 typedef struct s_sphere

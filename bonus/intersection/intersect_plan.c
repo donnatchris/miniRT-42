@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:01 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:04:03 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static int	choose_pl_color(t_plane *plane, t_hit hit)
+{
+	t_vector	local;
+	double		x;
+	double		y;
+	int			choose;
+	
+	local = sub_vector(hit.point, plane->position);
+	x = dot_vector(local, plane->u) / plane->scale;
+	y = dot_vector(local, plane->v) / plane->scale;
+	choose = (int) (floor(x) + floor(y)) % 2;
+	if (!choose)
+		return (plane->color);
+	else
+		return (plane->color2);
+}
 
 t_hit	inter_plane(t_ray *ray, t_dclst *node)
 {
@@ -34,7 +51,7 @@ t_hit	inter_plane(t_ray *ray, t_dclst *node)
 				hit.normal = plane->normal;
 			else
 				hit.normal = mul_vector(plane->normal, -1);
-			hit.color = plane->color;
+			hit.color = choose_pl_color(plane, hit);
 			hit.hit = 1;
 		}
 	}

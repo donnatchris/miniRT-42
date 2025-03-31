@@ -78,6 +78,7 @@ static void	print_plane(t_plane *pl)
 	print_vector(pl->position, "Position");
 	print_vector(pl->normal, "Normal");
 	print_color(pl->color, "Color");
+	print_color(pl->color2, "Color2");
 }
 
 static void	print_cylinder(t_cylinder *cy)
