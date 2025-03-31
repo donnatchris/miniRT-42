@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:15:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:42 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:31:48 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 void	init_hit(t_hit *hit, t_dclst *node)
 {

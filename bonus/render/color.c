@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:11:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:35:18 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:32:52 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 int	scale_color(int color, double factor)
 {

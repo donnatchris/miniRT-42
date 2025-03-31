@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_close.c                                      :+:      :+:    :+:   */
+/*   utils_array.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 16:50:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:35:54 by olthorel         ###   ########.fr       */
+/*   Created: 2025/03/30 16:50:14 by olthorel          #+#    #+#             */
+/*   Updated: 2025/03/31 11:33:16 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
-int	ft_close_windows(t_program *program)
+// Function to count the size of an array of strings
+// Returns the size of the array or 0 if the array does not exist
+size_t	str_array_size(char **array)
 {
-	if (program)
-		delete_program(program);
-	exit(0);
-	return (0);
-}
+	size_t	size;
 
-int	ft_key_hook(int keycode, t_program *program)
-{
-	if (keycode == 65307)
-		ft_close_windows(program);
-	return (0);
+	if (!array)
+		return (0);
+	size = 0;
+	while (array[size])
+		size++;
+	return (size);
 }

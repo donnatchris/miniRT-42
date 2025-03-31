@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:42:44 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:18 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:42 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 void	ft_print_error(int exit_code)
 {

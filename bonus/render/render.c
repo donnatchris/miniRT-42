@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:35:32 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:05 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 static int	ambient_lighting(t_hit hit, t_ambient_light ambient)
 {

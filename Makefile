@@ -1,4 +1,3 @@
-# Variables
 SRCS        =   mandatory/utils/utils_print.c  \
 				mandatory/utils/utils_array.c \
 				mandatory/utils/utils_atod.c \
@@ -33,7 +32,43 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
 				test/print_parsing.c \
-				mandatory/main.c 
+				mandatory/main.c
+
+SRCS_BONUS  =   bonus/utils/utils_print.c  \
+				bonus/utils/utils_array.c \
+				bonus/utils/utils_atod.c \
+				bonus/utils/utils_close.c  \
+				bonus/utils/utils_color.c \
+				bonus/utils/utils_double.c \
+				bonus/utils/utils_int.c \
+				bonus/utils/utils_free.c \
+				bonus/parsing/parsing_.c \
+				bonus/parsing/parsing_utils1.c \
+				bonus/parsing/parsing_utils2.c \
+				bonus/parsing/store_.c \
+				bonus/parsing/store_cylinder.c \
+				bonus/parsing/store_plane.c \
+				bonus/parsing/store_sphere.c \
+				bonus/parsing/store_scene.c \
+				bonus/parsing/store_utils1.c \
+				bonus/parsing/store_utils2.c \
+				bonus/vector/utils_vector.c \
+				bonus/vector/utils_vector2.c \
+				bonus/vector/utils_vector3.c \
+				bonus/intersection/intersect_.c \
+				bonus/intersection/intersect_cylinder.c \
+				bonus/intersection/intersect_plan.c \
+				bonus/intersection/intersect_sphere.c \
+				bonus/render/color.c \
+				bonus/render/phong.c \
+				bonus/render/rays.c \
+				bonus/render/render.c \
+				bonus/render/viewport.c \
+				dclst/dclst1.c \
+				dclst/dclst2.c \
+				dclst/dclst3.c \
+				test/print_parsing.c \
+				bonus/main.c 
 				
 OBJ_DIR     =   obj
 OBJS        =   $(SRCS:mandatory/%.c=$(OBJ_DIR)/%.o)

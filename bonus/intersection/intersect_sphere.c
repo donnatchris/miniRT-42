@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:54 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:32:04 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 static int	sp_hit_distance(t_ray *ray, t_sphere *sphere,
 		t_vector oc, double *hit_distance)

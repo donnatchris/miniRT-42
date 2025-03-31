@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 10:09:35 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:34:23 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "../dclst/dclst.h"
-# include "miniRT_struct.h"
+# include "miniRT_struct_bonus.h"
 
 // macros
 # define WIDTH 1200

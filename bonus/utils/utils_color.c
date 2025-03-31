@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:23 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:00 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:28 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 int	ft_iscolor(char *str)
 {

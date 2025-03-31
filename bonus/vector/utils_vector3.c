@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:28:08 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:33 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:58 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 double	dot_vector(t_vector a, t_vector b)
 {

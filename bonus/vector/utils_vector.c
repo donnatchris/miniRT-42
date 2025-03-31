@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:24:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:26 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:49 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 int	solve_quadratic(t_quadratic *q)
 {

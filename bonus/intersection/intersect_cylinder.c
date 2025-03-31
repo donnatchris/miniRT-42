@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:46 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:31:57 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../../includes/miniRT_bonus.h"
 
 static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
 {
