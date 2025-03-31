@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   store_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:31:58 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:11:31 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 int	store_camera(t_file *file, char *line)
 {

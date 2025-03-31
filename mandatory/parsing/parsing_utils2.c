@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:46:42 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:25:56 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	check_input_file(char *input)
 
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), 1);
+		return (perror("Error\nOpening file"), 1);
 	ret = 0;
 	byte_read = read(fd, buff, 1);
 	if (byte_read == -1)
 	{
-		perror("Error reading file");
+		perror("Error\nReading file");
 		ret = 1;
 	}
 	if (close(fd) == -1)
-		return (perror("Error closing file"), 1);
+		return (perror("Error\nClosing file"), 1);
 	return (ret);
 }
 
@@ -78,7 +78,7 @@ char	*next_and_advance(char *line, size_t *start, char *old_arg)
 // Returns 1
 int	pars_err_msg(char *msg, char *line)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(" in line: ", 2);
 	ft_putstr_fd(line, 2);

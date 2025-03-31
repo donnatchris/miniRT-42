@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:46:42 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:11:15 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 // Function to check if the input file can be opened and read
 // Returns 0 if the file can be opened and read

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:46:49 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:11:11 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 // Function to check if the line is a scene line ('A', 'C' or 'L')
 // Returns 1 if the line is a scene line

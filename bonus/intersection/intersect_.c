@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:15:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 09:13:13 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:10:39 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 void	init_hit(t_hit *hit, t_dclst *node)
 {

@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/30 16:50:50 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:12:19 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 int	ft_close_windows(t_program *program)
 {

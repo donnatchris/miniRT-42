@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:31:58 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:20:49 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	store_camera(t_file *file, char *line)
 	static int	cam = 0;
 
 	if (cam++ > 0)
-		return (printf("Too many cameras in file\n"), 1);
+		return (ft_putstr_fd("Error\nToo many cameras in file\n", 2), 1);
 	start = 1;
 	arg = next_arg(line, &start);
 	if (store_vector(&file->camera.origin, arg, line))
@@ -40,7 +40,7 @@ int	store_ambient(t_file *file, char *line)
 	static int	ambient = 0;
 
 	if (ambient++ > 0)
-		return (printf("Too many ambient in file\n"), 1);
+		return (ft_putstr_fd("Error\nToo many ambient in file\n", 2), 1);
 	start = 1;
 	arg = next_arg(line, &start);
 	if (store_ratio(&file->ambient_light.ratio, arg, line))
@@ -58,7 +58,7 @@ int	store_light(t_file *file, char *line)
 	static int	light = 0;
 
 	if (light++ > 0)
-		return (printf("Too many lights in file\n"), 1);
+		return (ft_putstr_fd("Error\nToo many lights in file\n", 2), 1);
 	start = 1;
 	arg = next_arg(line, &start);
 	if (store_vector(&file->light.position, arg, line))

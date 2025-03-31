@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:30:56 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:26:51 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ int	store_sphere(t_file *file, char *line)
 
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
-		return (perror("malloc failed"), 1);
+		return (perror("Error\nMalloc failed"), 1);
 	if (fill_sphere_from_line(sphere, line))
 		return (ft_free((void **)&sphere), 1);
 	node = dclst_add_back(file->obj_list, sphere);
 	if (!node)
-		return (ft_free((void **)&sphere), perror("malloc failed"), 1);
+		return (ft_free((void **)&sphere),
+			perror("Error\nMalloc failed"), 1);
 	node->type = SP;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:06 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:48:14 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:21:51 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	store_vector(t_vector *vector, char *arg, char *line)
 	char	**coordonates;
 
 	if (!ft_isvector(arg))
-		return (pars_err_msg("invalid vector", line));
+		return (pars_err_msg("Invalid vector", line));
 	coordonates = NULL;
 	coordonates = ft_split(arg, ',');
 	if (!coordonates || str_array_size(coordonates) != 3)
@@ -39,7 +39,7 @@ int	store_orientation(t_vector *vector, char *arg, char *line)
 	char	**coordonates;
 
 	if (!ft_isvector(arg))
-		return (pars_err_msg("invalid vector", line));
+		return (pars_err_msg("Invalid vector", line));
 	coordonates = NULL;
 	coordonates = ft_split(arg, ',');
 	if (!coordonates || str_array_size(coordonates) != 3)

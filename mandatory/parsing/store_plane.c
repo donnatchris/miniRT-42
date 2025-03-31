@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:30:50 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:26:18 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	store_plane(t_file *file, char *line)
 
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
-		return (perror("malloc failed"), 1);
+		return (perror("Error\nMalloc failed"), 1);
 	if (fill_plane_from_line(plane, line))
 		return (ft_free((void **)&plane), 1);
 	node = dclst_add_back(file->obj_list, plane);
 	if (!node)
-		return (ft_free((void **)&plane), perror("malloc failed"), 1);
+		return (ft_free((void **)&plane), perror("Error\nMalloc failed"), 1);
 	node->type = PL;
 	return (0);
 }

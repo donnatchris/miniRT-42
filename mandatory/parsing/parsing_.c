@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:13:26 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:25:39 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	init_file_structure(t_file *file)
 	ft_memset(file, 0, sizeof(t_file));
 	file->obj_list = ft_calloc(1, sizeof(t_dclst *));
 	if (!file->obj_list)
-		return (perror("malloc failed"), 1);
+		return (perror("Error\nMalloc failed"), 1);
 	file->camera.direction.x = 1;
 	file->camera.fov = 1;
 	file->light.ratio = 1;
@@ -89,7 +89,7 @@ static t_file	*parse_fd(int fd)
 
 	file = (t_file *) malloc(sizeof(t_file));
 	if (!file)
-		return (perror("malloc failed"), NULL);
+		return (perror("Error\nMalloc failed"), NULL);
 	if (init_file_structure(file))
 		return (free(file), NULL);
 	if (parsing_loop(fd, file))
@@ -110,12 +110,12 @@ t_file	*parse_input(char *input)
 		return (NULL);
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), NULL);
+		return (perror("Error\nOpening file"), NULL);
 	file = NULL;
 	file = parse_fd(fd);
 	if (!file)
 		return (NULL);
 	if (close(fd) == -1)
-		return (perror("Error closing file"), delete_file(file), NULL);
+		return (perror("Error\nClosing file"), delete_file(file), NULL);
 	return (file);
 }

@@ -1,42 +1,42 @@
 # Variables
-SRCS        =   src/utils/utils_print.c  \
-				src/utils/utils_array.c \
-				src/utils/utils_atod.c \
-				src/utils/utils_close.c  \
-				src/utils/utils_color.c \
-				src/utils/utils_double.c \
-				src/utils/utils_int.c \
-				src/utils/utils_free.c \
-				src/parsing/parsing_.c \
-				src/parsing/parsing_utils1.c \
-				src/parsing/parsing_utils2.c \
-				src/parsing/store_.c \
-				src/parsing/store_cylinder.c \
-				src/parsing/store_plane.c \
-				src/parsing/store_sphere.c \
-				src/parsing/store_scene.c \
-				src/parsing/store_utils1.c \
-				src/parsing/store_utils2.c \
-				src/vector/utils_vector.c \
-				src/vector/utils_vector2.c \
-				src/vector/utils_vector3.c \
-				src/intersection/intersect_.c \
-				src/intersection/intersect_cylinder.c \
-				src/intersection/intersect_plan.c \
-				src/intersection/intersect_sphere.c \
-				src/render/color.c \
-				src/render/phong.c \
-				src/render/rays.c \
-				src/render/render.c \
-				src/render/viewport.c \
+SRCS        =   mandatory/utils/utils_print.c  \
+				mandatory/utils/utils_array.c \
+				mandatory/utils/utils_atod.c \
+				mandatory/utils/utils_close.c  \
+				mandatory/utils/utils_color.c \
+				mandatory/utils/utils_double.c \
+				mandatory/utils/utils_int.c \
+				mandatory/utils/utils_free.c \
+				mandatory/parsing/parsing_.c \
+				mandatory/parsing/parsing_utils1.c \
+				mandatory/parsing/parsing_utils2.c \
+				mandatory/parsing/store_.c \
+				mandatory/parsing/store_cylinder.c \
+				mandatory/parsing/store_plane.c \
+				mandatory/parsing/store_sphere.c \
+				mandatory/parsing/store_scene.c \
+				mandatory/parsing/store_utils1.c \
+				mandatory/parsing/store_utils2.c \
+				mandatory/vector/utils_vector.c \
+				mandatory/vector/utils_vector2.c \
+				mandatory/vector/utils_vector3.c \
+				mandatory/intersection/intersect_.c \
+				mandatory/intersection/intersect_cylinder.c \
+				mandatory/intersection/intersect_plan.c \
+				mandatory/intersection/intersect_sphere.c \
+				mandatory/render/color.c \
+				mandatory/render/phong.c \
+				mandatory/render/rays.c \
+				mandatory/render/render.c \
+				mandatory/render/viewport.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
 				test/print_parsing.c \
-				src/main.c 
+				mandatory/main.c 
 				
 OBJ_DIR     =   obj
-OBJS        =   $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+OBJS        =   $(SRCS:mandatory/%.c=$(OBJ_DIR)/%.o)
 
 HEADERS     =   includes/miniRT.h     
 
@@ -59,7 +59,7 @@ SMILEY      =   👍
 SMILEY2	    =   😎
 
 # Règle pour générer chaque fichier .o dans obj/
-$(OBJ_DIR)/%.o: src/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: mandatory/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

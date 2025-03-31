@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/30 17:43:00 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:12:57 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 static t_program	*init_program(char **av)
 {

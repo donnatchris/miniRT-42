@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   store_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:06 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 13:48:14 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:11:44 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 // Function to store a vector in the structure
 // Returns 0 if the vector was stored successfully

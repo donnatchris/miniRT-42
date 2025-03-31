@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:26 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/30 17:43:50 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:12:27 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 static int	ft_handle_point(char *str, int *i, int *point_count)
 {

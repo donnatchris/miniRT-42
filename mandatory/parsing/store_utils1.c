@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:02 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/29 10:14:04 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:21:42 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	store_angle(int *storage, char *arg, char *line)
 {
 	if (!ft_isangle(arg))
-		return (pars_err_msg("invalid angle", line));
+		return (pars_err_msg("Invalid angle", line));
 	*storage = ft_atoi(arg);
 	return (0);
 }
@@ -29,7 +29,7 @@ int	store_angle(int *storage, char *arg, char *line)
 int	store_double(double *storage, char *arg, char *line)
 {
 	if (!ft_isdouble(arg))
-		return (pars_err_msg("invalid double", line));
+		return (pars_err_msg("Invalid double", line));
 	*storage = ft_atod(arg);
 	return (0);
 }
@@ -40,7 +40,7 @@ int	store_double(double *storage, char *arg, char *line)
 int	store_ratio(double *storage, char *arg, char *line)
 {
 	if (!ft_isratio(arg))
-		return (pars_err_msg("invalid ratio", line));
+		return (pars_err_msg("Invalid ratio", line));
 	*storage = ft_atod(arg);
 	return (0);
 }
@@ -51,7 +51,7 @@ int	store_ratio(double *storage, char *arg, char *line)
 int	store_color(int *storage, char *arg, char *line)
 {
 	if (!ft_iscolor(arg))
-		return (pars_err_msg("invalid color", line));
+		return (pars_err_msg("Invalid color", line));
 	*storage = ft_atoc(arg);
 	return (0);
 }

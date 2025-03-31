@@ -6,11 +6,11 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:26:18 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/30 16:27:55 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:12:49 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../includes/miniRT_bonus.h"
 
 t_vector	vector(double x, double y, double z)
 {

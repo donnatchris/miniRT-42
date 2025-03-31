@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/28 22:33:09 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 10:27:15 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static int	init_img(t_program *prog)
 
 	img = malloc(sizeof(t_image));
 	if (!img)
-		return (perror("malloc img failed"), 1);
+		return (perror("Error\nMalloc img failed"), 1);
 	img->img_ptr = mlx_new_image(prog->mlx, WIDTH, HEIGHT);
 	if (!img->img_ptr)
 		return (perror("mlx_new_image failed"), free(img), 1);
 	img->addr = mlx_get_data_addr(img->img_ptr,
 			&img->bpp, &img->size_line, &img->endian);
 	if (!img->addr)
-		return (perror("mlx_get_data_addr failed"), free(img), 1);
+		return (perror("Error\nMlx_get_data_addr failed"), free(img), 1);
 	prog->img = img;
 	return (0);
 }
