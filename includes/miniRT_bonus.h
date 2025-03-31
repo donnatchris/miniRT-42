@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:23 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:48:45 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int			store_ambient(t_file *file, char *line);
 int			store_light(t_file *file, char *line);
 // store_sphere.c
 int			store_sphere(t_file *file, char *line);
+// store.sphere
+int			store_triangle(t_file *file, char *line);
 // store_utils1.c
 int			store_angle(int *storage, char *arg, char *line);
 int			store_double(double *storage, char *arg, char *line);
@@ -137,6 +139,7 @@ t_hit		inter_scene(t_ray *ray, t_file *file);
 t_hit		inter_plane(t_ray *ray, t_dclst *node);
 t_hit		inter_sphere(t_ray *ray, t_dclst *node);
 t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
+t_hit		inter_triangle(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
 /* ************************************************************************** */
 /* 							TEST                                              */

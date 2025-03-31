@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:15:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:31:48 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:47:11 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_hit	inter_scene(t_ray *ray, t_file *file)
 			temp = inter_sphere(ray, current);
 		else if (current->type == CY)
 			temp = inter_cylinder(ray, current);
+		else if (current->type == TR)
+			temp = inter_triangle(ray, current);
 		if (temp.hit && temp.distance < hit.distance)
 			hit = temp;
 		current = current->next;

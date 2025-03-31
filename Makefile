@@ -31,7 +31,7 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
-				test/print_parsing.c \
+				mandatory/test/print_parsing.c \
 				mandatory/main.c
 
 SRCS_BONUS  =   bonus/utils/utils_print.c  \
@@ -49,6 +49,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/store_cylinder.c \
 				bonus/parsing/store_plane.c \
 				bonus/parsing/store_sphere.c \
+				bonus/parsing/store_triangle.c \
 				bonus/parsing/store_scene.c \
 				bonus/parsing/store_utils1.c \
 				bonus/parsing/store_utils2.c \
@@ -68,7 +69,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
-				test/print_parsing.c \
+				bonus/test/print_parsing.c \
 				bonus/main.c 
 
 OBJ_DIR      =   obj
