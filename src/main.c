@@ -1,34 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
+/*   Updated: 2025/03/30 17:43:00 by olthorel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/miniRT.h"
 
-int	main(int ac, char **av)
+static t_program	*init_program(char **av)
 {
-	(void)av;
-	(void)ac;
 	t_program	*program;
 
 	program = ft_calloc(1, sizeof(t_program));
 	if (!program)
-		return (perror("malloc failed"), 1);
-	// ft_memset(program->file, 0, sizeof(program->file));
+		return (ft_print_error(3), NULL);
 	program->file = parse_input(av[1]);
 	if (!program->file)
-		return (ft_putstr_fd("Invalid input\n", 2), ft_free((void **)&program), 1);
-	print_file(program->file);
-	program->mlx = mlx_init();
-	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
-	if (!program->mlx)
 	{
-		ft_print_error(3);
-		return (free(program), 1);
+		ft_print_error(2);
+		ft_free((void **)&program);
+		return (NULL);
 	}
+	print_file(program->file);
+	return (program);
+}
+
+static int	init_mlx(t_program *program)
+{
+	program->mlx = mlx_init();
+	if (!program->mlx)
+		return (ft_print_error(3), free(program), 0);
+	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, NAME_WINDOWS);
 	if (!program->win)
 	{
 		ft_print_error(5);
 		mlx_destroy_display(program->mlx);
 		free(program->mlx);
 		free(program);
-		return (1);
+		return (0);
 	}
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
+	t_program	*program;
+
+	if (ac != 2)
+		return (ft_print_error(1), 1);
+	program = init_program(av);
+	if (!program)
+		return (1);
+	if (!init_mlx(program))
+		return (1);
 	render(program);
 	mlx_hook(program->win, 17, 0, ft_close_windows, program);
 	mlx_key_hook(program->win, ft_key_hook, program);
