@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:49:01 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/28 22:23:36 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 09:10:54 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	viewport_len(t_viewport *view, t_program *prog)
 {
 	view->asp_ratio = (double) WIDTH / HEIGHT;
-	view->fov = DEG_TO_RAD (prog->file->camera.fov);
+	view->fov = prog->file->camera.fov * PI / 180;
 	view->width = 2.0 * tan(view->fov / 2.0);
 	view->height = view->width / view->asp_ratio;
 }

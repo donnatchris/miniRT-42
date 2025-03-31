@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:15:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/28 23:16:24 by christophed      ###   ########.fr       */
+/*   Updated: 2025/03/31 09:13:13 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_hit	inter_scene(t_ray *ray, t_file *file)
 	t_dclst	*current;
 
 	hit.hit = 0;
-	hit.distance = DBL_MAX;
+	hit.distance = ((double)1.79769313486231570814527423731704357e+308L);
 	current = *file->obj_list;
 	while (current)
 	{
