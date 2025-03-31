@@ -59,6 +59,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/intersection/intersect_cylinder.c \
 				bonus/intersection/intersect_plan.c \
 				bonus/intersection/intersect_sphere.c \
+				bonus/intersection/intersect_triangle.c \
 				bonus/render/color.c \
 				bonus/render/phong.c \
 				bonus/render/rays.c \
@@ -69,9 +70,12 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				dclst/dclst3.c \
 				test/print_parsing.c \
 				bonus/main.c 
-				
-OBJ_DIR     =   obj
+
+OBJ_DIR      =   obj
+OBJ_BONUS_DIR = obj_bonus
+
 OBJS        =   $(SRCS:mandatory/%.c=$(OBJ_DIR)/%.o)
+OBJS_BONUS  =   $(SRCS_BONUS:bonus/%.c=$(OBJ_BONUS_DIR)/%.o)
 
 HEADERS     =   includes/miniRT.h     
 
@@ -80,21 +84,21 @@ NAME_BONUS  =   miniRT_bonus
 
 CC          =   cc
 CFLAGS      =   -Wall -Wextra -Werror -g -I./libft/srcs -Iincludes
-# FLAGS       =   -lm -L./minilibx-linux -lmlx -L./libft -lft -lXext -lX11
-# flags for linux:
-# FLAGS		=	-L./minilibx-linux -L/opt/X11/lib -lmlx -lXext -lX11 -lm
-# flags for macos:
+
 FLAGS		=	-L./minilibx-linux -lmlx -L/opt/X11/lib -lXext -lX11 -lm -L./libft -lft
 
 # Commandes colorées et décoratives
 GREEN       =   \033[1;35m
 CYAN        =   \033[1;34m
 RESET       =   \033[0m
-SMILEY      =   👍
 SMILEY2	    =   😎
 
 # Règle pour générer chaque fichier .o dans obj/
 $(OBJ_DIR)/%.o: mandatory/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_BONUS_DIR)/%.o: bonus/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -110,15 +114,15 @@ $(NAME): $(OBJS) $(HEADERS)
 # Cible bonus
 bonus: libft mlx $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJS) $(HEADERS)
+$(NAME_BONUS): $(OBJS_BONUS) $(HEADERS)
 	@echo "$(CYAN)Linking bonus...$(RESET)"
-	@$(CC) $(OBJS) -o $(NAME_BONUS) $(FLAGS)
+	@$(CC) $(OBJS_BONUS) -o $(NAME_BONUS) $(FLAGS)
 	@echo "$(GREEN)Executable $(NAME_BONUS) created! $(SMILEY2)$(RESET)"
 	@echo "$(GREEN)Usage: ./miniRT_bonus [scene.rt]$(RESET)"
 
 # Nettoyage des fichiers objets
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) $(OBJ_BONUS_DIR)
 	@make -s clean -C libft
 	@make -s clean -C minilibx-linux >/dev/null 2>&1
 	@echo "$(CYAN)Object files cleaned!$(RESET)"
@@ -127,7 +131,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME) $(NAME_BONUS)
 	@make -s fclean -C libft
-	@echo "$(CYAN)Executable $(NAME) or $(NAME_BONUS) removed!$(RESET)"
+	@echo "$(CYAN)Executables removed!$(RESET)"
 
 # Recompiler à partir de zéro
 re: fclean all

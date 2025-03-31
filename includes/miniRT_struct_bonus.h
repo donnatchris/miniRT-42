@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 10:10:10 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:02:16 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,13 @@ typedef struct s_cylinder
 	double		height;
 	int			color;
 }	t_cylinder;
+
+typedef struct s_triangle
+{
+	t_vector	vertex[3];
+	t_vector	face[3];
+	int			color;	
+}	t_triangle;
 
 typedef struct s_file
 {
