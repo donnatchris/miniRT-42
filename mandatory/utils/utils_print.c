@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:42:44 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 10:24:16 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:03:15 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	ft_print_error(int exit_code)
 		ft_putstr_fd("Error\nUnable to render.\n", 2);
 	else if (exit_code == 8)
 		ft_putstr_fd("Error\nCannot init color.\n", 2);
-	exit(exit_code);
+	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 10:25:39 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:34:32 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_file	*parse_input(char *input)
 	file = NULL;
 	file = parse_fd(fd);
 	if (!file)
-		return (NULL);
+		return (close(fd), NULL);
 	if (close(fd) == -1)
 		return (perror("Error\nClosing file"), delete_file(file), NULL);
 	return (file);

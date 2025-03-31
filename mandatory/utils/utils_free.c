@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/30 16:50:29 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:17:19 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ void	delete_program(t_program *program)
 {
 	if (!program)
 		return ;
-	if (program->win)
-		mlx_destroy_window(program->mlx, program->win);
-	mlx_destroy_display(program->mlx);
-	ft_free((void **)&program->mlx);
 	delete_file(program->file);
-	ft_free((void **)&program);
+	mlx_destroy_image(program->mlx, program->img->img_ptr);
+	free(program->img);
+	mlx_destroy_window(program->mlx, program->win);
+	mlx_destroy_display(program->mlx);
+	free(program->mlx);
+	free(program);
 }
