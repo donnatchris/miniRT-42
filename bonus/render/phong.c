@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:48:42 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:55 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:21:41 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	phong_lighting(t_hit hit, t_light light, t_program *prog)
 	p.ambient = prog->file->ambient_light.ratio;
 	p.diffuse = fmax(dot_vector(hit.normal, p.light_dir), 0.0);
 	p.reflect_dir = reflect(mul_vector(p.light_dir, -1.0), hit.normal);
-	p.specular_coef = pow(fmax(dot_vector(p.reflect_dir, p.view_dir), 0.0), 32);
+	p.specular_coef = pow(fmax(dot_vector(p.reflect_dir, p.view_dir), 0.0), hit.shininess);
 	p.intensity = p.ambient
 		+ (light.ratio * p.diffuse)
 		+ (0.5 * p.specular_coef);

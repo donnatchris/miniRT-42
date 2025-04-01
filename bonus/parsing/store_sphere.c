@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 23:20:44 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:27:06 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+// Function to store the shininess parameter in the structure
+// Returns arg
+static char	*store_sp_shininess(t_sphere *sphere, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&sphere->shininess, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
+
 // Function to store the chessboard parameters in the structure
 // (The chessboard parameters are the color and the scale)
-// Returns 0 if the chessboard was stored successfully
-// Returns 1 if an error occured
+// Returns arg
 static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
@@ -33,6 +42,7 @@ static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t
 // Returns 1 if an error occured
 static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start)
 {
+	sphere->shininess = 32;
 	while (1)
 	{
 		arg = next_and_advance(line, start, arg);
@@ -40,6 +50,8 @@ static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_sp_chessboard(sphere, arg, line, start);
+		if (!ft_strncmp(arg, "sh", 2))
+			arg = store_sp_shininess(sphere, arg, line, start);
 		if (!arg)
 			break ;
 	}

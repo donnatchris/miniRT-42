@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/03/31 22:47:01 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:20:20 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_hit
 	t_dclst		*object;
 	t_vector	point;
 	t_vector	normal;
+	int			shininess;
 }	t_hit;
 
 typedef struct s_quadratic
@@ -99,6 +100,7 @@ typedef struct s_plane
 	int				color;
 	t_vector		u;
 	t_vector		v;
+	int				shininess;
 	int				chessboard;
 	int				color2;
 	int				scale;
@@ -110,6 +112,7 @@ typedef struct s_sphere
 	double		diameter;
 	double		rayon2;
 	int			color;
+	int			shininess;
 	int			chessboard;
 	int			color2;
 	int			scale;
@@ -122,6 +125,7 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	int			color;
+	int			shininess;
 	int			chessboard;
 	int			color2;
 	int			scale;

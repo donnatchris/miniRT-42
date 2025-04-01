@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 22:59:33 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:20:29 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_hit	inter_cylinder(t_ray *ray, t_dclst *node)
 	hit.normal = sub_vector(cp, mul_vector(cyl->orientation, m));
 	normalize_vector(&hit.normal);
 	hit.hit = 1;
+	hit.shininess = cyl->shininess;
 	hit.color = choose_cy_color(cyl, hit);
 	return (hit);
 }

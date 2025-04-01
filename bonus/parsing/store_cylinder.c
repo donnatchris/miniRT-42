@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 23:15:37 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:17:12 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line, si
 // Returns 1 if an error occured
 static int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg, size_t *start)
 {
+	cylinder->shininess = 32;
 	while (1)
 	{
 		arg = next_and_advance(line, start, arg);

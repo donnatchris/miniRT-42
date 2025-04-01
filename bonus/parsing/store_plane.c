@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 23:20:19 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:17:24 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static char	*store_pl_chessboard(t_plane *plane, char *arg, char *line, size_t *
 // Returns 1 if an error occured
 static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
 {
+	plane->shininess = 32;
 	create_ortho_basis(plane->normal, &plane->u, &plane->v);
 	while (1)
 	{

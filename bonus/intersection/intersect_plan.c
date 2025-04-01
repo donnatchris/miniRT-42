@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 22:42:48 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/01 09:20:55 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ t_hit	inter_plane(t_ray *ray, t_dclst *node)
 				hit.normal = plane->normal;
 			else
 				hit.normal = mul_vector(plane->normal, -1);
-			hit.color = choose_pl_color(plane, hit);
 			hit.hit = 1;
+			hit.color = choose_pl_color(plane, hit);
+			hit.shininess = plane->shininess;
 		}
 	}
 	return (hit);
