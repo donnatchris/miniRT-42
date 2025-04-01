@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 13:40:21 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:54:22 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	is_object(char *str)
 	if (!ft_strncmp(str, "cy", 2))
 		return (1);
 	if (!ft_strncmp(str, "tr", 2))
+		return (1);
+	if (!ft_strncmp(str, "co", 2))
 		return (1);
 	return (0);
 }

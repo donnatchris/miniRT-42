@@ -46,6 +46,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/parsing_utils1.c \
 				bonus/parsing/parsing_utils2.c \
 				bonus/parsing/store_.c \
+				bonus/parsing/store_cone.c \
 				bonus/parsing/store_cylinder.c \
 				bonus/parsing/store_plane.c \
 				bonus/parsing/store_sphere.c \

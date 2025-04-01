@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 09:20:20 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:34:53 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,17 @@ typedef struct s_triangle
 	int			color;	
 }	t_triangle;
 
+typedef struct s_cone
+{
+	t_vector    apex;
+	t_vector    axis;
+	int			angle;
+	double		angle_rad;
+	double		height;
+	int			shininess;
+	int         color;
+}   t_cone;
+
 typedef struct s_file
 {
 	t_ambient_light	ambient_light;
@@ -191,6 +202,7 @@ typedef enum e_object
 	PL,
 	SP,
 	CY,
+	CO,
 	TR
 }	t_object;
 

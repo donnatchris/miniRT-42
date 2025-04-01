@@ -67,6 +67,22 @@ static void	print_sphere(t_sphere *sp)
 	print_color(sp->color, "Color");
 }
 
+static void	print_cone(t_cone *co)
+{
+	if (!co)
+	{
+		printf("cone: NULL pointer\n");
+		return;
+	}
+	printf("=== cone ===\n");
+	print_vector(co->apex, "Sommet");
+	print_vector(co->axis, "Axe");
+	printf("Angle : %d\n", co->angle);
+	printf("Radian: %.6f\n", co->angle_rad);
+	printf("Height: %.6f\n", co->height);
+	print_color(co->color, "Color");
+}
+
 static void	print_plane(t_plane *pl)
 {
 	if (!pl)
@@ -114,7 +130,7 @@ static void	print_object_list(t_dclst **head)
 {
 	t_dclst	*current;
 
-	printf("=== Objetcs ===\n");
+	printf("=== Objects ===\n");
 	if (!head || !*head)
 	{
 		printf("No object to print\n");
@@ -131,6 +147,8 @@ static void	print_object_list(t_dclst **head)
 			print_cylinder((t_cylinder *) current->data);
 		else if (current->type == TR)
 			print_triangle((t_triangle *) current->data);
+		else if (current->type == CO)
+			print_cone((t_cone *) current->data);
 		else
 			printf("ERROR: unknown object in list\n");
 		current = current -> next;
