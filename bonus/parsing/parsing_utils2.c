@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:19 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:03:37 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*next_arg(char *line, size_t *start)
 	char	*arg;
 	int		end;
 
-	if (line[*start] == '\0' || line[*start] == '\n')
+	if (*start >= ft_strlen(line) || line[*start] == '\0'
+		|| line[*start] == '\n')
 		return (NULL);
 	arg = NULL;
 	while (ft_strchr(WHITESPACE, line[*start]))
