@@ -1,15 +1,15 @@
-# Caméra: position (0, 0, -5), orientation vers Z (0, 0, 1), champ de vision 70°
-C  0,5,-10  0,-1,1  70
+# Caméra : position (0, 0, -5), orientation vers Z (0, 0, 1), champ de vision 70°
+C  0,0,-5  0,0,1  70
 
-# Lumière ambiante: intensité 0.2 (20%), couleur blanche
-A  0.2  255,255,255
+# Lumière ambiante : intensité 0.2 (20%), couleur blanche
+A  1  255,255,255
 
-# Lumière directionnelle: position (2, 2, -2), intensité 0.5, couleur blanche
+# Lumière directionnelle : position (2, 2, -2), intensité 0.5, couleur blanche
 L  10,10,0  0.8  255,255,255
 
-# Triangle: 
-#   - Sommet 1: (-1, -1, 0)
-#   - Sommet 2: (1, -1, 0)
-#   - Sommet 3: (0, 1, 0)
-#   - Couleur rouge (255, 0, 0)
-tr  -1,-1,0  1,-1,0  0,1,0  255,0,0
+# Triangle : 
+#   - Sommet 1 : (-1, -1, 0)
+#   - Sommet 2 : (1, -1, 0)
+#   - Sommet 3 : (0, 1, 0)
+#   - Couleur : rouge (255, 0, 0)
+tr  -1,-1,-0.2  1.2,-1,1.5  0,1,0  255,0,0
