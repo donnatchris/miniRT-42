@@ -1,91 +1,109 @@
 #include "../../includes/miniRT_bonus.h"
 
-typedef struct s_cone
-{
-	t_vector    apex;    // Sommet du cône
-	t_vector    axis;    // Axe du cône (normalisé)
-	int         color;    // Couleur du cône
-}   t_cone;
-
-t_hit   inter_cone(t_ray *ray, t_dclst *node)
-{
-	t_hit  		 hit;
-	t_cone		*cone;
-	t_vector	oc;
-	t_vector	v;
-	t_vector	temp;
-	double		m;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-	double		t1;
-	double		t2;
-	double		cos2;
-	double		sin2;
-
-	init_hit(&hit, node);
-	cone = (t_cone *)node->data;
-	oc = sub_vector(ray->origin, cone->apex);
-	cos2 = 0.5; //approximation angle fixe;
-	sin2 = 1 - cos2;
-	a = dot_vector(ray->direction, ray->direction) - cos2 * dot_vector(ray->direction, cone->axis) * dot_vector(ray->direction, cone->axis);
-    b = 2 * (dot_vector(ray->direction, oc) - cos2 * dot_vector(ray->direction, cone->axis) * dot_vector(oc, cone->axis));
-    c = dot_vector(oc, oc) - cos2 * dot_vector(oc, cone->axis) * dot_vector(oc, cone->axis);
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-		return (hit);
-	t1 = (-b - sqrt(discriminant)) / (2 * a);
-	t2 = (-b + sqrt(discriminant)) / (2 * a);
-	if (t1 >= EPS)
-		hit.distance = t1;
-	else if (t2 >= EPS)
-		hit.distance = t2;
-	else
-		return (hit);
-	hit.point = add_vector(ray->origin, mul_vector(ray->direction, hit.distance));
-
-	// Correction ici
-	v = sub_vector(hit.point, cone->apex); // Initialisation correcte de v
-	m = dot_vector(v, cone->axis); // Calcul de m
-
-	temp = sub_vector(v, mul_vector(cone->axis, m * (1 + sin2 / cos2)));
-	normalize_vector(&temp);
-	hit.normal = temp; // Stockage correct de la normale
-
-	hit.color = cone->color;
-	hit.hit = 1;
-	return (hit);
+static double find_closest_intersection(double t1, double t2) {
+    if (t1 > EPS && (t2 < EPS || t1 < t2))
+        return t1;
+    if (t2 > EPS)
+        return t2;
+    return -1;
 }
 
-// int main()
-// {
-//     t_cone cone = {
-//         .apex = {0, 0, 0},
-//         .axis = {0, 1, 0},
-//         .color = 0xFFFFFF
-//     };
+// t_vector calculate_cone_normal(t_cone *cone, t_vector point) {
+//     t_vector apex_to_point = sub_vector(point, cone->apex);
+//     double m = dot_vector(apex_to_point, cone->axis);
+//     t_vector proj = mul_vector(cone->axis, m);
+//     t_vector normal = sub_vector(apex_to_point, proj);
+//     double len = sqrt(dot_vector(normal, normal));
+//     normal = mul_vector(normal, 1.0 / len);
+//     return normal;
+// }
+
+t_hit inter_cone(t_ray *ray, t_dclst *node)
+{
+    t_hit hit;
+    t_cone *cone = (t_cone *)node->data;
+    init_hit(&hit, node);
     
-//     t_ray ray = {
-//         .origin = {1, 2, -5},
-//         .direction = {0, -0.5, 1}
-//     };
+    // Normalisation de l'axe du cône
+	t_vector axis = cone->axis;
+    double k = pow(tan(cone->angle_rad), 2);
+    t_vector co = sub_vector(ray->origin, cone->apex);
     
-//     t_dclst node = {
-//         .data = &cone
-//     };
+    // Coefficients quadratiques
+    double dv = dot_vector(ray->direction, cone->axis);
+    double coa = dot_vector(co, cone->axis);
     
+    t_quadratic q;
+    q.a = dot_vector(ray->direction, ray->direction) - (1 + k) * dv * dv;
+    q.b = 2 * (dot_vector(ray->direction, co) - (1 + k) * dv * coa);
+    q.c = dot_vector(co, co) - (1 + k) * coa * coa;
+    
+    if (!solve_quadratic(&q))
+        return hit;
+    
+    double t = find_closest_intersection(q.t1, q.t2);
+    if (t < EPS)
+        return hit;
+    
+    hit.point = add_vector(ray->origin, mul_vector(ray->direction, t));
+    
+    // Vérification de la hauteur
+    double m = dot_vector(sub_vector(hit.point, cone->apex), cone->axis);
+    if (cone->height > 0 && (m < -EPS || m > cone->height + EPS))
+        return hit;
+    
+    // Calcul de la normale
+    t_vector apex_to_p = sub_vector(hit.point, cone->apex);
+    double proj_len = dot_vector(apex_to_p, axis);
+    t_vector proj = mul_vector(axis, proj_len);
+    hit.normal = sub_vector(apex_to_p, mul_vector(proj, 1 + k));
+	normalize_vector(&hit.normal);
+    
+    // Inverser la normale si le rayon est à l'intérieur
+    if (dot_vector(hit.normal, ray->direction) > 0)
+        hit.normal = mul_vector(hit.normal, -1);
+    
+    hit.distance = t;
+    hit.hit = 1;
+    hit.color = cone->color;
+    hit.shininess = cone->shininess;
+    
+    return hit;
+}
+
+// int main() {
+//     // Définition du cône
+//     t_cone cone;
+//     cone.apex = (t_vector){0, 0, 0};  // Sommet du cône à l'origine
+//     cone.axis = (t_vector){0, 1, 0};
+// 	normalize_vector(&cone.axis);  // Axe orienté vers le haut
+//     cone.angle = M_PI / 6;  // Angle d'ouverture (30 degrés)
+//     cone.height = 5;  // Hauteur maximale du cône
+//     cone.color = 0xFF0000;  // Rouge
+//     cone.shininess = 50;
+    
+//     // Définition du rayon
+//     t_ray ray;
+//     ray.origin = (t_vector){2, 3, -5};  // Point de départ du rayon
+//     ray.direction = (t_vector){-0.4, -0.6, 1};
+// 	normalize_vector(&ray.direction);  // Direction normalisée
+    
+//     // Création du nœud de la liste pour l'objet
+//     t_dclst node;
+//     node.data = &cone;
+    
+//     // Calcul de l'intersection
 //     t_hit hit = inter_cone(&ray, &node);
     
-//     if (hit.hit)
-//     {
-//         printf("Intersection at: (%f, %f, %f)\n", hit.point.x, hit.point.y, hit.point.z);
-//         printf("Normal: (%f, %f, %f)\n", hit.normal.x, hit.normal.y, hit.normal.z);
-//         printf("Distance: %f\n", hit.distance);
-//     }
-//     else
-//     {
-//         printf("No intersection.\n");
+//     // Affichage du résultat
+//     if (hit.hit) {
+//         printf("Intersection trouvée !\n");
+//         printf("Point d'impact : (%.2f, %.2f, %.2f)\n", hit.point.x, hit.point.y, hit.point.z);
+//         printf("Normale : (%.2f, %.2f, %.2f)\n", hit.normal.x, hit.normal.y, hit.normal.z);
+//         printf("Distance : %.2f\n", hit.distance);
+//         printf("Couleur : 0x%X\n", hit.color);
+//     } else {
+//         printf("Aucune intersection.\n");
 //     }
     
 //     return 0;

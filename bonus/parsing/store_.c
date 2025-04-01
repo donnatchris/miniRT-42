@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 13:40:57 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:54:53 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	store_object(t_file *file, char *line)
 		return (store_cylinder(file, line));
 	else if (!ft_strncmp(line, "tr", 2))
 		return (store_triangle(file, line));
+	else if (!ft_strncmp(line, "co", 2))
+		return (store_cone(file, line));
 	else
 		return (1);
 }
