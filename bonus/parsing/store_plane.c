@@ -6,11 +6,13 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:17:24 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:59:38 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+
 
 // Function to store the chessboard parameters in the structure
 // (The chessboard parameters are the color and the scale)
@@ -42,6 +44,8 @@ static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_pl_chessboard(plane, arg, line, start);
+		if (!ft_strncmp(arg, "xp", 2))
+			arg = store_pl_xpm(plane, arg, line, start);
 		if (!arg)
 			break ;
 	}

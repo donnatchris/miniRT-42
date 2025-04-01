@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 11:34:53 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:38:52 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef struct s_rgb
 	int	g;
 	int	b;
 }	t_rgb;
+
+typedef struct s_xpm
+{
+	void	*mlx;
+	int		width;
+	int		height;
+	void	*img_ptr;
+}	t_xpm;
 
 typedef struct s_chd
 {
@@ -104,6 +112,7 @@ typedef struct s_plane
 	int				chessboard;
 	int				color2;
 	int				scale;
+	t_xpm			*xpm;
 }	t_plane;
 
 typedef struct s_sphere
