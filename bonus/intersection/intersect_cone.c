@@ -37,27 +37,50 @@ t_hit inter_cone(t_ray *ray, t_dclst *node)
     q.a = dot_vector(ray->direction, ray->direction) - (1 + k) * dv * dv;
     q.b = 2 * (dot_vector(ray->direction, co) - (1 + k) * dv * coa);
     q.c = dot_vector(co, co) - (1 + k) * coa * coa;
-    
+    // printf("Coefficients quadratiques:\n");
+    // printf("a: %f, b: %f, c: %f\n", q.a, q.b, q.c);
     if (!solve_quadratic(&q))
+    {
+        // printf("Pas de solution quadratique, aucun rayon n'intersecte le cône.\n");
         return hit;
-    
+    }
+    // printf("Solutions quadratiques:\n");
+    // printf("t1: %f, t2: %f\n", q.t1, q.t2);
     double t = find_closest_intersection(q.t1, q.t2);
     if (t < EPS)
+    {
+        // printf("Aucune intersection valide trouvée, t: %f\n", t);
         return hit;
-    
+    }
     hit.point = add_vector(ray->origin, mul_vector(ray->direction, t));
-    
+    // printf("Point d'impact : (%.2f, %.2f, %.2f)\n", hit.point.x, hit.point.y, hit.point.z);
     // Vérification de la hauteur
     double m = dot_vector(sub_vector(hit.point, cone->apex), cone->axis);
-    if (cone->height > 0 && (m < -EPS || m > cone->height + EPS))
+    // printf("Point d'impact : (%f, %f, %f)\n", hit.point.x, hit.point.y, hit.point.z);
+    // printf("Apex du cône : (%f, %f, %f)\n", cone->apex.x, cone->apex.y, cone->apex.z);
+    // printf("Direction de l'axe du cône : (%f, %f, %f)\n", cone->axis.x, cone->axis.y, cone->axis.z);
+    // printf("Hauteur du point par rapport à l'apex : %f\n", m);
+    if (m < 0 || m > cone->height)
+    {
+        // printf("Le point d'impact est hors de la portée du cône (hauteur).\n");
         return hit;
+    }
+    // printf("Hauteur du point par rapport à l'apex du cône : %f\n", m);
+
+    if (cone->height > 0 && (m < -EPS || m > cone->height + EPS))
+    {
+        // printf("Le point d'impact est hors de la portée du cône.\n");
+        return hit;
+    }
     
     // Calcul de la normale
     t_vector apex_to_p = sub_vector(hit.point, cone->apex);
     double proj_len = dot_vector(apex_to_p, axis);
     t_vector proj = mul_vector(axis, proj_len);
     hit.normal = sub_vector(apex_to_p, mul_vector(proj, 1 + k));
+    // printf("Normale avant normalisation : (%.2f, %.2f, %.2f)\n", hit.normal.x, hit.normal.y, hit.normal.z);
 	normalize_vector(&hit.normal);
+    //printf("Normale après normalisation : (%.2f, %.2f, %.2f)\n", hit.normal.x, hit.normal.y, hit.normal.z);
     
     // Inverser la normale si le rayon est à l'intérieur
     if (dot_vector(hit.normal, ray->direction) > 0)
@@ -67,7 +90,16 @@ t_hit inter_cone(t_ray *ray, t_dclst *node)
     hit.hit = 1;
     hit.color = cone->color;
     hit.shininess = cone->shininess;
-    
+    // if (hit.hit) 
+    // {
+    //     // printf("Intersection trouvée !\n");
+    //     // printf("Point d'impact : (%.2f, %.2f, %.2f)\n", hit.point.x, hit.point.y, hit.point.z);
+    //     // printf("Normale : (%.2f, %.2f, %.2f)\n", hit.normal.x, hit.normal.y, hit.normal.z);
+    //     // printf("Distance : %.2f\n", hit.distance);
+    //     // printf("Couleur : 0x%X\n", hit.color);
+    // }
+    // else
+        // printf("Aucune intersection.\n");
     return hit;
 }
 

@@ -78,7 +78,7 @@ static int	fill_cone_from_line(t_cone *cone, char *line)
 		return (ft_free((void **)&arg), 1);
 	cone->angle_rad = cone->angle * M_PI / 180;
 	arg = next_and_advance(line, &start, arg);
-	if (store_double(&cone->height, arg, line) || cone->height <= 0)
+	if (store_double(&cone->height, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&cone->color, arg, line))
@@ -106,6 +106,7 @@ int	store_cone(t_file *file, char *line)
 	if (!node)
 		return (ft_free((void **)&cone),
 			perror("Error\nMalloc failed"), 1);
+	cone->shininess = 32;
 	node->type = CO;
 	return (0);
 }
