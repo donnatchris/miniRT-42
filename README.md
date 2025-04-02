@@ -3,8 +3,10 @@
 By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan, France
 
 <p align="center">
-  <img src="https://github.com/othorel/Fil-De-Fer/blob/main/img/Screenshot%20from%202025-01-20%2016-31-01.png" />
+  <img src="https://github.com/donnatchris/miniRT/blob/main/img/temple.png" />
 </p>
+
+---
 
 ## AIM OF THE PROJECT:
 
