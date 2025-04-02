@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 15:16:28 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:21:19 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		delete_program(t_program *program);
 /* 							PARSING                                           */
 /* ************************************************************************** */
 // parsing_.c
-t_file		*parse_input(char *input);
+t_file		*parse_input(char *input, t_program *prog);
 // parsing_utils1.c
 int			is_scene(char *str);
 int			is_object(char *str);
@@ -71,15 +71,17 @@ int			check_input_file(char *input);
 char		*next_arg(char *line, size_t *start);
 char		*next_and_advance(char *line, size_t *start, char *old_arg);
 int			pars_err_msg(char *msg, char *line);
+// parsing_utils3.c
+void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 // store_.c
 int			store_scene(t_file *file, char *line);
-int			store_object(t_file *file, char *line);
+int			store_object(t_file *file, char *line, t_program *prog);
 // store_cone.c
 int	        store_cone(t_file *file, char *line);
 // store_cylinder.c
 int			store_cylinder(t_file *file, char *line);
 // store_plane.c
-int			store_plane(t_file *file, char *line);
+int			store_plane(t_file *file, char *line, t_program *prog);
 // store_scene.c
 int			store_camera(t_file *file, char *line);
 int			store_ambient(t_file *file, char *line);
@@ -97,6 +99,9 @@ int			store_scale(int *storage, char *arg, char *line);
 // store_utils2.c
 int			store_vector(t_vector *vector, char *arg, char *line);
 int			store_orientation(t_vector *vector, char *arg, char *line);
+// xpm.c
+t_xpm		*store_xpm(t_program *prog, char *file);
+void		delete_xpm(t_xpm *xpm);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */
@@ -118,7 +123,7 @@ t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
 t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
-void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
+
 /* ************************************************************************** */
 /* 								RENDER                                        */
 /* ************************************************************************** */
@@ -136,6 +141,7 @@ t_ray		generate_light_ray(t_hit hit, t_light light);
 void		render(t_program *prog);
 // viewport.c
 t_viewport	viewport(t_program *prog);
+
 /* ************************************************************************** */
 /* 								INTERSECTION                                  */
 /* ************************************************************************** */
@@ -146,9 +152,11 @@ t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
 t_hit       inter_cone(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
+
 /* ************************************************************************** */
 /* 							TEST                                              */
 /* ************************************************************************** */
+
 void		print_file(t_file *file);
 
 #endif

@@ -6,11 +6,18 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 08:23:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:16:02 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static char	*store_pl_xpm(t_plane *plane, char *arg, char *line, size_t *start, t_program *prog)
+{
+	arg = next_and_advance(line, start, arg);
+	plane->xpm = store_xpm(prog, arg);
+	return (arg);
+}
 
 // Function to store the shininess parameter in the structure
 // Returns arg
@@ -41,7 +48,7 @@ static char	*store_pl_chessboard(t_plane *plane, char *arg, char *line, size_t *
 // Function to store the plane bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
-static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
+static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start, t_program *prog)
 {
 	plane->shininess = 32;
 	create_ortho_basis(plane->normal, &plane->u, &plane->v);
@@ -54,8 +61,8 @@ static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
 			arg = store_pl_chessboard(plane, arg, line, start);
 		if (!ft_strncmp(arg, "sh", 2))
 			arg = store_pl_shininess(plane, arg, line, start);
-		// if (!ft_strncmp(arg, "xp", 2))
-		// 	arg = store_pl_xpm(plane, arg, line, start);
+		if (!ft_strncmp(arg, "xp", 2))
+			arg = store_pl_xpm(plane, arg, line, start, prog);
 		if (!arg)
 			break ;
 	}
@@ -65,7 +72,7 @@ static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
 // Function to fill the plane structure from the line
 // Returns 0 if the plane was filled successfully
 // Returns 1 if an error occured
-static int	fill_plane_from_line(t_plane *plane, char *line)
+static int	fill_plane_from_line(t_plane *plane, char *line, t_program *prog)
 {
 	size_t	start;
 	char	*arg;
@@ -80,7 +87,7 @@ static int	fill_plane_from_line(t_plane *plane, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&plane->color, arg, line))
 		return (ft_free((void **)&arg), 1);
-	if (store_pl_bonus(plane, line, arg, &start))
+	if (store_pl_bonus(plane, line, arg, &start, prog))
 		return (1);
 	return (0);
 }
@@ -88,7 +95,7 @@ static int	fill_plane_from_line(t_plane *plane, char *line)
 // Function to store the plane in the file structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
-int	store_plane(t_file *file, char *line)
+int	store_plane(t_file *file, char *line, t_program *prog)
 {
 	t_plane	*plane;
 	t_dclst	*node;
@@ -97,7 +104,7 @@ int	store_plane(t_file *file, char *line)
 	if (!plane)
 		return (perror("Error\nMalloc failed"), 1);
 	ft_memset(plane, 0, sizeof(t_plane));
-	if (fill_plane_from_line(plane, line))
+	if (fill_plane_from_line(plane, line, prog))
 		return (ft_free((void **)&plane), 1);
 	node = dclst_add_back(file->obj_list, plane);
 	if (!node)

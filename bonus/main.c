@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/01 11:36:49 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:18:24 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_program	*init_program(char **av)
 	program = ft_calloc(1, sizeof(t_program));
 	if (!program)
 		return (ft_print_error(3), NULL);
-	program->file = parse_input(av[1]);
+	program->file = parse_input(av[1], program);
 	if (!program->file)
 	{
 		ft_free((void **)&program);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 10:54:53 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:20:17 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	store_scene(t_file *file, char *line)
 // (sphere, plane or cylinder)
 // Returns 0 if the object was stored successfully
 // Returns 1 if an error occured
-int	store_object(t_file *file, char *line)
+int	store_object(t_file *file, char *line, t_program *prog)
 {
 	if (!ft_strncmp(line, "sp", 2))
 		return (store_sphere(file, line));
 	else if (!ft_strncmp(line, "pl", 2))
-		return (store_plane(file, line));
+		return (store_plane(file, line, prog));
 	else if (!ft_strncmp(line, "cy", 2))
 		return (store_cylinder(file, line));
 	else if (!ft_strncmp(line, "tr", 2))

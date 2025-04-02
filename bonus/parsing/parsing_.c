@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:12 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:19:51 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	end_parse_error(t_file *file, int fd)
 // and store the information in a t_file structure
 // Returns 0 if the parsing was successful
 // Returns 1 if an error occured
-static int	parsing_loop(int fd, t_file *file)
+static int	parsing_loop(int fd, t_file *file, t_program *prog)
 {
 	char	*line;
 
@@ -67,7 +67,7 @@ static int	parsing_loop(int fd, t_file *file)
 			continue ;
 		if (is_object(line))
 		{
-			if (store_object(file, line))
+			if (store_object(file, line, prog))
 				return (ft_free((void **)&line), end_parse_error(file, fd));
 		}
 		else if (is_scene(line))
@@ -83,7 +83,7 @@ static int	parsing_loop(int fd, t_file *file)
 // and store the information in a t_file structure
 // Returns the t_file structure if the parsing was successful
 // Returns NULL if an error occured
-static t_file	*parse_fd(int fd)
+static t_file	*parse_fd(int fd, t_program *prog)
 {
 	t_file	*file;
 
@@ -92,7 +92,7 @@ static t_file	*parse_fd(int fd)
 		return (perror("Error\nMalloc failed"), NULL);
 	if (init_file_structure(file))
 		return (free(file), NULL);
-	if (parsing_loop(fd, file))
+	if (parsing_loop(fd, file, prog))
 		return (NULL);
 	return (file);
 }
@@ -101,7 +101,7 @@ static t_file	*parse_fd(int fd)
 // and store the information in a t_file structure
 // Returns the t_file structure if the parsing was successful
 // Returns NULL if an error occured
-t_file	*parse_input(char *input)
+t_file	*parse_input(char *input, t_program *prog)
 {
 	int		fd;
 	t_file	*file;
@@ -112,7 +112,7 @@ t_file	*parse_input(char *input)
 	if (fd == -1)
 		return (perror("Error\nOpening file"), NULL);
 	file = NULL;
-	file = parse_fd(fd);
+	file = parse_fd(fd, prog);
 	if (!file)
 		return (close(fd), NULL);
 	if (close(fd) == -1)
