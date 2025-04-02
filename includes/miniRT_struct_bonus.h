@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 11:34:53 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:53:43 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_hit
 	t_dclst		*object;
 	t_vector	point;
 	t_vector	normal;
+	double		reflectivity;
 	int			shininess;
 }	t_hit;
 
@@ -113,6 +114,7 @@ typedef struct s_sphere
 	double		rayon2;
 	int			color;
 	int			shininess;
+	double		reflectivity;
 	int			chessboard;
 	int			color2;
 	int			scale;
@@ -135,7 +137,7 @@ typedef struct s_triangle
 {
 	t_vector	vertex[3];
 	t_vector	face[3];
-	int			color;	
+	int			color;
 }	t_triangle;
 
 typedef struct s_cone

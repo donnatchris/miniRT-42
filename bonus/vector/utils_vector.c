@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:24:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:33:49 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:47:12 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ t_vector	*ray_mul(t_vector *dst, t_ray *r, double t)
 	dst->y = r->origin.y + t * r->direction.y;
 	dst->z = r->origin.z + t * r->direction.z;
 	return (dst);
+}
+
+t_vector	reflectivity(t_vector incident, t_vector normal)
+{
+	return (sub_vector(incident, mul_vector(normal, 2 * dot_vector(incident, normal))));
 }

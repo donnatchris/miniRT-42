@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:21:29 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:54:50 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 	hit.hit = 1;
 	hit.color = choose_sp_color(sphere, hit);
 	hit.shininess = sphere->shininess;
+	hit.reflectivity = sphere->reflectivity;
 	return (hit);
 }

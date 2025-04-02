@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:27:06 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:41:25 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,23 @@ static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t
 	return (arg);
 }
 
+static char	*store_sp_reflectivity(t_sphere *sphere, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_double(&sphere->reflectivity, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	if (sphere->reflectivity < 0 || sphere->reflectivity > 1) // On limite entre 0 et 1
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
+
 // Function to store the plane bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
 static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start)
 {
 	sphere->shininess = 32;
+	sphere->reflectivity = 0.0;
 	while (1)
 	{
 		arg = next_and_advance(line, start, arg);
@@ -52,6 +63,8 @@ static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start
 			arg = store_sp_chessboard(sphere, arg, line, start);
 		if (!ft_strncmp(arg, "sh", 2))
 			arg = store_sp_shininess(sphere, arg, line, start);
+		if (!ft_strncmp(arg, "re", 2))
+			arg = store_sp_reflectivity(sphere, arg, line, start);
 		if (!arg)
 			break ;
 	}
