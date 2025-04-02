@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 09:51:41 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:04:21 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int
 	t_ray	ref_ray;
 	int		ref_color;
 
-	printf("Ref: Depth=%d, Reflectivity=%f\n", depth, hit.reflectivity);
 	// Limite la profondeur de réflexion pour éviter une récursion infinie
 	if (hit.reflectivity <= 0 || depth <= 0)
 		return (local_color);

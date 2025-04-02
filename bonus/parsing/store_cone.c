@@ -37,6 +37,16 @@ static char	*store_co_chessboard(t_cone *cone, char *arg, char *line, size_t *st
 	return (arg);
 }
 
+static char	*store_co_reflectivity(t_cone *cone, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_double(&cone->reflectivity, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	if (cone->reflectivity < 0 || cone->reflectivity > 1)
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
+
 // Function to store the cone bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
@@ -52,6 +62,8 @@ static int	store_co_bonus(t_cone *cone, char *line, char *arg, size_t *start)
 			arg = store_co_chessboard(cone, arg, line, start);
 		if (!ft_strncmp(arg, "sh", 2))
 			arg = store_co_shininess(cone, arg, line, start);
+		if (!ft_strncmp(arg, "re", 2))
+			arg = store_co_reflectivity(cone, arg, line, start);
 		if (!arg)
 			break ;
 	}

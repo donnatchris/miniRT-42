@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 08:23:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:54:22 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ static char	*store_pl_chessboard(t_plane *plane, char *arg, char *line, size_t *
 	return (arg);
 }
 
+static char	*store_pl_reflectivity(t_plane *pl, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_double(&pl->reflectivity, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	if (pl->reflectivity < 0 || pl->reflectivity > 1)
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
+
 // Function to store the plane bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
@@ -54,6 +64,8 @@ static int	store_pl_bonus(t_plane *plane, char *line, char *arg, size_t *start)
 			arg = store_pl_chessboard(plane, arg, line, start);
 		if (!ft_strncmp(arg, "sh", 2))
 			arg = store_pl_shininess(plane, arg, line, start);
+		if (!ft_strncmp(arg, "re", 2))
+			arg = store_pl_reflectivity(plane, arg, line, start);
 		// if (!ft_strncmp(arg, "xp", 2))
 		// 	arg = store_pl_xpm(plane, arg, line, start);
 		if (!arg)

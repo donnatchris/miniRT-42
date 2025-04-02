@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 09:49:52 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:06:22 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 2000
+# define HEIGHT 1125
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"

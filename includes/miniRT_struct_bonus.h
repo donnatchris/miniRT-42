@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 10:34:33 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:38:40 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_plane
 	t_vector		u;
 	t_vector		v;
 	int				shininess;
+	double			reflectivity;
 	int				chessboard;
 	int				color2;
 	int				scale;
@@ -137,6 +138,7 @@ typedef struct s_cylinder
 	double		height;
 	int			color;
 	int			shininess;
+	double		reflectivity;
 	int			chessboard;
 	int			color2;
 	int			scale;
@@ -156,8 +158,9 @@ typedef struct s_cone
 	int			angle;
 	double		angle_rad;
 	double		height;
-	int			shininess;
 	int         color;
+	int			shininess;
+	double		reflectivity;
 	int			chessboard;
 	int			color2;
 	int			scale;

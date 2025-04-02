@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 08:19:41 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:48:46 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line, si
 	return (arg);
 }
 
+static char	*store_cy_reflectivity(t_cylinder *cy, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_double(&cy->reflectivity, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	if (cy->reflectivity < 0 || cy->reflectivity > 1)
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
+
 // Function to store the plane bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
@@ -53,6 +63,8 @@ static int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg, size_t *s
 			arg = store_cy_chessboard(cylinder, arg, line, start);
 		if (!ft_strncmp(arg, "sh", 2))
 			arg = store_cy_shininess(cylinder, arg, line, start);
+		if (!ft_strncmp(arg, "re", 2))
+			arg = store_cy_reflectivity(cylinder, arg, line, start);
 		if (!arg)
 			break ;
 	}

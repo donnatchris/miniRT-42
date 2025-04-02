@@ -82,5 +82,6 @@ t_hit inter_cone(t_ray *ray, t_dclst *node)
     hit.hit = 1;
     hit.color = choose_co_color(cone, hit);
     hit.shininess = cone->shininess;
+    hit.reflectivity = cone->reflectivity;
     return hit;
 }
