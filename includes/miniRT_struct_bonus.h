@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 16:38:52 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 08:18:46 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,9 @@ typedef struct s_cone
 	double		height;
 	int			shininess;
 	int         color;
+	int			chessboard;
+	int			color2;
+	int			scale;
 }   t_cone;
 
 typedef struct s_file

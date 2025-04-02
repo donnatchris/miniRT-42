@@ -6,11 +6,21 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:17:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 08:19:41 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+// Function to store the shininess parameter in the structure
+// Returns arg
+static char	*store_cy_shininess(t_cylinder *cy, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&cy->shininess, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
 
 // Function to store the chessboard parameters in the structure
 // (The chessboard parameters are the color and the scale)
@@ -41,6 +51,8 @@ static int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg, size_t *s
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_cy_chessboard(cylinder, arg, line, start);
+		if (!ft_strncmp(arg, "sh", 2))
+			arg = store_cy_shininess(cylinder, arg, line, start);
 		if (!arg)
 			break ;
 	}

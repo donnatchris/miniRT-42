@@ -14,52 +14,52 @@
 
 // Function to store the shininess parameter in the structure
 // Returns arg
-// static char	*store_sp_shininess(t_sphere *sphere, char *arg, char *line, size_t *start)
-// {
-// 	arg = next_and_advance(line, start, arg);
-// 	if (store_scale(&sphere->shininess, arg, line))
-// 		return (ft_free((void **)&arg), NULL);
-// 	return (arg);
-// }
+static char	*store_co_shininess(t_cone *cone, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&cone->shininess, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	return (arg);
+}
 
-// // Function to store the chessboard parameters in the structure
-// // (The chessboard parameters are the color and the scale)
-// // Returns arg
-// static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t *start)
-// {
-// 	arg = next_and_advance(line, start, arg);
-// 	if (store_color(&sphere->color2, arg, line))
-// 		return (ft_free((void **)&arg), NULL);
-// 	arg = next_and_advance(line, start, arg);
-// 	if (store_scale(&sphere->scale, arg, line))
-// 		return (ft_free((void **)&arg), NULL);
-// 	sphere->chessboard = 1;
-// 	return (arg);
-// }
+// Function to store the chessboard parameters in the structure
+// (The chessboard parameters are the color and the scale)
+// Returns arg
+static char	*store_co_chessboard(t_cone *cone, char *arg, char *line, size_t *start)
+{
+	arg = next_and_advance(line, start, arg);
+	if (store_color(&cone->color2, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	arg = next_and_advance(line, start, arg);
+	if (store_scale(&cone->scale, arg, line))
+		return (ft_free((void **)&arg), NULL);
+	cone->chessboard = 1;
+	return (arg);
+}
 
-// // Function to store the plane bonus parameters in the structure
-// // Returns 0 if the plane was stored successfully
-// // Returns 1 if an error occured
-// static int	store_co_bonus(t_sphere *sphere, char *line, char *arg, size_t *start)
-// {
-// 	sphere->shininess = 32;
-// 	while (1)
-// 	{
-// 		arg = next_and_advance(line, start, arg);
-// 		if (!arg)
-// 			break ;
-// 		if (!ft_strncmp(arg, "ch", 2))
-// 			arg = store_sp_chessboard(sphere, arg, line, start);
-// 		if (!ft_strncmp(arg, "sh", 2))
-// 			arg = store_sp_shininess(sphere, arg, line, start);
-// 		if (!arg)
-// 			break ;
-// 	}
-// 	return (ft_free((void **)&arg), 0);
-// }
+// Function to store the cone bonus parameters in the structure
+// Returns 0 if the plane was stored successfully
+// Returns 1 if an error occured
+static int	store_co_bonus(t_cone *cone, char *line, char *arg, size_t *start)
+{
+	cone->shininess = 32;
+	while (1)
+	{
+		arg = next_and_advance(line, start, arg);
+		if (!arg)
+			break ;
+		if (!ft_strncmp(arg, "ch", 2))
+			arg = store_co_chessboard(cone, arg, line, start);
+		if (!ft_strncmp(arg, "sh", 2))
+			arg = store_co_shininess(cone, arg, line, start);
+		if (!arg)
+			break ;
+	}
+	return (ft_free((void **)&arg), 0);
+}
 
-// Function to fill the sphere structure from the line
-// Returns 0 if the sphere was filled successfully
+// Function to fill the cone structure from the line
+// Returns 0 if the cone was filled successfully
 // Returns 1 if an error occured
 static int	fill_cone_from_line(t_cone *cone, char *line)
 {
@@ -83,8 +83,8 @@ static int	fill_cone_from_line(t_cone *cone, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&cone->color, arg, line))
 		return (ft_free((void **)&arg), 1);
-	// if (store_sp_bonus(cone, line, arg, &start))
-	// 	return (1);
+	if (store_co_bonus(cone, line, arg, &start))
+		return (1);
 	return (0);
 }
 

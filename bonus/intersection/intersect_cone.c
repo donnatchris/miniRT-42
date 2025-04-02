@@ -1,5 +1,35 @@
 #include "../../includes/miniRT_bonus.h"
 
+static int choose_co_color(t_cone *cone, t_hit hit)
+{
+	t_vector	dir;
+	t_vector	axis;
+	t_vector	radial;
+	t_vector	u_vec, v_vec, w_vec;
+	double		u, v;
+	int			x, y;
+
+	if (!cone->chessboard)
+		return (cone->color);
+	axis = cone->axis;
+	w_vec = axis;
+	t_vector tmp = (fabs(w_vec.y) > 0.999) ? (t_vector){1, 0, 0} : (t_vector){0, 1, 0};
+	u_vec = cross_vector(tmp, w_vec);
+    normalize_vector(&u_vec);
+	v_vec = cross_vector(w_vec, u_vec);
+	dir = sub_vector(hit.point, cone->apex);
+	radial = sub_vector(dir, mul_vector(w_vec, dot_vector(dir, w_vec)));
+	u = 0.5 + atan2(dot_vector(radial, v_vec), dot_vector(radial, u_vec)) / (2 * M_PI);
+	v = dot_vector(dir, w_vec) / cone->height;
+	x = (int)(floor(u * cone->scale));
+	y = (int)(floor(v * cone->scale));
+	if ((x + y) % 2 == 0)
+		return (cone->color);
+	else
+		return (cone->color2);
+}
+
+
 static double find_closest_intersection(double t1, double t2) {
     if (t1 > EPS && (t2 < EPS || t1 < t2))
         return t1;
@@ -88,7 +118,7 @@ t_hit inter_cone(t_ray *ray, t_dclst *node)
     
     hit.distance = t;
     hit.hit = 1;
-    hit.color = cone->color;
+    hit.color = choose_co_color(cone, hit);
     hit.shininess = cone->shininess;
     // if (hit.hit) 
     // {
