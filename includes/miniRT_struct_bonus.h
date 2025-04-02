@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 08:18:46 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:15:51 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,15 @@ typedef struct s_rgb
 typedef struct s_xpm
 {
 	void	*mlx;
+	void	*img_ptr;
+	char	*addr;
 	int		width;
 	int		height;
-	void	*img_ptr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_xpm;
+
 
 typedef struct s_chd
 {
@@ -113,6 +118,8 @@ typedef struct s_plane
 	int				color2;
 	int				scale;
 	t_xpm			*xpm;
+	double			xpm_scale;
+	int				xpm_rotation;
 }	t_plane;
 
 typedef struct s_sphere

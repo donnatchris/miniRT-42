@@ -13,4 +13,3 @@ void create_ortho_basis(t_vector normal, t_vector *u, t_vector *v)
 	*v = cross_vector(normal, *u);
 	normalize_vector(v);
 }
-

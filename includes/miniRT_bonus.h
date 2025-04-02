@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 09:21:19 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:57:10 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			store_orientation(t_vector *vector, char *arg, char *line);
 // xpm.c
 t_xpm		*store_xpm(t_program *prog, char *file);
 void		delete_xpm(t_xpm *xpm);
+int			get_xpm_color(t_xpm *xpm, int x, int y);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */

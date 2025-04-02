@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:20:55 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:24:20 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
-static int	choose_pl_color(t_plane *plane, t_hit hit)
+static int	chessboard_pl_color(t_plane *plane, t_hit hit)
 {
 	t_vector	local;
 	double		x;
 	double		y;
 
-	if (!plane->chessboard)
-		return (plane->color);
 	local = sub_vector(hit.point, plane->position);
 	x = dot_vector(local, plane->u) * plane->scale;
 	y = dot_vector(local, plane->v) * plane->scale;
@@ -27,6 +25,60 @@ static int	choose_pl_color(t_plane *plane, t_hit hit)
 		return (plane->color);
 	else
 		return (plane->color2);
+}
+
+static int xpm_pl_color(t_plane *plane, t_hit hit)
+{
+	t_vector	local;
+	double		u, v;
+	int			x, y;	
+
+	// Position locale du point par rapport au plan
+	local = sub_vector(hit.point, plane->position);
+
+	// Coordonnées UV (0..1)
+	u = dot_vector(local, plane->u) / plane->xpm_scale;
+	v = dot_vector(local, plane->v) / plane->xpm_scale;
+
+	// Optionnel : faire un mod 1.0 pour répéter
+	u = u - floor(u);
+	v = v - floor(v);
+
+	// Appliquer la rotation de texture
+if (plane->xpm_rotation == 90)
+{
+	double tmp = u;
+	u = v;
+	v = 1.0 - tmp;
+}
+else if (plane->xpm_rotation == 180)
+{
+	u = 1.0 - u;
+	v = 1.0 - v;
+}
+else if (plane->xpm_rotation == 270)
+{
+	double tmp = u;
+	u = 1.0 - v;
+	v = tmp;
+}
+
+
+	// Transformation en pixels
+	x = (int)(u * plane->xpm->width);
+	y = (int)(v * plane->xpm->height);
+
+	return (get_xpm_color(plane->xpm, x, y));
+}
+
+static int	choose_pl_color(t_plane *plane, t_hit hit)
+{
+	if (plane->xpm)
+		return (xpm_pl_color(plane, hit));
+	else if (plane->chessboard)
+		return (chessboard_pl_color(plane, hit));
+	else
+		return (plane->color);
 }
 
 t_hit	inter_plane(t_ray *ray, t_dclst *node)

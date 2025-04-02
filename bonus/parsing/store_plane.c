@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 09:16:02 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:23:37 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ static char	*store_pl_xpm(t_plane *plane, char *arg, char *line, size_t *start, 
 {
 	arg = next_and_advance(line, start, arg);
 	plane->xpm = store_xpm(prog, arg);
+	if (plane->xpm)
+	{
+		arg = next_and_advance(line, start, arg);
+		if (store_double(&plane->xpm_scale, arg, line))
+			plane->xpm_scale = 1;
+		arg = next_and_advance(line, start, arg);
+		if (store_scale(&plane->xpm_rotation, arg, line))
+			plane->xpm_rotation = 0;
+	}
 	return (arg);
 }
 
