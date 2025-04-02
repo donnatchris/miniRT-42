@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/01 15:16:28 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:49:52 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			store_orientation(t_vector *vector, char *arg, char *line);
 
 int			solve_quadratic(t_quadratic *q);
 int			is_zero_vector(t_vector v);
+t_vector	reflectivity(t_vector incident, t_vector normal);
 t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
 // t_vector	reflect_vector(t_vector vector, t_vector nb);
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
@@ -124,7 +125,8 @@ void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 /* ************************************************************************** */
 // color.c
 int			scale_color(int color, double factor);
-int			mix_colors(int color1, int color2);
+int			mix_colors(int color1, int color2, double reflectivity);
+//int			mix_colors(int color1, int color2);
 int			multiply_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
 // phong.c
@@ -150,5 +152,10 @@ void		init_hit(t_hit *hit, t_dclst *node);
 /* 							TEST                                              */
 /* ************************************************************************** */
 void		print_file(t_file *file);
+
+int	apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int depth);
+int choose_color_with_depth(t_program *prog, t_ray ray, int depth);
+int	ambient_lighting(t_hit hit, t_ambient_light ambient);
+int choose_color_with_depth(t_program *prog, t_ray ray, int depth);
 
 #endif

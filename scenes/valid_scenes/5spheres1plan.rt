@@ -14,9 +14,9 @@ pl 4,0,0 1,0,0 200,150,150       # Mur droit rose pâle
 pl 0,0,-5 0,0,1 150,150,200       # Mur arrière bleuté
 
 # Sphères
-sp 0,0,0 1.0 255,50,50        # Sphère rouge centrale
-sp -3,0,1 0.8 50,255,50       # Sphère verte gauche
-sp 2,-0.5,1 0.6 50,50,255     # Sphère bleue droite
-sp -1,1.5,-2 0.5 255,255,0    # Sphère jaune en haut à gauche
-sp 1.5,0.3,-3 0.7 255,0,255   # Sphère magenta en bas à droite
+sp 0,0,0 1.0 255,50,50    re 0.8    # Sphère rouge centrale
+sp -3,0,1 0.8 50,255,50   re 0.8    # Sphère verte gauche
+sp 2,-0.5,1 0.6 50,50,255 re 0.8    # Sphère bleue droite
+sp -1,1.5,-2 0.5 255,255,0  re 0.8 # Sphère jaune en haut à gauche
+sp 1.5,0.3,-3 0.7 255,0,255 re 0.8  # Sphère magenta en bas à droite
 
