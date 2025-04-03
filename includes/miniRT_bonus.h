@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/03 11:25:37 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:29:58 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int			store_plane(t_file *file, char *line);
 int			store_camera(t_file *file, char *line);
 int			store_ambient(t_file *file, char *line);
 int			store_light(t_file *file, char *line);
-// store_sphere.c
-int			store_sphere(t_file *file, char *line);
 // store.sphere
 int			store_triangle(t_file *file, char *line);
 // store_utils1.c
@@ -106,9 +104,7 @@ int			solve_quadratic(t_quadratic *q);
 int			is_zero_vector(t_vector v);
 t_vector	reflectivity(t_vector incident, t_vector normal);
 t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
-// t_vector	reflect_vector(t_vector vector, t_vector nb);
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
-t_vector	refract_vector(t_vector a, t_vector b, double c);
 t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);
 t_vector	sub_vector(t_vector a, t_vector b);
@@ -120,19 +116,24 @@ double		distance_vector(t_vector a, t_vector b);
 t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
 void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
+
 /* ************************************************************************** */
 /* 								RENDER                                        */
 /* ************************************************************************** */
-// color.c
+
+// choose_color.c
+int			choose_color_with_depth(t_program *prog, t_ray ray, int depth);
+int			choose_color(t_program *prog, int x, int y);
+// color_utils.c
 int			scale_color(int color, double factor);
 int			mix_colors(int color1, int color2, double reflectivity);
 int			multiply_colors_scalar(int color1, int color2, double intensity);
-
-//int			mix_colors(int color1, int color2);
 int			multiply_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
-// phong.c
+// light.c
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
+int			apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int depth);
+int			ambient_lighting(t_hit hit, t_ambient_light ambient);
 // rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);
 t_ray		generate_light_ray(t_hit hit, t_light light);
@@ -140,9 +141,11 @@ t_ray		generate_light_ray(t_hit hit, t_light light);
 void		render(t_program *prog);
 // viewport.c
 t_viewport	viewport(t_program *prog);
+
 /* ************************************************************************** */
 /* 								INTERSECTION                                  */
 /* ************************************************************************** */
+
 t_hit		inter_scene(t_ray *ray, t_file *file);
 t_hit		inter_plane(t_ray *ray, t_dclst *node);
 t_hit		inter_sphere(t_ray *ray, t_dclst *node);
@@ -150,14 +153,10 @@ t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
 t_hit       inter_cone(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
+
 /* ************************************************************************** */
 /* 							TEST                                              */
 /* ************************************************************************** */
 void		print_file(t_file *file);
-
-int	apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int depth);
-int choose_color_with_depth(t_program *prog, t_ray ray, int depth);
-int	ambient_lighting(t_hit hit, t_ambient_light ambient);
-int choose_color_with_depth(t_program *prog, t_ray ray, int depth);
 
 #endif
