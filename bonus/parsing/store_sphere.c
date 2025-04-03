@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:32 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:47 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 static char	*store_sp_shininess(t_sphere *sphere, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_scale(&sphere->shininess, arg, line))
-		return (ft_free((void **)&arg), NULL);
+	store_scale(&sphere->shininess, arg, line);
 	return (arg);
 }
 
@@ -29,10 +28,10 @@ static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t
 {
 	arg = next_and_advance(line, start, arg);
 	if (store_color(&sphere->color2, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	arg = next_and_advance(line, start, arg);
 	if (store_scale(&sphere->scale, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	sphere->chessboard = 1;
 	return (arg);
 }
@@ -40,10 +39,7 @@ static char	*store_sp_chessboard(t_sphere *sphere, char *arg, char *line, size_t
 static char	*store_sp_reflectivity(t_sphere *sphere, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_double(&sphere->reflectivity, arg, line))
-		return (ft_free((void **)&arg), NULL);
-	if (sphere->reflectivity < 0 || sphere->reflectivity > 1)
-		return (ft_free((void **)&arg), NULL);
+	store_ratio(&sphere->reflectivity, arg, line);
 	return (arg);
 }
 
@@ -53,17 +49,19 @@ static char	*store_sp_reflectivity(t_sphere *sphere, char *arg, char *line, size
 static int	store_sp_bonus(t_sphere *sphere, char *line, char *arg, size_t *start)
 {
 	sphere->shininess = 32;
+	arg = next_and_advance(line, start, arg);
 	while (1)
 	{
-		arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_sp_chessboard(sphere, arg, line, start);
-		if (!ft_strncmp(arg, "sh", 2))
+		else if (!ft_strncmp(arg, "sh", 2))
 			arg = store_sp_shininess(sphere, arg, line, start);
-		if (!ft_strncmp(arg, "re", 2))
+		else if (!ft_strncmp(arg, "re", 2))
 			arg = store_sp_reflectivity(sphere, arg, line, start);
+		else
+			arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 	}

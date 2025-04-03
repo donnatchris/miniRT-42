@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 10:48:46 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:40:09 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 static char	*store_cy_shininess(t_cylinder *cy, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_scale(&cy->shininess, arg, line))
-		return (ft_free((void **)&arg), NULL);
+	store_scale(&cy->shininess, arg, line);
 	return (arg);
 }
 
@@ -30,10 +29,10 @@ static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line, si
 {
 	arg = next_and_advance(line, start, arg);
 	if (store_color(&cylinder->color2, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	arg = next_and_advance(line, start, arg);
 	if (store_scale(&cylinder->scale, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	cylinder->chessboard = 1;
 	return (arg);
 }
@@ -41,10 +40,7 @@ static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line, si
 static char	*store_cy_reflectivity(t_cylinder *cy, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_double(&cy->reflectivity, arg, line))
-		return (ft_free((void **)&arg), NULL);
-	if (cy->reflectivity < 0 || cy->reflectivity > 1)
-		return (ft_free((void **)&arg), NULL);
+	store_ratio(&cy->reflectivity, arg, line);
 	return (arg);
 }
 
@@ -54,21 +50,23 @@ static char	*store_cy_reflectivity(t_cylinder *cy, char *arg, char *line, size_t
 static int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg, size_t *start)
 {
 	cylinder->shininess = 32;
+	arg = next_and_advance(line, start, arg);
 	while (1)
 	{
-		arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_cy_chessboard(cylinder, arg, line, start);
-		if (!ft_strncmp(arg, "sh", 2))
+		else if (!ft_strncmp(arg, "sh", 2))
 			arg = store_cy_shininess(cylinder, arg, line, start);
-		if (!ft_strncmp(arg, "re", 2))
+		else if (!ft_strncmp(arg, "re", 2))
 			arg = store_cy_reflectivity(cylinder, arg, line, start);
+		else
+			arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 	}
-	return (0);
+	return (ft_free((void **)&arg), 0);
 }
 
 // Function to fill the cylinder structure from the line

@@ -17,8 +17,7 @@
 static char	*store_co_shininess(t_cone *cone, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_scale(&cone->shininess, arg, line))
-		return (ft_free((void **)&arg), NULL);
+	store_scale(&cone->shininess, arg, line);
 	return (arg);
 }
 
@@ -29,10 +28,10 @@ static char	*store_co_chessboard(t_cone *cone, char *arg, char *line, size_t *st
 {
 	arg = next_and_advance(line, start, arg);
 	if (store_color(&cone->color2, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	arg = next_and_advance(line, start, arg);
 	if (store_scale(&cone->scale, arg, line))
-		return (ft_free((void **)&arg), NULL);
+		return (arg);
 	cone->chessboard = 1;
 	return (arg);
 }
@@ -40,10 +39,7 @@ static char	*store_co_chessboard(t_cone *cone, char *arg, char *line, size_t *st
 static char	*store_co_reflectivity(t_cone *cone, char *arg, char *line, size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	if (store_double(&cone->reflectivity, arg, line))
-		return (ft_free((void **)&arg), NULL);
-	if (cone->reflectivity < 0 || cone->reflectivity > 1)
-		return (ft_free((void **)&arg), NULL);
+	store_ratio(&cone->reflectivity, arg, line);
 	return (arg);
 }
 
@@ -53,17 +49,19 @@ static char	*store_co_reflectivity(t_cone *cone, char *arg, char *line, size_t *
 static int	store_co_bonus(t_cone *cone, char *line, char *arg, size_t *start)
 {
 	cone->shininess = 32;
+	arg = next_and_advance(line, start, arg);
 	while (1)
 	{
-		arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
 			arg = store_co_chessboard(cone, arg, line, start);
-		if (!ft_strncmp(arg, "sh", 2))
+		else if (!ft_strncmp(arg, "sh", 2))
 			arg = store_co_shininess(cone, arg, line, start);
-		if (!ft_strncmp(arg, "re", 2))
+		else if (!ft_strncmp(arg, "re", 2))
 			arg = store_co_reflectivity(cone, arg, line, start);
+		else
+			arg = next_and_advance(line, start, arg);
 		if (!arg)
 			break ;
 	}
