@@ -1,0 +1,106 @@
+Pour gérer plusieurs **points lumineux** dans ton projet **miniRT**, tu peux suivre cette structure simple et propre, en plusieurs étapes :
+
+---
+
+### **1. Représenter plusieurs lumières dans les structures**
+
+Crée une **liste chaînée** (ou tableau dynamique si tu préfères) de lumières, au lieu d’une unique `t_light`. Par exemple :
+
+```c
+typedef struct s_light
+{
+    t_vec3         position;
+    double         intensity;
+    t_color        color;
+    struct s_light *next;
+} t_light;
+```
+
+Et dans ta structure globale `t_scene` ou équivalent :
+
+```c
+typedef struct s_scene
+{
+    t_camera   camera;
+    t_object  *objects;
+    t_light   *lights; // liste chaînée de lumières
+    t_ambient ambient;
+} t_scene;
+```
+
+---
+
+### **2. Remplir la liste lors du parsing**
+
+Quand tu parses un fichier `.rt`, ajoute chaque lumière rencontrée à la fin de la liste chaînée :
+
+```c
+void add_light(t_scene *scene, t_light *new_light)
+{
+    t_light *current;
+
+    if (!scene->lights)
+    {
+        scene->lights = new_light;
+        return;
+    }
+    current = scene->lights;
+    while (current->next)
+        current = current->next;
+    current->next = new_light;
+}
+```
+
+---
+
+### **3. Calculer l’éclairage avec plusieurs lumières**
+
+Dans ta fonction de calcul de la **couleur finale d’un pixel** (shading), tu dois boucler sur toutes les lumières :
+
+```c
+t_color compute_lighting(t_scene *scene, t_hit hit)
+{
+    t_color final_color = {0, 0, 0};
+    t_light *light = scene->lights;
+
+    while (light)
+    {
+        if (!in_shadow(scene, hit, light))
+        {
+            final_color = add_color(final_color, compute_diffuse_specular(hit, light));
+        }
+        light = light->next;
+    }
+
+    final_color = add_color(final_color, scene->ambient.color); // ajouter l’ambiant
+    return clamp_color(final_color);
+}
+```
+
+---
+
+### **4. Gérer les ombres (optionnel mais souvent requis)**
+
+Pour chaque lumière, tu peux lancer un **rayon d’ombre** entre le point d’impact et la lumière. Si quelque chose bloque le rayon, n’ajoute pas sa lumière dans le calcul :
+
+```c
+bool in_shadow(t_scene *scene, t_hit hit, t_light *light)
+{
+    t_ray shadow_ray = create_ray(hit.point, vec_sub(light->position, hit.point));
+    return intersect_any_object(scene->objects, shadow_ray);
+}
+```
+
+---
+
+### **5. Résultat visuel**
+
+Avec plusieurs lumières, tu obtiendras une scène plus dynamique, avec :
+
+- plusieurs ombres projetées,
+- des zones plus lumineuses quand deux lumières couvrent la même surface,
+- et un rendu plus réaliste (surtout si tu varies les couleurs/intensités).
+
+---
+
+Souhaite-tu un exemple concret de fichier `.rt` avec plusieurs lumières, ou un exemple du rendu attendu ?

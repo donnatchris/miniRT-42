@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:32:12 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:29:59 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static int	init_file_structure(t_file *file)
 		return (perror("Error\nMalloc failed"), 1);
 	file->camera.direction.x = 1;
 	file->camera.fov = 1;
-	file->light.ratio = 1;
 	file->ambient_light.ratio = 1;
+	file->light_list = ft_calloc(1, sizeof(t_list *));
+	if (!file->light_list)
+		return (perror("Error\nMalloc failed\n"), 1);
 	return (0);
 }
 

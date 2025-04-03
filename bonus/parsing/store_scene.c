@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:35 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:00:22 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,28 @@ int	store_light(t_file *file, char *line)
 {
 	size_t		start;
 	char		*arg;
-	static int	light = 0;
+	t_light		*light;
+	t_list		*node;
 
-	if (light++ > 0)
-		return (ft_putstr_fd("Error\nToo many lights in file\n", 2), 1);
+	light = (t_light *) malloc(sizeof(t_light));
+	if (!light)
+		return (perror("Error\nMalloc failed\n"), 1);
 	start = 1;
 	arg = next_arg(line, &start);
-	if (store_vector(&file->light.position, arg, line))
+	if (store_vector(&light->position, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_ratio(&file->light.ratio, arg, line))
+	if (store_ratio(&light->ratio, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_color(&file->light.color, arg, line))
+	if (store_color(&light->color, arg, line))
 		return (ft_free((void **)&arg), 1);
+	node = ft_lstnew((void *) light);
+	if (!node)
+	{
+		ft_free((void **)&arg);
+		return (perror("Error\nMalloc failed\n"), 1);
+	}
+	ft_lstadd_back(file->light_list, node);
 	return (ft_free((void **)&arg), 0);
 }

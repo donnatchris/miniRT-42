@@ -29,17 +29,26 @@ static void	print_color(int color, const char *label)
 	printf("%s: R=%d, G=%d, B=%d\n", label, r, g, b);
 }
 
-static void	print_light(t_file *file)
+static void	print_light(t_list **list)
 {
-	if (!file)
+	t_list	*node;
+	t_light	*light;
+
+	if (!list)
 	{
 		printf("Light: NULL file pointer\n");
 		return;
 	}
-	printf("=== Light ===\n");
-	print_vector(file->light.position, "Position");
-	printf("Intensity Ratio: %.6f\n", file->light.ratio);
-	print_color(file->light.color, "Color");
+	printf("=== Lights ===\n");
+	node = *list;
+	while (node)
+	{
+		light = (t_light *) node->content;
+		print_vector(light->position, "Position");
+		printf("Intensity Ratio: %.6f\n", light->ratio);
+		print_color(light->color, "Color");
+		node = node->next;
+	}
 }
 
 void	print_ambient_light(t_file *file)
@@ -160,7 +169,7 @@ static void	print_object_list(t_dclst **head)
 void	print_file(t_file *file)
 {
 	print_camera(file);
-	print_light(file);
+	print_light(file->light_list);
 	print_ambient_light(file);
 	print_object_list(file->obj_list);
 }
