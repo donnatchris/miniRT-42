@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/03 15:29:58 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:21:21 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int			store_camera(t_file *file, char *line);
 int			store_ambient(t_file *file, char *line);
 int			store_light(t_file *file, char *line);
 // store.sphere
+int			store_sphere(t_file *file, char *line);
+// store.triangle
 int			store_triangle(t_file *file, char *line);
 // store_utils1.c
 int			store_angle(int *storage, char *arg, char *line);
