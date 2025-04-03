@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 10:00:22 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:28:53 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ int	store_light(t_file *file, char *line)
 		return (ft_free((void **)&arg), 1);
 	node = ft_lstnew((void *) light);
 	if (!node)
-	{
-		ft_free((void **)&arg);
-		return (perror("Error\nMalloc failed\n"), 1);
-	}
+		return (ft_free((void **)&arg), perror("Error\nMalloc failed\n"), 1);
 	ft_lstadd_back(file->light_list, node);
 	return (ft_free((void **)&arg), 0);
 }

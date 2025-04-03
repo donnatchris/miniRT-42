@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/03 16:21:21 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:43:27 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 2000
-# define HEIGHT 1125
+# define WIDTH 1600
+# define HEIGHT 1000
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -49,6 +49,7 @@ int			ft_isdouble(char *str);
 int			ft_isint(char *str);
 int			ft_isvector(char *str);
 size_t		str_array_size(char **array);
+void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 // utils_free.c
 void		ft_free(void **ptr);
 void		delete_str_array(char **array);
@@ -76,16 +77,28 @@ int			store_scene(t_file *file, char *line);
 int			store_object(t_file *file, char *line);
 // store_cone.c
 int	        store_cone(t_file *file, char *line);
+// store_cone_bonus.c
+int			store_co_bonus(t_cone *cone, char *line, char *arg,
+				size_t *start);
 // store_cylinder.c
 int			store_cylinder(t_file *file, char *line);
+// store_cylinder_bonus.c
+int			store_cy_bonus(t_cylinder *cylinder, char *line, char *arg,
+				size_t *start);
 // store_plane.c
 int			store_plane(t_file *file, char *line);
+// store_plane_bonus.c
+int			store_pl_bonus(t_plane *plane, char *line, char *arg,
+				size_t *start);
 // store_scene.c
 int			store_camera(t_file *file, char *line);
 int			store_ambient(t_file *file, char *line);
 int			store_light(t_file *file, char *line);
 // store.sphere
 int			store_sphere(t_file *file, char *line);
+// store_sphere_bonus.c
+int			store_sp_bonus(t_sphere *sphere, char *line, char *arg,
+				size_t *start);
 // store.triangle
 int			store_triangle(t_file *file, char *line);
 // store_utils1.c
@@ -117,7 +130,6 @@ t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
 t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
-void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 
 /* ************************************************************************** */
 /* 								RENDER                                        */

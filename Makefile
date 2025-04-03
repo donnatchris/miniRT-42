@@ -45,11 +45,16 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/parsing_.c \
 				bonus/parsing/parsing_utils1.c \
 				bonus/parsing/parsing_utils2.c \
+				bonus/parsing/parsing_utils3.c \
 				bonus/parsing/store_.c \
 				bonus/parsing/store_cone.c \
+				bonus/parsing/store_cone_bonus.c \
 				bonus/parsing/store_cylinder.c \
+				bonus/parsing/store_cylinder_bonus.c \
 				bonus/parsing/store_plane.c \
+				bonus/parsing/store_plane_bonus.c \
 				bonus/parsing/store_sphere.c \
+				bonus/parsing/store_sphere_bonus.c \
 				bonus/parsing/store_triangle.c \
 				bonus/parsing/store_scene.c \
 				bonus/parsing/store_utils1.c \
@@ -57,7 +62,6 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/vector/utils_vector.c \
 				bonus/vector/utils_vector2.c \
 				bonus/vector/utils_vector3.c \
-				bonus/vector/utils_vector4.c \
 				bonus/intersection/intersect_.c \
 				bonus/intersection/intersect_cone.c \
 				bonus/intersection/intersect_cylinder.c \

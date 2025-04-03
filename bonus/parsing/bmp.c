@@ -4,7 +4,6 @@
 // {
 // 	int		fd;
 // 	char	*extension;
-
 // 	if (!file)
 // 		return (pars_err_msg("No bmp file", line), -1);
 // 	extension = ft_strchr(extension, '.');
@@ -32,7 +31,6 @@
 // 	int				line_bytes;
 // 	int				padding;
 // 	int				offset;
-
 // 	if (read(fd, header, 54) == -1)
 // 		return (pars_err_msg("Invalid bmp header", line));
 // 	if (header[0] != 'B' || header[1] != 'M')
@@ -45,9 +43,4 @@
 // 	line_bytes = width * 3;
 // 	padding = (4 - (line_bytes % 4)) % 4;
 // 	offset = read_le_int(&header[10]);
-
-
-
-
 // }
-
