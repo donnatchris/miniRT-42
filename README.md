@@ -479,4 +479,48 @@ Clamp or normalize the result into a valid RGB color.
 Write the computed color to the image buffer at the corresponding pixel location.
 
 
+Absolutely! Here's a clean and concise **English markdown summary** you can use in your GitHub `README.md` for explaining how lighting is handled in your `miniRT` project:
+
+---
+
+## Multiples lights in miniRT
+
+The rendering pipeline in `miniRT` follows a **ray tracing** approach with support for **multiple point lights**, ambient light, and a basic **Phong lighting model**.
+
+### Step-by-Step Lighting per Pixel
+
+1. **Cast a primary ray** from the camera through the current pixel.
+2. **Find the closest intersection** between the ray and any object in the scene.
+3. **If no object is hit**, the pixel is set to the background color.
+4. **If an object is hit**:
+   - Start with the **ambient light**, computed as:
+
+     ```c
+     final_color = object_color * ambient_intensity;
+     ```
+
+   - For each **point light source** in the scene:
+     1. **Cast a shadow ray** from the intersection point to the light.
+     2. If the shadow ray hits another object before reaching the light, the point is **in shadow** → skip this light.
+     3. Otherwise, compute **diffuse** and optional **specular** components:
+        - **Diffuse**:
+          ```c
+          diffuse = max(0, dot(normal, light_dir)) * light_intensity;
+          ```
+        - **Specular** (Phong):
+          ```c
+          specular = pow(max(0, dot(reflect_dir, view_dir)), shininess);
+          ```
+     4. Add the light contribution to the final color.
+
+5. **Clamp the final color** to the [0, 1] range (or [0, 255] depending on your color system).
+
+### Summary
+
+- Ambient light **multiplies** the object color (global tint).
+- Each point light is **added** only if it is visible from the hit point.
+- Shadows are supported via **shadow rays**.
+- The model supports realistic lighting with multiple light sources.
+
+
 

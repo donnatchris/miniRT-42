@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:33:35 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:26:14 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,21 @@ void	delete_str_array(char **array)
 	ft_free((void **)&array);
 }
 
+void	delete_light_list(void *content)
+{
+	free(content);
+	return ;
+}
+
 void	delete_file(t_file *file)
 {
 	if (!file)
 		return ;
+	if (file->light_list)
+	{
+		ft_lstclear(file->light_list, &delete_light_list);
+		free(file->light_list);
+	}
 	if (file->obj_list)
 		dclst_clear(file->obj_list);
 	ft_free((void **)&file);

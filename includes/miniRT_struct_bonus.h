@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:10 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:49:41 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_file
 {
 	t_ambient_light	ambient_light;
 	t_camera		camera;
-	t_light			light;
+	t_list			**light_list;
 	t_dclst			**obj_list;
 }	t_file;
 

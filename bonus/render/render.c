@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_copy.c                                      :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:24 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:58:17 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,21 @@ int choose_color_with_depth(t_program *prog, t_ray ray, int depth)
 	t_ray	light_ray;
 	t_hit	shadow;
 	int		local_color;
+	t_list	*node;
+	t_light	*light;
 
 	hit = inter_scene(&ray, prog->file);
 	if (hit.hit == 0)
 		return (0);
-
+	node = *prog->file->light_list;
+	light = (t_light *) node->content;
 	// Vérifier les ombres
-	light_ray = generate_light_ray(hit, prog->file->light);
+	light_ray = generate_light_ray(hit, *light);
 	shadow = inter_scene(&light_ray, prog->file);
 	if (shadow.hit && shadow.distance < light_ray.distance)
 		local_color = ambient_lighting(hit, prog->file->ambient_light);
 	else
-		local_color = phong_lighting(hit, prog->file->light, prog);
+		local_color = phong_lighting(hit, *light, prog);
 
 	// Appliquer la réflexion
 	return apply_reflection(prog, hit, ray, local_color, depth);
