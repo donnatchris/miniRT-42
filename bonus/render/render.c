@@ -1,18 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_copy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:33:05 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:52:24 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
-static int	ambient_lighting(t_hit hit, t_ambient_light ambient)
+int	apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int depth)
+{
+	t_ray	ref_ray;
+	int		ref_color;
+
+	// Limite la profondeur de réflexion pour éviter une récursion infinie
+	if (hit.reflectivity <= 0 || depth <= 0)
+		return (local_color);
+
+	// Calcul du rayon réfléchi
+	ref_ray.origin = add_vector(hit.point, mul_vector(hit.normal, EPS));
+	ref_ray.direction = reflectivity(ray.direction, hit.normal);
+
+	// Récursion avec une profondeur réduite
+	ref_color = choose_color_with_depth(prog, ref_ray, depth - 1);
+
+	// Mélange entre la couleur locale et la couleur réfléchie
+	return (mix_colors(local_color, ref_color, hit.reflectivity));
+}
+
+int choose_color_with_depth(t_program *prog, t_ray ray, int depth)
+{
+	t_hit	hit;
+	t_ray	light_ray;
+	t_hit	shadow;
+	int		local_color;
+
+	hit = inter_scene(&ray, prog->file);
+	if (hit.hit == 0)
+		return (0);
+
+	// Vérifier les ombres
+	light_ray = generate_light_ray(hit, prog->file->light);
+	shadow = inter_scene(&light_ray, prog->file);
+	if (shadow.hit && shadow.distance < light_ray.distance)
+		local_color = ambient_lighting(hit, prog->file->ambient_light);
+	else
+		local_color = phong_lighting(hit, prog->file->light, prog);
+
+	// Appliquer la réflexion
+	return apply_reflection(prog, hit, ray, local_color, depth);
+}
+int	ambient_lighting(t_hit hit, t_ambient_light ambient)
 {
 	t_rgb	ambient_rgb;
 	t_rgb	obj;
@@ -53,24 +95,27 @@ static int	init_img(t_program *prog)
 
 static int	choose_color(t_program *prog, int x, int y)
 {
-	t_ray		ray;
-	t_hit		hit;
-	t_ray		light_ray;
-	t_hit		shadow;
+	// t_ray		ray;
+	// t_hit		hit;
+	// t_ray		light_ray;
+	// t_hit		shadow;
+	// int			local_color;
 
-	ray = generate_ray(prog->view, x, y);
-	hit = inter_scene(&ray, prog->file);
-	if (hit.hit == 0)
-		return (0);
-	else
-	{
-		light_ray = generate_light_ray(hit, prog->file->light);
-		shadow = inter_scene(&light_ray, prog->file);
-		if (shadow.hit && shadow.distance < light_ray.distance)
-			return (ambient_lighting(hit, prog->file->ambient_light));
-		else
-			return (phong_lighting(hit, prog->file->light, prog));
-	}
+	// ray = generate_ray(prog->view, x, y);
+	// hit = inter_scene(&ray, prog->file);
+	// if (hit.hit == 0)
+	// 	return (0);
+	// else
+	// {
+	// 	light_ray = generate_light_ray(hit, prog->file->light);
+	// 	shadow = inter_scene(&light_ray, prog->file);
+	// 	if (shadow.hit && shadow.distance < light_ray.distance)
+	// 		return (ambient_lighting(hit, prog->file->ambient_light));
+	// 	else
+	// 		return (phong_lighting(hit, prog->file->light, prog));
+	// }
+	t_ray	ray = generate_ray(prog->view, x, y);
+	return choose_color_with_depth(prog, ray, 5); // Profondeur max = 5 réflexions
 }
 
 void	render(t_program *prog)

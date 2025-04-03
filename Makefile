@@ -23,9 +23,10 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				mandatory/intersection/intersect_cylinder.c \
 				mandatory/intersection/intersect_plan.c \
 				mandatory/intersection/intersect_sphere.c \
-				mandatory/render/color_copy.c \
+				mandatory/render/color.c \
 				mandatory/render/phong.c \
 				mandatory/render/rays.c \
+				mandatory/render/render.c \
 				mandatory/render/viewport.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
@@ -63,10 +64,10 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/intersection/intersect_plan.c \
 				bonus/intersection/intersect_sphere.c \
 				bonus/intersection/intersect_triangle.c \
-				bonus/render/color_copy.c \
+				bonus/render/color.c \
 				bonus/render/phong.c \
 				bonus/render/rays.c \
-				bonus/render/render_copy.c \
+				bonus/render/render.c \
 				bonus/render/viewport.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
