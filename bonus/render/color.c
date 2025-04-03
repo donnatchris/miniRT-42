@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_copy.c                                       :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:11:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 09:39:38 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:24:53 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,25 @@ int	multiply_colors(int color1, int color2)
 	rgb.r = ((color1 >> 16) & 0xFF) * ((color2 >> 16) & 0xFF) / 255;
 	rgb.g = ((color1 >> 8) & 0xFF) * ((color2 >> 8) & 0xFF) / 255;
 	rgb.b = (color1 & 0xFF) * (color2 & 0xFF) / 255;
+	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
+}
+
+int	multiply_colors_scalar(int color1, int color2, double intensity)
+{
+	t_rgb	rgb;
+
+	rgb.r = ((color1 >> 16) & 0xFF) * ((color2 >> 16) & 0xFF) / 255;
+	rgb.g = ((color1 >> 8) & 0xFF) * ((color2 >> 8) & 0xFF) / 255;
+	rgb.b = (color1 & 0xFF) * (color2 & 0xFF) / 255;
+	rgb.r = rgb.r * intensity;
+	rgb.g = rgb.g * intensity;
+	rgb.b = rgb.b * intensity;
+	if (rgb.r > 255)
+		rgb.r = 255;
+	if (rgb.g > 255)
+		rgb.g = 255;
+	if (rgb.b > 255)
+		rgb.b = 255;
 	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
 }
 

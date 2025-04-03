@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 10:08:08 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:44:04 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ int choose_color_with_depth(t_program *prog, t_ray ray, int depth)
 	t_hit	hit;
 	t_ray	light_ray;
 	t_hit	shadow;
-	int		local_color;
-	t_list	*node;
+	t_list	*light_node;
 	t_light	*light;
+	int		color;
 
 	hit = inter_scene(&ray, prog->file);
 	if (hit.hit == 0)
 		return (0);
-	node = *prog->file->light_list;
-	light = (t_light *) node->content;
-	// Vérifier les ombres
-	light_ray = generate_light_ray(hit, *light);
-	shadow = inter_scene(&light_ray, prog->file);
-	if (shadow.hit && shadow.distance < light_ray.distance)
-		local_color = ambient_lighting(hit, prog->file->ambient_light);
-	else
-		local_color = phong_lighting(hit, *light, prog);
-
-	// Appliquer la réflexion
-	return apply_reflection(prog, hit, ray, local_color, depth);
+	color = ambient_lighting(hit, prog->file->ambient_light);
+	light_node = *prog->file->light_list;
+	while (light_node)
+	{
+		light = (t_light *) light_node->content;
+		light_ray = generate_light_ray(hit, *light);
+		shadow = inter_scene(&light_ray, prog->file);
+		if (!(shadow.hit && shadow.distance < light_ray.distance))
+			color = add_colors(color, phong_lighting(hit, *light, prog));
+		light_node = light_node->next;
+	}
+	return (apply_reflection(prog, hit, ray, color, depth));
 }
 int	ambient_lighting(t_hit hit, t_ambient_light ambient)
 {
