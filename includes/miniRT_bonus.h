@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:17 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:25:37 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 // color.c
 int			scale_color(int color, double factor);
 int			mix_colors(int color1, int color2, double reflectivity);
+int			multiply_colors_scalar(int color1, int color2, double intensity);
+
 //int			mix_colors(int color1, int color2);
 int			multiply_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
