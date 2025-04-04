@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/03 20:43:27 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/04 12:07:33 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 1600
-# define HEIGHT 1000
+# define WIDTH 1920
+# define HEIGHT 1080
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -60,7 +60,7 @@ void		delete_program(t_program *program);
 /* 							PARSING                                           */
 /* ************************************************************************** */
 // parsing_.c
-t_file		*parse_input(char *input);
+t_file		*parse_input(char *input, void *mlx_ptr);
 // parsing_utils1.c
 int			is_scene(char *str);
 int			is_object(char *str);
@@ -167,6 +167,14 @@ t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
 t_hit       inter_cone(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
+
+/* ************************************************************************** */
+/* 							TEXTURING                                         */
+/* ************************************************************************** */
+
+void		*xpm_error(char *file);
+t_xpm		*store_xpm(char *file, void *mlx_ptr);
+void		delete_xpm(t_xpm *xpm);
 
 /* ************************************************************************** */
 /* 							TEST                                              */

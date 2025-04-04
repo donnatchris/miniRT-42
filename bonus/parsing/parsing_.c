@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 10:29:59 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:02:15 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // with the default values
 // Returns 0 if the initialization was successful
 // Returns 1 if an error occured
-static int	init_file_structure(t_file *file)
+static int	init_file_structure(t_file *file, void *mlx_ptr)
 {
 	ft_memset(file, 0, sizeof(t_file));
 	file->obj_list = ft_calloc(1, sizeof(t_dclst *));
@@ -25,6 +25,7 @@ static int	init_file_structure(t_file *file)
 	file->camera.direction.x = 1;
 	file->camera.fov = 1;
 	file->ambient_light.ratio = 1;
+	file->mlx_ptr = mlx_ptr;
 	file->light_list = ft_calloc(1, sizeof(t_list *));
 	if (!file->light_list)
 		return (perror("Error\nMalloc failed\n"), 1);
@@ -85,14 +86,14 @@ static int	parsing_loop(int fd, t_file *file)
 // and store the information in a t_file structure
 // Returns the t_file structure if the parsing was successful
 // Returns NULL if an error occured
-static t_file	*parse_fd(int fd)
+static t_file	*parse_fd(int fd, void *mlx_ptr)
 {
 	t_file	*file;
 
 	file = (t_file *) malloc(sizeof(t_file));
 	if (!file)
 		return (perror("Error\nMalloc failed"), NULL);
-	if (init_file_structure(file))
+	if (init_file_structure(file, mlx_ptr))
 		return (free(file), NULL);
 	if (parsing_loop(fd, file))
 		return (NULL);
@@ -103,7 +104,7 @@ static t_file	*parse_fd(int fd)
 // and store the information in a t_file structure
 // Returns the t_file structure if the parsing was successful
 // Returns NULL if an error occured
-t_file	*parse_input(char *input)
+t_file	*parse_input(char *input, void *mlx_ptr)
 {
 	int		fd;
 	t_file	*file;
@@ -114,7 +115,7 @@ t_file	*parse_input(char *input)
 	if (fd == -1)
 		return (perror("Error\nOpening file"), NULL);
 	file = NULL;
-	file = parse_fd(fd);
+	file = parse_fd(fd, mlx_ptr);
 	if (!file)
 		return (close(fd), NULL);
 	if (close(fd) == -1)

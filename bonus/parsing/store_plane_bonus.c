@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:34:40 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:35:09 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/04 12:07:59 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static char	*store_pl_xpm(t_plane *plane, char *arg, char *line,
+	size_t *start)
+{
+		arg = next_and_advance(line, start, arg);
+		plane->xpm = store_xpm(arg, plane->mlx_ptr);
+		return (arg);
+}
 
 // Function to store the shininess parameter in the structure
 // Returns arg
@@ -66,8 +74,8 @@ int	store_pl_bonus(t_plane *plane, char *line, char *arg,
 			arg = store_pl_shininess(plane, arg, line, start);
 		else if (!ft_strncmp(arg, "re", 2))
 			arg = store_pl_reflectivity(plane, arg, line, start);
-		// else if (!ft_strncmp(arg, "xp", 2))
-		// 	arg = store_pl_xpm(plane, arg, line, start);
+		else if (!ft_strncmp(arg, "xp", 2))
+			arg = store_pl_xpm(plane, arg, line, start);
 		else
 			arg = next_and_advance(line, start, arg);
 		if (!arg)

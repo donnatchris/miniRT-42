@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/01 11:36:49 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:32:25 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT_bonus.h"
 
-static t_program	*init_program(char **av)
+static t_program	*init_program(void)
 {
 	t_program	*program;
 
@@ -20,13 +20,6 @@ static t_program	*init_program(char **av)
 	program = ft_calloc(1, sizeof(t_program));
 	if (!program)
 		return (ft_print_error(3), NULL);
-	program->file = parse_input(av[1]);
-	if (!program->file)
-	{
-		ft_free((void **)&program);
-		return (NULL);
-	}
-	print_file(program->file);
 	return (program);
 }
 
@@ -42,9 +35,22 @@ static int	init_mlx(t_program *program)
 		mlx_destroy_display(program->mlx);
 		free(program->mlx);
 		free(program);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
+}
+
+static int	launch_parsing(t_program *program, char *input_file)
+{
+	program->file = NULL;
+	program->file = parse_input(input_file, program->mlx);
+	if (!program->file)
+	{
+		ft_print_error(2);
+		return (1);
+	}
+	print_file(program->file);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -53,11 +59,13 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_print_error(1), 1);
-	program = init_program(av);
+	program = init_program();
 	if (!program)
 		return (1);
-	if (!init_mlx(program))
+	if (init_mlx(program))
 		return (1);
+	if (launch_parsing(program, av[1]))
+		return (delete_program(program), 1);
 	render(program);
 	mlx_hook(program->win, 17, 0, ft_close_windows, program);
 	mlx_key_hook(program->win, ft_key_hook, program);

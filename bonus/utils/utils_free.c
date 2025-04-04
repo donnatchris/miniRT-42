@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/03 10:26:14 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:35:57 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	delete_program(t_program *program)
 	if (!program)
 		return ;
 	delete_file(program->file);
-	mlx_destroy_image(program->mlx, program->img->img_ptr);
+	if (program->img && program->img->img_ptr)
+		mlx_destroy_image(program->mlx, program->img->img_ptr);
 	free(program->img);
 	mlx_destroy_window(program->mlx, program->win);
 	mlx_destroy_display(program->mlx);

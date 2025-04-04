@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/03 09:49:41 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 10:53:37 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ typedef struct s_rgb
 
 typedef struct s_xpm
 {
-	void	*mlx;
+	void	*mlx_ptr;
 	int		width;
 	int		height;
 	void	*img_ptr;
+	char	*img_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_xpm;
 
 typedef struct s_chd
@@ -114,6 +118,7 @@ typedef struct s_plane
 	int				chessboard;
 	int				color2;
 	int				scale;
+	void			*mlx_ptr;
 	t_xpm			*xpm;
 }	t_plane;
 
@@ -172,6 +177,7 @@ typedef struct s_file
 	t_camera		camera;
 	t_list			**light_list;
 	t_dclst			**obj_list;
+	void			*mlx_ptr;
 }	t_file;
 
 typedef struct s_viewport
