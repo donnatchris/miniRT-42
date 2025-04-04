@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:46 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/04 07:42:45 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+
+static	int	is_valid_cy_distance(double t, t_ray *ray, t_cylinder *cyl)
+{
+	t_vector	p;
+	t_vector	v;
+	double		h;
+
+	p = add_vector(ray->origin, mul_vector(ray->direction, t));
+	v = sub_vector(p, cyl->position);
+	h = dot_vector(v, cyl->orientation);
+	if (t > EPS && h >= 0 && h <= cyl->height)
+		return (1);
+	return (0);
+}
+
+static int	choose_cy_distance(t_chd *chd, t_hit *hit, t_ray *ray, t_cylinder *cyl)
+{
+	int	valid1;
+	int	valid2;
+
+	valid1 = is_valid_cy_distance(chd->t1, ray, cyl);
+	valid2 = is_valid_cy_distance(chd->t2, ray, cyl);
+	if (!valid1 && !valid2)
+		return (-1);
+	if (valid1 && (!valid2 || chd->t1 < chd->t2))
+		chd->parametric_distance = chd->t1;
+	else
+		chd->parametric_distance = chd->t2;
+	hit->distance = chd->parametric_distance;
+	return (0);
+}
 
 static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
 {
@@ -30,14 +61,7 @@ static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
 		return (-1);
 	chd.t1 = (-chd.b - sqrt(chd.delta)) / (2 * chd.a);
 	chd.t2 = (-chd.b + sqrt(chd.delta)) / (2 * chd.a);
-	if (chd.t1 > EPS)
-		chd.parametric_distance = fmin(chd.t1, chd.t2);
-	else
-		chd.parametric_distance = chd.t2;
-	if (chd.parametric_distance < EPS)
-		return (-1);
-	hit->distance = chd.parametric_distance;
-	return (0);
+	return (choose_cy_distance(&chd, hit, ray, cyl));
 }
 
 t_hit	inter_cylinder(t_ray *ray, t_dclst *node)

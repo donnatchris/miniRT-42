@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 16:19:06 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 07:42:27 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	choose_cy_distance(t_chd *chd, t_hit *hit, t_ray *ray, t_cylinder *cy
 	hit->distance = chd->parametric_distance;
 	return (0);
 }
-//test
+
 static int	cy_hit_distance(t_ray *ray, t_cylinder *cyl, t_hit *hit)
 {
 	t_chd	chd;
