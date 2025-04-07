@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/04 07:42:45 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/04 13:31:35 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static	int	is_valid_cy_distance(double t, t_ray *ray, t_cylinder *cyl)
 	return (0);
 }
 
-static int	choose_cy_distance(t_chd *chd, t_hit *hit, t_ray *ray, t_cylinder *cyl)
+static int	choose_cy_distance(t_chd *chd, t_hit *hit,
+	t_ray *ray, t_cylinder *cyl)
 {
 	int	valid1;
 	int	valid2;

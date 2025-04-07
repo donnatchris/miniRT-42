@@ -15,7 +15,7 @@ static int	fill_triangle_from_line(t_triangle *triangle, char *line)
 	arg = next_and_advance(line, &start, arg);
 	if (store_vector(&triangle->vertex[1], arg, line))
 		return (ft_free((void **)&arg), 1);
-    arg = next_and_advance(line, &start, arg);
+	arg = next_and_advance(line, &start, arg);
 	if (store_vector(&triangle->vertex[2], arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
@@ -30,7 +30,7 @@ static int	fill_triangle_from_line(t_triangle *triangle, char *line)
 int	store_triangle(t_file *file, char *line)
 {
 	t_triangle	*triangle;
-	t_dclst	*node;
+	t_dclst		*node;
 
 	triangle = malloc(sizeof(t_triangle));
 	if (!triangle)

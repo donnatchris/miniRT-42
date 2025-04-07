@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:14:02 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 09:25:26 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:57:49 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	store_scale(int *storage, char *arg, char *line)
 	if (!ft_isint(arg))
 		return (pars_err_msg("Invalid scale", line));
 	*storage = ft_atoi(arg);
-	if (storage <= 0)
+	if (*storage <= 0)
 		return (pars_err_msg("Invalid scale", line));
 	return (0);
 }

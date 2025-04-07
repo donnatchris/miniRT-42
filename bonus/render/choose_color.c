@@ -1,6 +1,6 @@
 #include "../../includes/miniRT_bonus.h"
 
-int choose_color_with_depth(t_program *prog, t_ray ray, int depth)
+int	choose_color_with_depth(t_program *prog, t_ray ray, int depth)
 {
 	t_hit	hit;
 	t_ray	light_ray;
@@ -29,7 +29,7 @@ int choose_color_with_depth(t_program *prog, t_ray ray, int depth)
 int	choose_color(t_program *prog, int x, int y)
 {
 	t_ray	ray;
-	
+
 	ray = generate_ray(prog->view, x, y);
-	return choose_color_with_depth(prog, ray, 5);
+	return (choose_color_with_depth(prog, ray, 5));
 }

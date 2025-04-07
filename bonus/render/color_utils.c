@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:11:25 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 11:24:53 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:32:41 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ int	mix_colors(int color1, int color2, double reflectivity)
 	rgb2.r = (color2 >> 16) & 0xFF;
 	rgb2.g = (color2 >> 8) & 0xFF;
 	rgb2.b = color2 & 0xFF;
-	// mix.r = (rgb1.r + rgb2.r) / 2;
-	// mix.g = (rgb1.g + rgb2.g) / 2;
-	// mix.b = (rgb1.b + rgb2.b) / 2;
 	mix.r = fmin((1 - reflectivity) * rgb1.r + reflectivity * rgb2.r, 255);
 	mix.g = fmin((1 - reflectivity) * rgb1.g + reflectivity * rgb2.g, 255);
 	mix.b = fmin((1 - reflectivity) * rgb1.b + reflectivity * rgb2.b, 255);
