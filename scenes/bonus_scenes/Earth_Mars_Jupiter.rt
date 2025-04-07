@@ -12,3 +12,4 @@ L 14,0,-10 0.7 255,255,255
 sp -9,2,-3 3 0,255,0 xp textures/2k_earth_daymap.xpm
 sp 8,0,-5 1 0,255,0 xp textures/2k_mars.xpm
 sp 0,0,0 8 0,255,0 xp textures/2k_jupiter.xpm
+
