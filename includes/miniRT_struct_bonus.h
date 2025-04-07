@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/04 10:53:37 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:35:42 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_hit
 	t_vector	normal;
 	double		reflectivity;
 	int			shininess;
+	double		u;
+	double		v;
 }	t_hit;
 
 typedef struct s_quadratic
