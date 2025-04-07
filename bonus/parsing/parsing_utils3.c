@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:29:35 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:30:56 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/07 12:48:46 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
