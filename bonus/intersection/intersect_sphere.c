@@ -3,31 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 14:52:48 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:49:35 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+void	get_sphere_uv(t_hit *hit, t_sphere *sphere)
+{
+	t_vector	local;
+
+	local = sub_vector(hit->point, sphere->position);
+	normalize_vector(&local); // Converti en coordonnées sphériques unitaires
+	hit->u = 0.5 + atan2(local.z, local.x) / (2 * M_PI); // longitude
+	hit->v = 0.5 - asin(local.y) / M_PI;                 // latitude
+}
+
+
 static int choose_sp_color(t_sphere *sphere, t_hit hit)
 {
-	t_vector	normal;
-	double		u;
-	double		v;
-	int			x;
-	int			y;
+	if (sphere->xpm)
+	{
+		double tex_u = fmod(fabs(hit.u), 1.0);
+		double tex_v = fmod(fabs(hit.v), 1.0);
+		int x = (int)(tex_u * sphere->xpm->width);
+		int y = (int)(tex_v * sphere->xpm->height);
 
+		// ✅ Clamping des coordonnées
+		if (x >= sphere->xpm->width)
+			x = sphere->xpm->width - 1;
+		if (y >= sphere->xpm->height)
+			y = sphere->xpm->height - 1;
+
+		return get_pixel_color(sphere->xpm, x, y);
+	}
 	if (!sphere->chessboard)
 		return (sphere->color);
-	normal = sub_vector(hit.point, sphere->position);
-	normalize_vector(&normal);
-	u = 0.5 + atan2(normal.z, normal.x) / (2 * M_PI);
-	v = 0.5 - asin(normal.y) / M_PI;
-	x = (int)(floor(u * sphere->scale));
-	y = (int)(floor(v * sphere->scale));
+	int x = (int)(floor(hit.u * sphere->scale));
+	int y = (int)(floor(hit.v * sphere->scale));
 	if ((x + y) % 2 == 0)
 		return (sphere->color);
 	else
@@ -58,6 +74,24 @@ static int	sp_hit_distance(t_ray *ray, t_sphere *sphere,
 	return (0);
 }
 
+void	apply_sphere_bump(t_hit *hit, t_sphere *sphere)
+{
+	double		tex_u;
+	double		tex_v;
+	int			px;
+	int			py;
+	double		scale;
+
+	if (!sphere->xpm)
+		return ;
+	scale = 1;
+	tex_u = fmod(fabs(hit->u), scale);
+	tex_v = fmod(fabs(hit->v), scale);
+	px = (int)(tex_u * sphere->xpm->width);
+	py = (int)(tex_v * sphere->xpm->height);
+	hit->normal = perturbed_normal(sphere->xpm, px, py, hit->normal);
+}
+
 t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 {
 	t_hit		hit;
@@ -75,6 +109,8 @@ t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 	hit.normal = sub_vector(hit.point, sphere->position);
 	normalize_vector(&hit.normal);
 	hit.hit = 1;
+	get_sphere_uv(&hit, sphere);
+	apply_sphere_bump(&hit, sphere);
 	hit.color = choose_sp_color(sphere, hit);
 	hit.shininess = sphere->shininess;
 	hit.reflectivity = sphere->reflectivity;

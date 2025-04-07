@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/04 15:09:20 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/07 11:31:33 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 1060
-# define HEIGHT 540
+# define WIDTH 2120
+# define HEIGHT 1080
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -177,6 +177,7 @@ void		*xpm_error(char *file);
 t_xpm		*store_xpm(char *file, void *mlx_ptr);
 void		delete_xpm(t_xpm *xpm);
 // xpm_perturbation.c
+int			get_pixel_color(t_xpm *xpm, int x, int y);
 t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);
 
 /* ************************************************************************** */

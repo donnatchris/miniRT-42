@@ -1,14 +1,14 @@
 # 🔆 Lumière ambiante
-A 0.1 255,255,255
+A 0.2 255,255,255
 
 # 🎥 Caméra (ajustée pour mieux voir la scène)
-C 0,0,-10 0,0,1 70 ch 255
+C 8,0,-20 -0.5,0,1 70 ch 255
 
 # 💡 Lumière ponctuelle (déplacée pour un meilleur éclairage)
-L -20,0,0 0.7 255,255,255 sh 544
-L 0,0,-10 0.7 255,255,255      
+# L -20,0,0 0.7 255,255,255
+L 14,0,-10 0.7 255,255,255      
 
 # 🟢 Sphère verte (posée sur le plan, éloignée de la caméra)
-sp 0,0,0 4 0,255,0 sh eeknwe ch 255,255,255 3
-sp 6,0,0 1 0,255,0 ch 255,255,255 sh 0
-
+sp -9,2,-3 3 0,255,0 xp textures/2k_earth_daymap.xpm
+sp 8,0,-5 1 0,255,0 xp textures/2k_mars.xpm
+sp 0,0,0 8 0,255,0 xp textures/2k_jupiter.xpm

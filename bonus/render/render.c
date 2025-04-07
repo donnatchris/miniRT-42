@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 15:25:12 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:12:47 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render(t_program *prog)
 		while (x++ < WIDTH)
 		{
 			color = choose_color(prog, x, y);
-			*(int *)(prog->img->addr + ((x + (y * WIDTH))
+			*(int *)(prog->img->addr + ((WIDTH - x + (y * WIDTH))
 						* (prog->img->bpp / 8))) = color;
 		}
 	}

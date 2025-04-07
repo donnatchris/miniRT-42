@@ -1,5 +1,21 @@
 #include "../../includes/miniRT_bonus.h"
 
+int	get_pixel_color(t_xpm *xpm, int x, int y)
+{
+	int				pixel_offset;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+
+	if (x < 0 || x >= xpm->width || y < 0 || y >= xpm->height)
+		return (0); // Valeur par défaut si hors limite (à adapter si besoin)
+	pixel_offset = (y * xpm->size_line) + (x * (xpm->bpp / 8));
+	b = (unsigned char)xpm->img_addr[pixel_offset];
+	g = (unsigned char)xpm->img_addr[pixel_offset + 1];
+	r = (unsigned char)xpm->img_addr[pixel_offset + 2];
+	return ((r << 16) | (g << 8) | b);
+}
+
 static int	get_pixel_grayscale(t_xpm *xpm, int x, int y)
 {
 	int				pixel_offset;
@@ -19,6 +35,7 @@ static t_vector	get_bump_normal(t_xpm *xpm, int u, int v)
 	double		h_center;
 	double		dx;
 	double		dy;
+	double 		strength = 0.05; // modifiable
 	int			safe_u;
 	int			safe_v;
 	t_vector	bump;
@@ -32,7 +49,7 @@ static t_vector	get_bump_normal(t_xpm *xpm, int u, int v)
 	h_center = get_pixel_grayscale(xpm, u, v);
 	dx = get_pixel_grayscale(xpm, safe_u, v) - h_center;
 	dy = get_pixel_grayscale(xpm, u, safe_v) - h_center;
-	bump = vector(-dx, -dy, 1);
+	bump = vector(-dx * strength, -dy * strength, 1);
 	normalize_vector(&bump);
 	return (bump);
 }

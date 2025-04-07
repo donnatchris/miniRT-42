@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 10:48:05 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:11:28 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	apply_plane_bump(t_hit *hit, t_plane *plane)
 	py = (int)(tex_v * plane->xpm->height);
 	hit->normal = perturbed_normal(plane->xpm, px, py, hit->normal);
 }
+
 
 t_hit	inter_plane(t_ray *ray, t_dclst *node)
 {

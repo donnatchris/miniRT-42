@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:27:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:31:33 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/07 11:08:41 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static char	*store_sp_xpm(t_sphere *sphere, char *arg, char *line,
+	size_t *start)
+{
+		arg = next_and_advance(line, start, arg);
+		sphere->xpm = store_xpm(arg, sphere->mlx_ptr);
+		return (arg);
+}
 
 // Function to store the shininess parameter in the structure
 // Returns arg
@@ -64,6 +72,8 @@ int	store_sp_bonus(t_sphere *sphere, char *line, char *arg,
 			arg = store_sp_shininess(sphere, arg, line, start);
 		else if (!ft_strncmp(arg, "re", 2))
 			arg = store_sp_reflectivity(sphere, arg, line, start);
+		else if (!ft_strncmp(arg, "xp", 2))
+			arg = store_sp_xpm(sphere, arg, line, start);
 		else
 			arg = next_and_advance(line, start, arg);
 		if (!arg)

@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/07 10:35:42 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:06:03 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,10 @@ typedef struct s_sphere
 	int			chessboard;
 	int			color2;
 	int			scale;
+	void		*mlx_ptr;
+	t_xpm		*xpm;
+	double		u;
+	double		v;
 }	t_sphere;
 
 typedef struct s_cylinder
