@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plan.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/02 10:36:47 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:27:09 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,36 @@ t_hit	inter_plane(t_ray *ray, t_dclst *node)
 			hit.color = choose_pl_color(plane, hit);
 			hit.shininess = plane->shininess;
 			hit.reflectivity = plane->reflectivity;
+			if (plane->xpm) // on a une texture bump
+			{
+				t_vector	local;
+				double		u;
+				double		v;
+				int			tex_u;
+				int			tex_v;
+
+				// Calcule les coords locales (comme pour ton checkerboard)
+				local = sub_vector(hit.point, plane->position);
+				u = dot_vector(local, plane->u) * plane->scale;
+				v = dot_vector(local, plane->v) * plane->scale;
+
+				// Applique modulo pour rester dans la texture
+				u = fmod(fabs(u), 1.0);
+				v = fmod(fabs(v), 1.0);
+
+				// Convertis ça en pixels
+				tex_u = (int)(u * plane->xpm->width);
+				tex_v = (int)(v * plane->xpm->height);
+
+				// Applique le bump
+				printf("Vecteur avant perturbation: ");
+				printf("x: %f, y: %f, z: %f\n", hit.normal.x, hit.normal.y, hit.normal.z);
+				hit.normal = perturbed_normal(plane->xpm, tex_u, tex_v, hit.normal);
+				printf("Vecteur apres perturbation: ");
+				printf("x: %f, y: %f, z: %f\n", hit.normal.x, hit.normal.y, hit.normal.z);
+
+			}
+
 		}
 	}
 	return (hit);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/04 12:07:33 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:09:20 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1060
+# define HEIGHT 540
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -172,9 +172,12 @@ void		init_hit(t_hit *hit, t_dclst *node);
 /* 							TEXTURING                                         */
 /* ************************************************************************** */
 
+// stor_xpm.c
 void		*xpm_error(char *file);
 t_xpm		*store_xpm(char *file, void *mlx_ptr);
 void		delete_xpm(t_xpm *xpm);
+// xpm_perturbation.c
+t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);
 
 /* ************************************************************************** */
 /* 							TEST                                              */

@@ -74,7 +74,8 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/render/rays.c \
 				bonus/render/render.c \
 				bonus/render/viewport.c \
-				bonus/texturing/xpm.c \
+				bonus/texturing/store_xpm.c \
+				bonus/texturing/perturbation.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
