@@ -6,12 +6,12 @@ A 0.2 255,165,0
 
 # Lumière directionnelle (position, ratio, couleur)
 L -10,10,-5 0.6 230,230,250
-
+L 10,-10,5 0.6 230,230,250
 # Plan au sol (position, normale, couleur)
-pl 0,-1,0 0,1,0 237,201,175
+pl 0,-1,0 0,1,0 237,201,175 re 0.5
 237,201,175
 # Plan mural arrière (position, normale, couleur)
-pl 0,0,10 0,0,-1 135,206,235
+pl 0,0,10 0,0,-1 135,206,235 re 0.2
 
 # Sphère (optionnelle pour décor)
 sp 2.3,0,-1.5 2 255,200,200
