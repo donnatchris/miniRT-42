@@ -6,12 +6,14 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:27:34 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 11:08:41 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:27:43 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+// Function to store the xpm file in the structure
+// Returns arg
 static char	*store_sp_xpm(t_sphere *sphere, char *arg, char *line,
 	size_t *start)
 {

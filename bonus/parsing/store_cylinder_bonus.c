@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:39:27 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:40:26 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:33:59 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
+
+static char	*store_cy_xpm(t_cylinder *cyl, char *arg, char *line,
+	size_t *start)
+{
+		arg = next_and_advance(line, start, arg);
+		cyl->xpm = store_xpm(arg, cyl->mlx_ptr);
+		return (arg);
+}
 
 // Function to store the shininess parameter in the structure
 // Returns arg
@@ -50,21 +58,24 @@ static char	*store_cy_reflectivity(t_cylinder *cy, char *arg, char *line,
 // Function to store the plane bonus parameters in the structure
 // Returns 0 if the plane was stored successfully
 // Returns 1 if an error occured
-int	store_cy_bonus(t_cylinder *cylinder, char *line, char *arg,
+int	store_cy_bonus(t_cylinder *cyl, char *line, char *arg,
 	size_t *start)
 {
-	cylinder->shininess = 32;
+	create_ortho_basis(cyl->orientation, &cyl->u, &cyl->v);
+	cyl->shininess = 32;
 	arg = next_and_advance(line, start, arg);
 	while (1)
 	{
 		if (!arg)
 			break ;
 		if (!ft_strncmp(arg, "ch", 2))
-			arg = store_cy_chessboard(cylinder, arg, line, start);
+			arg = store_cy_chessboard(cyl, arg, line, start);
 		else if (!ft_strncmp(arg, "sh", 2))
-			arg = store_cy_shininess(cylinder, arg, line, start);
+			arg = store_cy_shininess(cyl, arg, line, start);
 		else if (!ft_strncmp(arg, "re", 2))
-			arg = store_cy_reflectivity(cylinder, arg, line, start);
+			arg = store_cy_reflectivity(cyl, arg, line, start);
+		else if (!ft_strncmp(arg, "xp", 2))
+			arg = store_cy_xpm(cyl, arg, line, start);
 		else
 			arg = next_and_advance(line, start, arg);
 		if (!arg)

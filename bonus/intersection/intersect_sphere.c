@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 12:49:35 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:29:46 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ void	get_sphere_uv(t_hit *hit, t_sphere *sphere)
 	hit->v = 0.5 - asin(local.y) / M_PI;                 // latitude
 }
 
+void	apply_sphere_bump(t_hit *hit, t_sphere *sphere)
+{
+	double		tex_u;
+	double		tex_v;
+	int			px;
+	int			py;
+	double		scale;
+
+	if (!sphere->xpm)
+		return ;
+	scale = 1;
+	tex_u = fmod(fabs(hit->u), scale);
+	tex_v = fmod(fabs(hit->v), scale);
+	px = (int)(tex_u * sphere->xpm->width);
+	py = (int)(tex_v * sphere->xpm->height);
+	hit->normal = perturbed_normal(sphere->xpm, px, py, hit->normal);
+}
 
 static int choose_sp_color(t_sphere *sphere, t_hit hit)
 {
@@ -31,13 +48,10 @@ static int choose_sp_color(t_sphere *sphere, t_hit hit)
 		double tex_v = fmod(fabs(hit.v), 1.0);
 		int x = (int)(tex_u * sphere->xpm->width);
 		int y = (int)(tex_v * sphere->xpm->height);
-
-		// ✅ Clamping des coordonnées
 		if (x >= sphere->xpm->width)
 			x = sphere->xpm->width - 1;
 		if (y >= sphere->xpm->height)
 			y = sphere->xpm->height - 1;
-
 		return get_pixel_color(sphere->xpm, x, y);
 	}
 	if (!sphere->chessboard)
@@ -74,23 +88,6 @@ static int	sp_hit_distance(t_ray *ray, t_sphere *sphere,
 	return (0);
 }
 
-void	apply_sphere_bump(t_hit *hit, t_sphere *sphere)
-{
-	double		tex_u;
-	double		tex_v;
-	int			px;
-	int			py;
-	double		scale;
-
-	if (!sphere->xpm)
-		return ;
-	scale = 1;
-	tex_u = fmod(fabs(hit->u), scale);
-	tex_v = fmod(fabs(hit->v), scale);
-	px = (int)(tex_u * sphere->xpm->width);
-	py = (int)(tex_v * sphere->xpm->height);
-	hit->normal = perturbed_normal(sphere->xpm, px, py, hit->normal);
-}
 
 t_hit	inter_sphere(t_ray *ray, t_dclst *node)
 {

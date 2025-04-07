@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:41:03 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/07 13:29:50 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	store_cylinder(t_file *file, char *line)
 	if (!cylinder)
 		return (perror("Error\nMalloc failed"), 1);
 	ft_memset(cylinder, 0, sizeof(t_cylinder));
+	cylinder->mlx_ptr = file->mlx_ptr;		//test xpm
 	if (fill_cylinder_from_line(cylinder, line))
 		return (ft_free((void **)&cylinder), 1);
 	node = dclst_add_back(file->obj_list, cylinder);

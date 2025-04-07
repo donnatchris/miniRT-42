@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 11:11:28 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:51:59 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,55 @@ void	get_plane_uv(t_hit *hit, t_plane *plane)
 	hit->v = dot_vector(local, plane->v) * 1; // 1 a modif si on veut appliquer un scale
 }
 
+// static int	choose_pl_color(t_plane *plane, t_hit hit)
+// {
+// 	double	x;
+// 	double	y;
+
+// 	if (!plane->chessboard)
+// 	x = hit.u * plane->scale;
+// 	y = hit.v * plane->scale;
+// 		return (plane->color);
+// 	if (((int) floor(x) + (int) floor(y)) % 2 == 0)
+// 		return (plane->color);
+// 	else
+// 		return (plane->color2);
+// }
+
 static int	choose_pl_color(t_plane *plane, t_hit hit)
 {
 	double	x;
 	double	y;
-	
-	x = hit.u * plane->scale;
-	y = hit.v * plane->scale;
+
+	// ✅ Si une texture XPM est présente, on l'utilise
+	if (plane->xpm)
+	{
+		double tex_u = fmod(fabs(hit.u), 1.0);
+		double tex_v = fmod(fabs(hit.v), 1.0);
+		int px = (int)(tex_u * plane->xpm->width);
+		int py = (int)(tex_v * plane->xpm->height);
+
+		if (px >= plane->xpm->width)
+			px = plane->xpm->width - 1;
+		if (py >= plane->xpm->height)
+			py = plane->xpm->height - 1;
+
+		return get_pixel_color(plane->xpm, px, py);
+	}
+
+	// ✅ Sinon : damier ?
 	if (!plane->chessboard)
 		return (plane->color);
-	if (((int) floor(x) + (int) floor(y)) % 2 == 0)
+
+	// ✅ Checkerboard : applique scale à u/v
+	x = hit.u * plane->scale;
+	y = hit.v * plane->scale;
+	if (((int)floor(x) + (int)floor(y)) % 2 == 0)
 		return (plane->color);
 	else
 		return (plane->color2);
 }
+
 
 void	apply_plane_bump(t_hit *hit, t_plane *plane)
 {

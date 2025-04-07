@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/07 11:06:03 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:44:01 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,10 @@ typedef struct s_cylinder
 	int			chessboard;
 	int			color2;
 	int			scale;
+	void		*mlx_ptr;
+	t_xpm		*xpm;
+	t_vector	u;
+	t_vector	v;
 }	t_cylinder;
 
 typedef struct s_triangle
@@ -175,6 +179,10 @@ typedef struct s_cone
 	int			chessboard;
 	int			color2;
 	int			scale;
+	void		*mlx_ptr;
+	t_xpm		*xpm;
+	t_vector	u;
+	t_vector	v;
 }   t_cone;
 
 typedef struct s_file
