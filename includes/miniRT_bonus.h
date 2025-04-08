@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 11:04:57 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 11:21:32 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ t_hit       inter_cone(t_ray *ray, t_dclst *node);
 int			choose_cy_color(t_cylinder *cyl, t_hit *hit);
 // inter_cylinder.c
 t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
+// inter_sphere_bonus.c
+int			choose_sp_color(t_sphere *sphere, t_hit *hit);
+// inter_sphere.c
+t_hit		inter_sphere(t_ray *ray, t_dclst *node);
 
 t_hit		inter_plane(t_ray *ray, t_dclst *node);
-t_hit		inter_sphere(t_ray *ray, t_dclst *node);
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
 
