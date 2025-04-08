@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 11:21:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 11:54:52 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void		delete_xpm(t_xpm *xpm);
 /* 								INTERSECTION                                  */
 /* ************************************************************************** */
 
-// intersection.c
+// intersect.c
+void		init_hit(t_hit *hit, t_dclst *node);
 t_hit		inter_scene(t_ray *ray, t_file *file);
 // intersect_cone_bonus.c
 int			choose_co_color(t_cone *cone, t_hit *hit);
@@ -68,16 +69,18 @@ int			choose_co_color(t_cone *cone, t_hit *hit);
 t_hit       inter_cone(t_ray *ray, t_dclst *node);
 // intersect_cylinder_bonus.c
 int			choose_cy_color(t_cylinder *cyl, t_hit *hit);
-// inter_cylinder.c
+// intersect_cylinder.c
 t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
-// inter_sphere_bonus.c
+// intersect_sphere_bonus.c
 int			choose_sp_color(t_sphere *sphere, t_hit *hit);
-// inter_sphere.c
+// intersect_sphere.c
 t_hit		inter_sphere(t_ray *ray, t_dclst *node);
-
+// intersect_plane_bonus.c
+int			choose_pl_color(t_plane *plane, t_hit *hit);
+// intersect_plane.c
 t_hit		inter_plane(t_ray *ray, t_dclst *node);
+// intersect_triangle.c
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
-void		init_hit(t_hit *hit, t_dclst *node);
 
 /* ************************************************************************** */
 /* 							PARSING                                           */

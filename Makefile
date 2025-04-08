@@ -66,6 +66,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/intersection/intersect_cone.c \
 				bonus/intersection/intersect_cylinder_bonus.c \
 				bonus/intersection/intersect_cylinder.c \
+				bonus/intersection/intersect_plan_bonus.c \
 				bonus/intersection/intersect_plan.c \
 				bonus/intersection/intersect_sphere_bonus.c \
 				bonus/intersection/intersect_sphere.c \
