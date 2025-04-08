@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/04 11:32:25 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:18:18 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	launch_parsing(t_program *program, char *input_file)
 		ft_print_error(2);
 		return (1);
 	}
-	print_file(program->file);
 	return (0);
 }
 

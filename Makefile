@@ -81,7 +81,6 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
-				bonus/test/print_parsing.c \
 				bonus/main.c 
 
 OBJ_DIR      =   obj

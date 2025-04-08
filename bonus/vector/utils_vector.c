@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:24:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/04 13:38:35 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:17:11 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ t_vector	*ray_mul(t_vector *dst, t_ray *r, double t)
 t_vector	reflectivity(t_vector incident, t_vector normal)
 {
 	return (sub_vector(incident, mul_vector(normal, 2
-			* dot_vector(incident, normal))));
+				* dot_vector(incident, normal))));
 }
