@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils_vector3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:28:08 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:33 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:55:22 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+
+int	solve_quadratic(t_quadratic *q)
+{
+	q->delta = q->b * q->b - 4 * q->a * q->c;
+	if (q->delta < 0)
+		return (0);
+	q->t1 = (-q->b - sqrt(q->delta)) / (q->a * 2);
+	q->t2 = (-q->b + sqrt(q->delta)) / (q->a * 2);
+	return (1);
+}
 
 double	dot_vector(t_vector a, t_vector b)
 {
@@ -40,14 +50,6 @@ double	distance_vector(t_vector a, t_vector b)
 	y = pow(y, 2);
 	z = pow(z, 2);
 	return (sqrt(x + y + z));
-}
-
-t_vector	inv_vector(t_vector vector)
-{
-	vector.x = -vector.x;
-	vector.y = -vector.y;
-	vector.z = -vector.z;
-	return (vector);
 }
 
 void	normalize_vector(t_vector *vector)

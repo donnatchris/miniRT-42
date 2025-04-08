@@ -16,9 +16,8 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				mandatory/parsing/store_scene.c \
 				mandatory/parsing/store_utils1.c \
 				mandatory/parsing/store_utils2.c \
-				mandatory/vector/utils_vector.c \
+				mandatory/vector/utils_vector1.c \
 				mandatory/vector/utils_vector2.c \
-				mandatory/vector/utils_vector3.c \
 				mandatory/intersection/intersect_.c \
 				mandatory/intersection/intersect_cylinder.c \
 				mandatory/intersection/intersect_plan.c \

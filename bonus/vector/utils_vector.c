@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:24:20 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/08 13:17:11 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 13:44:35 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,6 @@ int	solve_quadratic(t_quadratic *q)
 	q->t1 = (-q->b - sqrt(q->delta)) / (q->a * 2);
 	q->t2 = (-q->b + sqrt(q->delta)) / (q->a * 2);
 	return (1);
-}
-
-int	is_zero_vector(t_vector v)
-{
-	return (v.x == 0.0 && v.y == 0.0 && v.z == 0.0);
-}
-
-t_vector	*ray_mul(t_vector *dst, t_ray *r, double t)
-{
-	dst->x = r->origin.x + t * r->direction.x;
-	dst->y = r->origin.y + t * r->direction.y;
-	dst->z = r->origin.z + t * r->direction.z;
-	return (dst);
 }
 
 t_vector	reflectivity(t_vector incident, t_vector normal)

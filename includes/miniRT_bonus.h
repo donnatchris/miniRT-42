@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 13:24:32 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 13:51:48 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,6 @@
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
 # define WHITESPACE " \t\r\v\f"
-
-/* ************************************************************************** */
-/* 							UTILS                                             */
-/* ************************************************************************** */
-
-int			ft_close_windows(t_program *program);
-int			ft_key_hook(int keycode, t_program *program);
-void		ft_print_error(int exit_code);
-int			ft_iscolor(char *str);
-int			ft_atoc(char *str);
-double		ft_atod(char *str);
-int			ft_isdouble(char *str);
-int			ft_isint(char *str);
-int			ft_isvector(char *str);
-size_t		str_array_size(char **array);
-// utils_free.c
-void		ft_free(void **ptr);
-void		delete_str_array(char **array);
-void		delete_file(t_file *file);
-void		delete_program(t_program *program);
-void		delete_xpm(t_xpm *xpm);
 
 /* ************************************************************************** */
 /* 								INTERSECTION                                  */
@@ -153,10 +132,7 @@ int			add_lights(t_program *prog, t_hit hit, int color);
 int			choose_color_with_depth(t_program *prog, t_ray ray, int depth);
 int			choose_color(t_program *prog, int x, int y);
 // color_utils.c
-int			scale_color(int color, double factor);
 int			mix_colors(int color1, int color2, double reflectivity);
-int			multiply_colors_scalar(int color1, int color2, double intensity);
-int			multiply_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
 // light.c
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
@@ -171,14 +147,32 @@ void		render(t_program *prog);
 t_viewport	viewport(t_program *prog);
 
 /* ************************************************************************** */
+/* 							UTILS                                             */
+/* ************************************************************************** */
+
+int			ft_close_windows(t_program *program);
+int			ft_key_hook(int keycode, t_program *program);
+void		ft_print_error(int exit_code);
+int			ft_iscolor(char *str);
+int			ft_atoc(char *str);
+double		ft_atod(char *str);
+int			ft_isdouble(char *str);
+int			ft_isint(char *str);
+int			ft_isvector(char *str);
+size_t		str_array_size(char **array);
+// utils_free.c
+void		ft_free(void **ptr);
+void		delete_str_array(char **array);
+void		delete_file(t_file *file);
+void		delete_program(t_program *program);
+void		delete_xpm(t_xpm *xpm);
+
+/* ************************************************************************** */
 /* 							VECTOR                                            */
 /* ************************************************************************** */
 
 int			solve_quadratic(t_quadratic *q);
-int			is_zero_vector(t_vector v);
 t_vector	reflectivity(t_vector incident, t_vector normal);
-t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
-int			phong_lighting(t_hit hit, t_light light, t_program *prog);
 t_vector	vector(double x, double y, double z);
 double		len_vector(t_vector v);
 t_vector	sub_vector(t_vector a, t_vector b);
@@ -187,12 +181,6 @@ t_vector	mul_vector(t_vector v, double f);
 double		dot_vector(t_vector a, t_vector b);
 t_vector	cross_vector(t_vector a, t_vector b);
 double		distance_vector(t_vector a, t_vector b);
-t_vector	inv_vector(t_vector vector);
 void		normalize_vector(t_vector *vector);
-
-/* ************************************************************************** */
-/* 							TEST                                              */
-/* ************************************************************************** */
-void		print_file(t_file *file);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_vector3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:28:08 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:33:58 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:46:12 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ double	distance_vector(t_vector a, t_vector b)
 	y = pow(y, 2);
 	z = pow(z, 2);
 	return (sqrt(x + y + z));
-}
-
-t_vector	inv_vector(t_vector vector)
-{
-	vector.x = -vector.x;
-	vector.y = -vector.y;
-	vector.z = -vector.z;
-	return (vector);
 }
 
 void	normalize_vector(t_vector *vector)
