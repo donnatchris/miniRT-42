@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bump_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 09:45:35 by olthorel          #+#    #+#             */
+/*   Updated: 2025/04/08 10:43:42 by olthorel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT_bonus.h"
-
-int	get_pixel_color(t_xpm *xpm, int x, int y)
-{
-	int				pixel_offset;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-
-	if (x < 0 || x >= xpm->width || y < 0 || y >= xpm->height)
-		return (0); // Valeur par défaut si hors limite (à adapter si besoin)
-	pixel_offset = (y * xpm->size_line) + (x * (xpm->bpp / 8));
-	b = (unsigned char)xpm->img_addr[pixel_offset];
-	g = (unsigned char)xpm->img_addr[pixel_offset + 1];
-	r = (unsigned char)xpm->img_addr[pixel_offset + 2];
-	return ((r << 16) | (g << 8) | b);
-}
 
 static int	get_pixel_grayscale(t_xpm *xpm, int x, int y)
 {
@@ -27,7 +23,14 @@ static int	get_pixel_grayscale(t_xpm *xpm, int x, int y)
 	b = (unsigned char)xpm->img_addr[pixel_offset];
 	g = (unsigned char)xpm->img_addr[pixel_offset + 1];
 	r = (unsigned char)xpm->img_addr[pixel_offset + 2];
-	return ((int) (0.299 * r + 0.587 * g + 0.114 * b));
+	return ((int)(0.299 * r + 0.587 * g + 0.114 * b));
+}
+
+static int	safe_coord(int coord, int max)
+{
+	if (coord + 1 >= max)
+		return (coord);
+	return (coord + 1);
 }
 
 static t_vector	get_bump_normal(t_xpm *xpm, int u, int v)
@@ -35,30 +38,21 @@ static t_vector	get_bump_normal(t_xpm *xpm, int u, int v)
 	double		h_center;
 	double		dx;
 	double		dy;
-	double 		strength = 0.05; // modifiable
-	int			safe_u;
-	int			safe_v;
 	t_vector	bump;
 
-	safe_u = u + 1;
-	safe_v = v + 1;
-	if (safe_u > xpm->width)
-		safe_u = u;
-	if (safe_v > xpm->height)
-		safe_v = v;
 	h_center = get_pixel_grayscale(xpm, u, v);
-	dx = get_pixel_grayscale(xpm, safe_u, v) - h_center;
-	dy = get_pixel_grayscale(xpm, u, safe_v) - h_center;
-	bump = vector(-dx * strength, -dy * strength, 1);
+	dx = get_pixel_grayscale(xpm, safe_coord(u, xpm->width), v) - h_center;
+	dy = get_pixel_grayscale(xpm, u, safe_coord(v, xpm->height)) - h_center;
+	bump = vector(-dx * 0.05, -dy * 0.05, 1);
 	normalize_vector(&bump);
 	return (bump);
 }
 
 static t_vector	perturb_normal(t_vector bump, t_vector normal)
 {
-	t_vector tangent;
-	t_vector bitangent;
-	t_vector perturbed;
+	t_vector	tangent;
+	t_vector	bitangent;
+	t_vector	perturbed;
 
 	if (fabs(normal.x) > 0.9)
 		tangent = vector(0, 1, 0);
@@ -67,12 +61,10 @@ static t_vector	perturb_normal(t_vector bump, t_vector normal)
 	bitangent = cross_vector(normal, tangent);
 	tangent = cross_vector(bitangent, normal);
 	perturbed = add_vector(
-		add_vector(
-			mul_vector(tangent, bump.x),
-			mul_vector(bitangent, bump.y)
-		),
-		mul_vector(normal, bump.z)
-	);
+			add_vector(
+				mul_vector(tangent, bump.x),
+				mul_vector(bitangent, bump.y)),
+			mul_vector(normal, bump.z));
 	normalize_vector(&perturbed);
 	return (perturbed);
 }

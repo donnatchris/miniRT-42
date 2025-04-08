@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 09:12:25 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 10:22:25 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ t_xpm		*store_xpm(char *file, void *mlx_ptr);
 int			get_pixel_color(t_xpm *xpm, int x, int y);
 t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);
 // choose_color.c
+int			add_lights(t_program *prog, t_hit hit, int color);
 int			choose_color_with_depth(t_program *prog, t_ray ray, int depth);
 int			choose_color(t_program *prog, int x, int y);
 // color_utils.c
@@ -145,7 +146,7 @@ int			multiply_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
 // light.c
 int			phong_lighting(t_hit hit, t_light light, t_program *prog);
-int			apply_reflection(t_program *prog, t_hit hit, t_ray ray, int local_color, int depth);
+int			apply_reflection(t_program *prog, t_reflection data);
 int			ambient_lighting(t_hit hit, t_ambient_light ambient);
 // rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);

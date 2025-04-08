@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:48:42 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 16:40:56 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:32:54 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	phong_lighting(t_hit hit, t_light light, t_program *prog)
 	p.diffuse = fmax(dot_vector(hit.normal, p.light_dir), 0.0);
 	p.reflect_dir = reflect(mul_vector(p.light_dir, -1.0), hit.normal);
 	p.specular_coef = pow(fmax(dot_vector(p.reflect_dir,
-			p.view_dir), 0.0), hit.shininess);
+					p.view_dir), 0.0), hit.shininess);
 	p.intensity = (light.ratio * p.diffuse)
 		+ (0.5 * p.specular_coef);
 	p.intensity = fmin(p.intensity, 1.0);
@@ -45,18 +45,18 @@ int	phong_lighting(t_hit hit, t_light light, t_program *prog)
 	return ((p.rgb.r << 16) | (p.rgb.g << 8) | p.rgb.b);
 }
 
-int	apply_reflection(t_program *prog, t_hit hit, t_ray ray,
-	int local_color, int depth)
+int	apply_reflection(t_program *prog, t_reflection data)
 {
 	t_ray	ref_ray;
 	int		ref_color;
 
-	if (hit.reflectivity <= 0 || depth <= 0)
-		return (local_color);
-	ref_ray.origin = add_vector(hit.point, mul_vector(hit.normal, EPS));
-	ref_ray.direction = reflectivity(ray.direction, hit.normal);
-	ref_color = choose_color_with_depth(prog, ref_ray, depth - 1);
-	return (mix_colors(local_color, ref_color, hit.reflectivity));
+	if (data.hit.reflectivity <= 0 || data.depth <= 0)
+		return (data.local_color);
+	ref_ray.origin = add_vector(data.hit.point,
+			mul_vector(data.hit.normal, EPS));
+	ref_ray.direction = reflectivity(data.ray.direction, data.hit.normal);
+	ref_color = choose_color_with_depth(prog, ref_ray, data.depth - 1);
+	return (mix_colors(data.local_color, ref_color, data.hit.reflectivity));
 }
 
 int	ambient_lighting(t_hit hit, t_ambient_light ambient)

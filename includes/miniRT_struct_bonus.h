@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/07 14:44:01 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:21:52 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_xpm
 	int		size_line;
 	int		endian;
 }	t_xpm;
+
 
 typedef struct s_chd
 {
@@ -215,6 +216,14 @@ typedef struct s_ray
 	t_vector	direction;
 	double		distance;
 }	t_ray;
+
+typedef struct s_reflection
+{
+	t_ray		ray;
+	t_hit		hit;
+	int			local_color;
+	int			depth;
+}	t_reflection;
 
 typedef struct s_image
 {
