@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 11:35:32 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:26:12 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	choose_color(t_program *prog, int x, int y)
 		if (shadow.hit && shadow.distance < light_ray.distance)
 			return (ambient_lighting(hit, prog->file->ambient_light));
 		else
-			return (phong_lighting(hit, prog->file->light, prog));
+			return (lighting(hit, prog->file->light, prog));
 	}
 }
 

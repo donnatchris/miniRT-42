@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 13:56:17 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 14:30:52 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ int			store_orientation(t_vector *vector, char *arg, char *line);
 // color.c
 int			mix_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
+int			apply_intensity_to_color(int base_color, int light_color,
+		double intensity);
 // phong.c
-int			phong_lighting(t_hit hit, t_light light, t_program *prog);
+int			lighting(t_hit hit, t_light light, t_program *prog);
 // rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);
 t_ray		generate_light_ray(t_hit hit, t_light light);

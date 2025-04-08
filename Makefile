@@ -73,7 +73,8 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/render/bump_map.c \
 				bonus/render/choose_color.c \
 				bonus/render/color_utils.c \
-				bonus/render/light.c \
+				bonus/render/other_lightnings.c \
+				bonus/render/phong_lightning.c \
 				bonus/render/rays.c \
 				bonus/render/render.c \
 				bonus/render/viewport.c \

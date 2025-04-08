@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 13:51:48 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 14:37:30 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,13 @@ int			choose_color(t_program *prog, int x, int y);
 // color_utils.c
 int			mix_colors(int color1, int color2, double reflectivity);
 int			add_colors(int color1, int color2);
-// light.c
-int			phong_lighting(t_hit hit, t_light light, t_program *prog);
+int			apply_intensity_to_color(int base_color, int light_color,
+		double intensity);
+// other_lightnings.c
 int			apply_reflection(t_program *prog, t_reflection data);
 int			ambient_lighting(t_hit hit, t_ambient_light ambient);
+// phong_lightning.c
+int			phong_lighting(t_hit hit, t_light light, t_program *prog);
 // rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);
 t_ray		generate_light_ray(t_hit hit, t_light light);
