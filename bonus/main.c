@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/08 13:18:18 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 13:31:28 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,24 @@ static int	launch_parsing(t_program *program, char *input_file)
 	return (0);
 }
 
+static int	is_valid_extension(char *filename)
+{
+	char	*ext;
+
+	ext = ft_strrchr(filename, '.');
+	if (!ext || ft_strlen(ext) != 3 || ft_strncmp(ext, ".rt", 4) != 0)
+		return (0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_program	*program;
 
 	if (ac != 2)
 		return (ft_print_error(1), 1);
+	if (!is_valid_extension(av[1]))
+		return (ft_print_error(9), 1);
 	program = init_program();
 	if (!program)
 		return (1);
