@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 11:24:51 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:19:03 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	get_sphere_uv(t_hit *hit, t_sphere *sphere)
 
 	local = sub_vector(hit->point, sphere->position);
 	normalize_vector(&local);
-	hit->u = 0.5 + atan2(local.z, local.x) / (2.0 * M_PI);
-	hit->v = 0.5 - asin(local.y) / M_PI;
+	hit->u = (0.5 + atan2(local.z, local.x) / (2.0 * M_PI)) * sphere->scale;
+	hit->v = (0.5 - asin(local.y) / M_PI) * sphere->scale;
 }
 
 static void	apply_sphere_bump(t_hit *hit, t_sphere *sphere)
@@ -63,8 +63,8 @@ static int	get_sphere_chess_color(t_sphere *sphere, double u, double v)
 	int	x;
 	int	y;
 
-	x = (int)(floor(u * sphere->scale));
-	y = (int)(floor(v * sphere->scale));
+	x = (int)(floor(u));
+	y = (int)(floor(v));
 	if ((x + y) % 2 == 0)
 		return (sphere->color);
 	else

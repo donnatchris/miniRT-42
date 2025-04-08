@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 14:37:30 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:39:55 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 2120
-# define HEIGHT 1080
+# define WIDTH 1060
+# define HEIGHT 540
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -80,30 +80,71 @@ int			pars_err_msg(char *msg, char *line);
 // store_.c
 int			store_scene(t_file *file, char *line);
 int			store_object(t_file *file, char *line);
-// store_cone_.c
-int			store_cone(t_file *file, char *line);
-// store_cone_bonus.c
+// store_bonus_.c
 int			store_co_bonus(t_cone *cone, char *line, char *arg,
 				size_t *start);
-// store_cylinder_.c
-int			store_cylinder(t_file *file, char *line);
-// store_cylinder_bonus.c
 int			store_cy_bonus(t_cylinder *cylinder, char *line, char *arg,
 				size_t *start);
-// store_plane_.c
-int			store_plane(t_file *file, char *line);
-// store_plane_bonus.c
 int			store_pl_bonus(t_plane *plane, char *line, char *arg,
 				size_t *start);
+int			store_sp_bonus(t_sphere *sphere, char *line, char *arg,
+				size_t *start);
+// store_bonus_cone.c
+char		*store_co_xpm(t_cone *cone, char *arg, char *line,
+				size_t *start);
+char		*store_co_shininess(t_cone *cone, char *arg, char *line,
+				size_t *start);
+char		*store_co_chessboard(t_cone *cone, char *arg, char *line,
+				size_t *start);
+char		*store_co_reflectivity(t_cone *cone, char *arg, char *line,
+				size_t *start);
+char		*store_co_scale(t_cone *cone, char *arg, char *line,
+				size_t *start);
+// store_bonus_cylinder.c
+char		*store_cy_xpm(t_cylinder *cyl, char *arg, char *line,
+				size_t *start);
+char		*store_cy_shininess(t_cylinder *cyl, char *arg, char *line,
+				size_t *start);
+char		*store_cy_chessboard(t_cylinder *cyl, char *arg, char *line,
+				size_t *start);
+char		*store_cy_reflectivity(t_cylinder *cyl, char *arg, char *line,
+				size_t *start);
+char		*store_cy_scale(t_cylinder *cyl, char *arg, char *line,
+				size_t *start);
+// store_bonus_plane.c
+char		*store_pl_xpm(t_plane *plane, char *arg, char *line,
+				size_t *start);
+char		*store_pl_shininess(t_plane *plane, char *arg, char *line,
+				size_t *start);
+char		*store_pl_chessboard(t_plane *plane, char *arg, char *line,
+				size_t *start);
+char		*store_pl_reflectivity(t_plane *plane, char *arg, char *line,
+				size_t *start);
+char		*store_pl_scale(t_plane *plane, char *arg, char *line,
+				size_t *start);
+// store_bonus_sphere.c
+char		*store_sp_xpm(t_sphere *sphere, char *arg, char *line,
+				size_t *start);
+char		*store_sp_shininess(t_sphere *sphere, char *arg, char *line,
+				size_t *start);
+char		*store_sp_chessboard(t_sphere *sphere, char *arg, char *line,
+				size_t *start);
+char		*store_sp_reflectivity(t_sphere *sphere, char *arg, char *line,
+				size_t *start);
+char		*store_sp_scale(t_sphere *sphere, char *arg, char *line,
+				size_t *start);
+// store_cone_.c
+int			store_cone(t_file *file, char *line);
+// store_cylinder_.c
+int			store_cylinder(t_file *file, char *line);
+// store_plane_.c
+int			store_plane(t_file *file, char *line);
 // store_scene.c
 int			store_camera(t_file *file, char *line);
 int			store_ambient(t_file *file, char *line);
 int			store_light(t_file *file, char *line);
 // store.sphere_.c
 int			store_sphere(t_file *file, char *line);
-// store_sphere_bonus.c
-int			store_sp_bonus(t_sphere *sphere, char *line, char *arg,
-				size_t *start);
 // store.triangle
 int			store_triangle(t_file *file, char *line);
 // store_utils1.c

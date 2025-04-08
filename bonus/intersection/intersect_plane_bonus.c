@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_plan_bonus.c                             :+:      :+:    :+:   */
+/*   intersect_plane_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:54:13 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 12:00:54 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 15:57:15 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	get_plane_uv(t_hit *hit, t_plane *plane)
 	t_vector	local;
 
 	local = sub_vector(hit->point, plane->position);
-	hit->u = dot_vector(local, plane->u);
-	hit->v = dot_vector(local, plane->v);
+	hit->u = dot_vector(local, plane->u) * plane->scale;
+	hit->v = dot_vector(local, plane->v) * plane->scale;
 }
 
 static void	apply_plane_bump(t_hit *hit, t_plane *plane)

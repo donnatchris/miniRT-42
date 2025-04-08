@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 09:21:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 10:44:51 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:17:36 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	get_cone_uv(t_hit *hit, t_cone *cone)
 
 	local = sub_vector(hit->point, cone->apex);
 	height = dot_vector(local, cone->axis);
-	hit->v = height / cone->height;
+	hit->v = (height / cone->height) * cone->scale;
 	height_proj = mul_vector(cone->axis, height);
 	radial = sub_vector(local, height_proj);
 	normalize_vector(&radial);
 	theta = atan2(dot_vector(radial, cone->v), dot_vector(radial, cone->u));
-	hit->u = 0.5 + theta / (2.0 * M_PI);
+	hit->u = (0.5 + theta / (2.0 * M_PI)) * cone->scale;
 }
 
 void	apply_cone_bump(t_hit *hit, t_cone *cone)
@@ -73,8 +73,8 @@ static int	get_cone_chess_color(t_cone *cone, double u, double v)
 	int	x;
 	int	y;
 
-	x = (int)(floor(u * cone->scale));
-	y = (int)(floor(v * cone->scale));
+	x = (int)(floor(u));
+	y = (int)(floor(v));
 	if ((x + y) % 2 == 0)
 		return (cone->color);
 	else

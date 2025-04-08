@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 13:23:46 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:22:57 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_plane
 	double			reflectivity;
 	int				chessboard;
 	int				color2;
-	int				scale;
+	double			scale;
 	void			*mlx_ptr;
 	t_xpm			*xpm;
 }	t_plane;
@@ -130,15 +130,15 @@ typedef struct s_sphere
 	double		diameter;
 	double		rayon2;
 	int			color;
+	double		u;
+	double		v;
 	int			shininess;
 	double		reflectivity;
 	int			chessboard;
 	int			color2;
-	int			scale;
+	double		scale;
 	void		*mlx_ptr;
 	t_xpm		*xpm;
-	double		u;
-	double		v;
 }	t_sphere;
 
 typedef struct s_cylinder
@@ -148,15 +148,15 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	int			color;
+	t_vector	u;
+	t_vector	v;
 	int			shininess;
 	double		reflectivity;
 	int			chessboard;
 	int			color2;
-	int			scale;
+	double		scale;
 	void		*mlx_ptr;
 	t_xpm		*xpm;
-	t_vector	u;
-	t_vector	v;
 }	t_cylinder;
 
 typedef struct s_triangle
@@ -174,15 +174,15 @@ typedef struct s_cone
 	double		angle_rad;
 	double		height;
 	int			color;
+	t_vector	u;
+	t_vector	v;
 	int			shininess;
 	double		reflectivity;
 	int			chessboard;
 	int			color2;
-	int			scale;
+	double		scale;
 	void		*mlx_ptr;
 	t_xpm		*xpm;
-	t_vector	u;
-	t_vector	v;
 }	t_cone;
 
 typedef struct s_file

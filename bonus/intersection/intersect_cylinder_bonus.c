@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 10:58:49 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 16:18:14 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	get_cylinder_uv(t_hit *hit, t_cylinder *cyl)
 
 	local = sub_vector(hit->point, cyl->position);
 	height = dot_vector(local, cyl->orientation);
-	hit->v = height / cyl->height;
+	hit->v = (height / cyl->height) * cyl->scale;
 	height_proj = mul_vector(cyl->orientation, height);
 	radial = sub_vector(local, height_proj);
 	normalize_vector(&radial);
 	theta = atan2(dot_vector(radial, cyl->v), dot_vector(radial, cyl->u));
-	hit->u = 0.5 + theta / (2.0 * M_PI);
+	hit->u = (0.5 + theta / (2.0 * M_PI)) * cyl->scale;
 }
 
 static void	apply_cylinder_bump(t_hit *hit, t_cylinder *cyl)
@@ -73,8 +73,8 @@ static int	get_cylinder_chess_color(t_cylinder *cyl, double u, double v)
 	int	x;
 	int	y;
 
-	x = (int)(floor(u * cyl->scale));
-	y = (int)(floor(v * cyl->scale));
+	x = (int)(floor(u));
+	y = (int)(floor(v));
 	if ((x + y) % 2 == 0)
 		return (cyl->color);
 	else
