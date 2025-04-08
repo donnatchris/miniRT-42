@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:37:11 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 11:20:21 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 11:24:51 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	get_sphere_xpm_color(t_sphere *sphere, double u, double v)
 		x = sphere->xpm->width - 1;
 	if (y >= sphere->xpm->height)
 		y = sphere->xpm->height - 1;
-	return get_pixel_color(sphere->xpm, x, y);
+	return (get_pixel_color(sphere->xpm, x, y));
 }
 
 static int	get_sphere_chess_color(t_sphere *sphere, double u, double v)
@@ -66,9 +66,9 @@ static int	get_sphere_chess_color(t_sphere *sphere, double u, double v)
 	x = (int)(floor(u * sphere->scale));
 	y = (int)(floor(v * sphere->scale));
 	if ((x + y) % 2 == 0)
-		return sphere->color;
+		return (sphere->color);
 	else
-		return sphere->color2;
+		return (sphere->color2);
 }
 
 int	choose_sp_color(t_sphere *sphere, t_hit *hit)
@@ -76,9 +76,9 @@ int	choose_sp_color(t_sphere *sphere, t_hit *hit)
 	get_sphere_uv(hit, sphere);
 	apply_sphere_bump(hit, sphere);
 	if (sphere->xpm)
-		return get_sphere_xpm_color(sphere, hit->u, hit->v);
+		return (get_sphere_xpm_color(sphere, hit->u, hit->v));
 	else if (sphere->chessboard)
-		return get_sphere_chess_color(sphere, hit->u, hit->v);
+		return (get_sphere_chess_color(sphere, hit->u, hit->v));
 	else
-		return sphere->color;
+		return (sphere->color);
 }
