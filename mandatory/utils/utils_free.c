@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:10 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:06:36 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

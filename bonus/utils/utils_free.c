@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/04 11:35:57 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:06:45 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,13 @@ void	delete_program(t_program *program)
 	mlx_destroy_display(program->mlx);
 	free(program->mlx);
 	free(program);
+}
+
+void	delete_xpm(t_xpm *xpm)
+{
+	if (!xpm)
+		return ;
+	if (xpm->img_ptr)
+		mlx_destroy_image(xpm->mlx_ptr, xpm->img_ptr);
+	free(xpm);
 }

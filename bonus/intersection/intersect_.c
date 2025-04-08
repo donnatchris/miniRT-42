@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 23:15:31 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/01 10:53:33 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:13:01 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

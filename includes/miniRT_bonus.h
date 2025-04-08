@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 09:00:25 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 09:12:25 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ void		ft_free(void **ptr);
 void		delete_str_array(char **array);
 void		delete_file(t_file *file);
 void		delete_program(t_program *program);
+void		delete_xpm(t_xpm *xpm);
+
+/* ************************************************************************** */
+/* 								INTERSECTION                                  */
+/* ************************************************************************** */
+
+t_hit		inter_scene(t_ray *ray, t_file *file);
+t_hit		inter_plane(t_ray *ray, t_dclst *node);
+t_hit		inter_sphere(t_ray *ray, t_dclst *node);
+t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
+t_hit		inter_triangle(t_ray *ray, t_dclst *node);
+t_hit       inter_cone(t_ray *ray, t_dclst *node);
+void		init_hit(t_hit *hit, t_dclst *node);
 
 /* ************************************************************************** */
 /* 							PARSING                                           */
@@ -113,32 +126,14 @@ void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 // store_xpm.c
 void		*xpm_error(char *file);
 t_xpm		*store_xpm(char *file, void *mlx_ptr);
-void		delete_xpm(t_xpm *xpm);
-
-/* ************************************************************************** */
-/* 							VECTOR                                            */
-/* ************************************************************************** */
-
-int			solve_quadratic(t_quadratic *q);
-int			is_zero_vector(t_vector v);
-t_vector	reflectivity(t_vector incident, t_vector normal);
-t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
-int			phong_lighting(t_hit hit, t_light light, t_program *prog);
-t_vector	vector(double x, double y, double z);
-double		len_vector(t_vector v);
-t_vector	sub_vector(t_vector a, t_vector b);
-t_vector	add_vector(t_vector a, t_vector b);
-t_vector	mul_vector(t_vector v, double f);
-double		dot_vector(t_vector a, t_vector b);
-t_vector	cross_vector(t_vector a, t_vector b);
-double		distance_vector(t_vector a, t_vector b);
-t_vector	inv_vector(t_vector vector);
-void		normalize_vector(t_vector *vector);
 
 /* ************************************************************************** */
 /* 								RENDER                                        */
 /* ************************************************************************** */
 
+// bump_map.c
+int			get_pixel_color(t_xpm *xpm, int x, int y);
+t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);
 // choose_color.c
 int			choose_color_with_depth(t_program *prog, t_ray ray, int depth);
 int			choose_color(t_program *prog, int x, int y);
@@ -161,25 +156,24 @@ void		render(t_program *prog);
 t_viewport	viewport(t_program *prog);
 
 /* ************************************************************************** */
-/* 								INTERSECTION                                  */
+/* 							VECTOR                                            */
 /* ************************************************************************** */
 
-t_hit		inter_scene(t_ray *ray, t_file *file);
-t_hit		inter_plane(t_ray *ray, t_dclst *node);
-t_hit		inter_sphere(t_ray *ray, t_dclst *node);
-t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
-t_hit		inter_triangle(t_ray *ray, t_dclst *node);
-t_hit       inter_cone(t_ray *ray, t_dclst *node);
-void		init_hit(t_hit *hit, t_dclst *node);
-
-/* ************************************************************************** */
-/* 							TEXTURING                                         */
-/* ************************************************************************** */
-
-
-// xpm_perturbation.c
-int			get_pixel_color(t_xpm *xpm, int x, int y);
-t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);
+int			solve_quadratic(t_quadratic *q);
+int			is_zero_vector(t_vector v);
+t_vector	reflectivity(t_vector incident, t_vector normal);
+t_vector	*ray_mul(t_vector *dst, t_ray *r, double t);
+int			phong_lighting(t_hit hit, t_light light, t_program *prog);
+t_vector	vector(double x, double y, double z);
+double		len_vector(t_vector v);
+t_vector	sub_vector(t_vector a, t_vector b);
+t_vector	add_vector(t_vector a, t_vector b);
+t_vector	mul_vector(t_vector v, double f);
+double		dot_vector(t_vector a, t_vector b);
+t_vector	cross_vector(t_vector a, t_vector b);
+double		distance_vector(t_vector a, t_vector b);
+t_vector	inv_vector(t_vector vector);
+void		normalize_vector(t_vector *vector);
 
 /* ************************************************************************** */
 /* 							TEST                                              */

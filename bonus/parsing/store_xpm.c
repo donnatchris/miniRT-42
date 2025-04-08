@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:58:08 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 09:02:20 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 09:03:12 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,4 @@ t_xpm	*store_xpm(char *file, void *mlx_ptr)
 		return (delete_xpm(xpm), xpm_error(file));
 	printf("Image: %s has been loaded successfully\n", file);
 	return (xpm);
-}
-
-void	delete_xpm(t_xpm *xpm)
-{
-	if (!xpm)
-		return ;
-	if (xpm->img_ptr)
-		mlx_destroy_image(xpm->mlx_ptr, xpm->img_ptr);
-	free(xpm);
 }

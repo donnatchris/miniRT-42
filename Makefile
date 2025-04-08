@@ -67,13 +67,13 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/intersection/intersect_plan.c \
 				bonus/intersection/intersect_sphere.c \
 				bonus/intersection/intersect_triangle.c \
+				bonus/render/bump_map.c \
 				bonus/render/choose_color.c \
 				bonus/render/color_utils.c \
 				bonus/render/light.c \
 				bonus/render/rays.c \
 				bonus/render/render.c \
 				bonus/render/viewport.c \
-				bonus/texturing/perturbation.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
