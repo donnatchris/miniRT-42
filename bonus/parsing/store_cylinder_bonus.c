@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:39:27 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 14:33:59 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:57:04 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+// Function to store the xpm in the structure
+// Returns arg
 static char	*store_cy_xpm(t_cylinder *cyl, char *arg, char *line,
 	size_t *start)
 {
-		arg = next_and_advance(line, start, arg);
-		cyl->xpm = store_xpm(arg, cyl->mlx_ptr);
-		return (arg);
+	arg = next_and_advance(line, start, arg);
+	cyl->xpm = store_xpm(arg, cyl->mlx_ptr);
+	return (arg);
 }
 
 // Function to store the shininess parameter in the structure
@@ -47,6 +49,8 @@ static char	*store_cy_chessboard(t_cylinder *cylinder, char *arg, char *line,
 	return (arg);
 }
 
+// Function to store the reflectivity parameter in the structure
+// Returns arg
 static char	*store_cy_reflectivity(t_cylinder *cy, char *arg, char *line,
 	size_t *start)
 {

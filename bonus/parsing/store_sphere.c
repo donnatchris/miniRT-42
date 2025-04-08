@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:57 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 11:07:28 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:46:19 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	store_sphere(t_file *file, char *line)
 	if (!sphere)
 		return (perror("Error\nMalloc failed"), 1);
 	ft_memset(sphere, 0, sizeof(t_sphere));
-	sphere->mlx_ptr = file->mlx_ptr;		//test xpm
+	sphere->mlx_ptr = file->mlx_ptr;
 	if (fill_sphere_from_line(sphere, line))
 		return (ft_free((void **)&sphere), 1);
 	node = dclst_add_back(file->obj_list, sphere);

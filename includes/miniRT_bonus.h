@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/07 16:41:04 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:00:25 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			ft_isdouble(char *str);
 int			ft_isint(char *str);
 int			ft_isvector(char *str);
 size_t		str_array_size(char **array);
-void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
 // utils_free.c
 void		ft_free(void **ptr);
 void		delete_str_array(char **array);
@@ -110,6 +109,11 @@ int			store_scale(int *storage, char *arg, char *line);
 // store_utils2.c
 int			store_vector(t_vector *vector, char *arg, char *line);
 int			store_orientation(t_vector *vector, char *arg, char *line);
+void		create_ortho_basis(t_vector normal, t_vector *u, t_vector *v);
+// store_xpm.c
+void		*xpm_error(char *file);
+t_xpm		*store_xpm(char *file, void *mlx_ptr);
+void		delete_xpm(t_xpm *xpm);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */
@@ -172,10 +176,7 @@ void		init_hit(t_hit *hit, t_dclst *node);
 /* 							TEXTURING                                         */
 /* ************************************************************************** */
 
-// stor_xpm.c
-void		*xpm_error(char *file);
-t_xpm		*store_xpm(char *file, void *mlx_ptr);
-void		delete_xpm(t_xpm *xpm);
+
 // xpm_perturbation.c
 int			get_pixel_color(t_xpm *xpm, int x, int y);
 t_vector	perturbed_normal(t_xpm *xpm, int u, int v, t_vector normal);

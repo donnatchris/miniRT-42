@@ -54,7 +54,7 @@ int	store_cone(t_file *file, char *line)
 	if (!cone)
 		return (perror("Error\nMalloc failed"), 1);
 	ft_memset(cone, 0, sizeof(t_cone));
-	cone->mlx_ptr = file->mlx_ptr;		//test xpm
+	cone->mlx_ptr = file->mlx_ptr;
 	if (fill_cone_from_line(cone, line))
 		return (ft_free((void **)&cone), 1);
 	node = dclst_add_back(file->obj_list, cone);

@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   store_cone_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:42:16 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 14:43:41 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:57:23 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+// Function to store the xpm in the structure
+// Returns arg
 static char	*store_co_xpm(t_cone *cone, char *arg, char *line,
 	size_t *start)
 {
-		arg = next_and_advance(line, start, arg);
-		cone->xpm = store_xpm(arg, cone->mlx_ptr);
-		return (arg);
+	arg = next_and_advance(line, start, arg);
+	cone->xpm = store_xpm(arg, cone->mlx_ptr);
+	return (arg);
 }
 
 // Function to store the shininess parameter in the structure
@@ -46,6 +48,8 @@ static char	*store_co_chessboard(t_cone *cone, char *arg, char *line,
 	return (arg);
 }
 
+// Function to store the reflectivity parameter in the structure
+// Returns arg
 static char	*store_co_reflectivity(t_cone *cone, char *arg, char *line,
 	size_t *start)
 {

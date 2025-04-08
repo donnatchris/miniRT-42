@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:48 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 11:07:16 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:48:04 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	store_plane(t_file *file, char *line)
 	if (!plane)
 		return (perror("Error\nMalloc failed"), 1);
 	ft_memset(plane, 0, sizeof(t_plane));
-	plane->mlx_ptr = file->mlx_ptr;		//test xpm
+	plane->mlx_ptr = file->mlx_ptr;
 	if (fill_plane_from_line(plane, line))
 		return (ft_free((void **)&plane), 1);
 	node = dclst_add_back(file->obj_list, plane);

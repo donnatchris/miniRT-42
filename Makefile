@@ -31,7 +31,6 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				dclst/dclst1.c \
 				dclst/dclst2.c \
 				dclst/dclst3.c \
-				mandatory/test/print_parsing.c \
 				mandatory/main.c
 
 SRCS_BONUS  =   bonus/utils/utils_print.c  \
@@ -45,7 +44,6 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/parsing_.c \
 				bonus/parsing/parsing_utils1.c \
 				bonus/parsing/parsing_utils2.c \
-				bonus/parsing/parsing_utils3.c \
 				bonus/parsing/store_.c \
 				bonus/parsing/store_cone.c \
 				bonus/parsing/store_cone_bonus.c \
@@ -59,6 +57,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/store_scene.c \
 				bonus/parsing/store_utils1.c \
 				bonus/parsing/store_utils2.c \
+				bonus/parsing/store_xpm.c \
 				bonus/vector/utils_vector.c \
 				bonus/vector/utils_vector2.c \
 				bonus/vector/utils_vector3.c \
@@ -74,7 +73,6 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/render/rays.c \
 				bonus/render/render.c \
 				bonus/render/viewport.c \
-				bonus/texturing/store_xpm.c \
 				bonus/texturing/perturbation.c \
 				dclst/dclst1.c \
 				dclst/dclst2.c \

@@ -6,12 +6,15 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:53 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/03 20:28:53 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 08:56:17 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
 
+// Function to store the camera in the file structure
+// Returns 0 if the scene was stored successfully
+// Returns 1 if an error occured
 int	store_camera(t_file *file, char *line)
 {
 	size_t		start;
@@ -33,6 +36,9 @@ int	store_camera(t_file *file, char *line)
 	return (ft_free((void **)&arg), 0);
 }
 
+// Function to store the ambient light in the file structure
+// Returns 0 if the ambient light was stored successfully
+// Returns 1 if an error occured
 int	store_ambient(t_file *file, char *line)
 {
 	size_t		start;
@@ -51,6 +57,10 @@ int	store_ambient(t_file *file, char *line)
 	return (ft_free((void **)&arg), 0);
 }
 
+// Function to store one or more lights in the file structure
+// (in a linked list)
+// Returns 0 if the light was stored successfully
+// Returns 1 if an error occured
 int	store_light(t_file *file, char *line)
 {
 	size_t		start;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:30:25 by olthorel          #+#    #+#             */
-/*   Updated: 2025/03/31 11:37:16 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:43:35 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_program	*init_program(char **av)
 		ft_free((void **)&program);
 		return (NULL);
 	}
-	print_file(program->file);
 	return (program);
 }
 
