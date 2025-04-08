@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_struct_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:00:52 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 10:21:52 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:23:46 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_xpm
 	int		size_line;
 	int		endian;
 }	t_xpm;
-
 
 typedef struct s_chd
 {
@@ -169,12 +168,12 @@ typedef struct s_triangle
 
 typedef struct s_cone
 {
-	t_vector    apex;
-	t_vector    axis;
+	t_vector	apex;
+	t_vector	axis;
 	int			angle;
 	double		angle_rad;
 	double		height;
-	int         color;
+	int			color;
 	int			shininess;
 	double		reflectivity;
 	int			chessboard;
@@ -184,7 +183,7 @@ typedef struct s_cone
 	t_xpm		*xpm;
 	t_vector	u;
 	t_vector	v;
-}   t_cone;
+}	t_cone;
 
 typedef struct s_file
 {
