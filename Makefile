@@ -45,13 +45,13 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/parsing/parsing_utils1.c \
 				bonus/parsing/parsing_utils2.c \
 				bonus/parsing/store_.c \
-				bonus/parsing/store_cone.c \
+				bonus/parsing/store_cone_.c \
 				bonus/parsing/store_cone_bonus.c \
-				bonus/parsing/store_cylinder.c \
+				bonus/parsing/store_cylinder_.c \
 				bonus/parsing/store_cylinder_bonus.c \
-				bonus/parsing/store_plane.c \
+				bonus/parsing/store_plane_.c \
 				bonus/parsing/store_plane_bonus.c \
-				bonus/parsing/store_sphere.c \
+				bonus/parsing/store_sphere_.c \
 				bonus/parsing/store_sphere_bonus.c \
 				bonus/parsing/store_triangle.c \
 				bonus/parsing/store_scene.c \
@@ -62,14 +62,14 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/vector/utils_vector2.c \
 				bonus/vector/utils_vector3.c \
 				bonus/intersection/intersect_.c \
+				bonus/intersection/intersect_cone_.c \
 				bonus/intersection/intersect_cone_bonus.c \
-				bonus/intersection/intersect_cone.c \
+				bonus/intersection/intersect_cylinder_.c \
 				bonus/intersection/intersect_cylinder_bonus.c \
-				bonus/intersection/intersect_cylinder.c \
-				bonus/intersection/intersect_plan_bonus.c \
-				bonus/intersection/intersect_plan.c \
+				bonus/intersection/intersect_plane_.c \
+				bonus/intersection/intersect_plane_bonus.c \
+				bonus/intersection/intersect_sphere_.c \
 				bonus/intersection/intersect_sphere_bonus.c \
-				bonus/intersection/intersect_sphere.c \
 				bonus/intersection/intersect_triangle.c \
 				bonus/render/bump_map.c \
 				bonus/render/choose_color.c \
