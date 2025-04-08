@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 09:12:25 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/08 10:42:19 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,18 @@ void		delete_xpm(t_xpm *xpm);
 /* 								INTERSECTION                                  */
 /* ************************************************************************** */
 
+// intersection.c
 t_hit		inter_scene(t_ray *ray, t_file *file);
+// intersect_cone_bonus.c
+void		get_cone_uv(t_hit *hit, t_cone *cone);
+void		apply_cone_bump(t_hit *hit, t_cone *cone);
+int			choose_co_color(t_cone *cone, t_hit *hit);
+// intersect_cone.c
+t_hit       inter_cone(t_ray *ray, t_dclst *node);
 t_hit		inter_plane(t_ray *ray, t_dclst *node);
 t_hit		inter_sphere(t_ray *ray, t_dclst *node);
 t_hit		inter_cylinder(t_ray *ray, t_dclst *node);
 t_hit		inter_triangle(t_ray *ray, t_dclst *node);
-t_hit       inter_cone(t_ray *ray, t_dclst *node);
 void		init_hit(t_hit *hit, t_dclst *node);
 
 /* ************************************************************************** */
