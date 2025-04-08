@@ -3,100 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:57:38 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/07 14:39:45 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:02:10 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT_bonus.h"
-
-void	get_cylinder_uv(t_hit *hit, t_cylinder *cyl)
-{
-	t_vector	local;
-	t_vector	axis = cyl->orientation;
-	t_vector	height_proj;
-	t_vector	around;
-	double		theta;
-
-	local = sub_vector(hit->point, cyl->position);
-	double height = dot_vector(local, axis);
-	hit->v = height;
-	height_proj = mul_vector(axis, height);
-	around = sub_vector(local, height_proj);
-	normalize_vector(&around);
-	theta = atan2(dot_vector(around, cyl->v), dot_vector(around, cyl->u));
-	hit->u = 0.5 + theta / (2.0 * M_PI);
-}
-
-void	apply_cylinder_bump(t_hit *hit, t_cylinder *cyl)
-{
-	double		tex_u;
-	double		tex_v;
-	int			px;
-	int			py;
-
-	if (!cyl->xpm)
-		return ;
-
-	// Wrapping UV dans [0, 1]
-	tex_u = fmod(fabs(hit->u), 1.0);
-	tex_v = fmod(fabs(hit->v), 1.0);
-
-	// Conversion en pixels
-	px = (int)(tex_u * cyl->xpm->width);
-	py = (int)(tex_v * cyl->xpm->height);
-
-	// Sécurité : clamp pour ne jamais dépasser la texture
-	if (px >= cyl->xpm->width)
-		px = cyl->xpm->width - 1;
-	if (py >= cyl->xpm->height)
-		py = cyl->xpm->height - 1;
-
-	hit->normal = perturbed_normal(cyl->xpm, px, py, hit->normal);
-}
-
-
-static int choose_cy_color(t_cylinder *cyl, t_hit hit)
-{
-	double		tex_u;
-	double		tex_v;
-	int			x;
-	int			y;
-
-	// ✅ Si on a une texture XPM
-	if (cyl->xpm)
-	{
-		// UV wrapping
-		tex_u = fmod(fabs(hit.u), 1.0);
-		tex_v = fmod(fabs(hit.v), 1.0);
-
-		// Passage en pixels
-		x = (int)(tex_u * cyl->xpm->width);
-		y = (int)(tex_v * cyl->xpm->height);
-
-		// Clamp (sécurité)
-		if (x >= cyl->xpm->width)
-			x = cyl->xpm->width - 1;
-		if (y >= cyl->xpm->height)
-			y = cyl->xpm->height - 1;
-
-		return get_pixel_color(cyl->xpm, x, y);
-	}
-
-	// ✅ Sinon, checkerboard (damier)
-	if (!cyl->chessboard)
-		return (cyl->color);
-
-	x = (int)(floor(hit.u * cyl->scale));
-	y = (int)(floor(hit.v * cyl->scale));
-	if ((x + y) % 2 == 0)
-		return (cyl->color);
-	else
-		return (cyl->color2);
-}
-
 
 static	int	is_valid_cy_distance(double t, t_ray *ray, t_cylinder *cyl)
 {
@@ -112,7 +26,8 @@ static	int	is_valid_cy_distance(double t, t_ray *ray, t_cylinder *cyl)
 	return (0);
 }
 
-static int	choose_cy_distance(t_chd *chd, t_hit *hit, t_ray *ray, t_cylinder *cyl)
+static int	choose_cy_distance(t_chd *chd, t_hit *hit, t_ray *ray,
+		t_cylinder *cyl)
 {
 	int	valid1;
 	int	valid2;
@@ -168,10 +83,8 @@ t_hit	inter_cylinder(t_ray *ray, t_dclst *node)
 	hit.normal = sub_vector(cp, mul_vector(cyl->orientation, m));
 	normalize_vector(&hit.normal);
 	hit.hit = 1;
-	get_cylinder_uv(&hit, cyl);
-	apply_cylinder_bump(&hit, cyl);
+	hit.color = choose_cy_color(cyl, &hit);
 	hit.shininess = cyl->shininess;
 	hit.reflectivity = cyl->reflectivity;
-	hit.color = choose_cy_color(cyl, hit);
 	return (hit);
 }
