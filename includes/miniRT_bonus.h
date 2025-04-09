@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 16:39:55 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:18:02 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "miniRT_struct_bonus.h"
 
 // macros
-# define WIDTH 1060
-# define HEIGHT 540
+# define WIDTH 2120
+# define HEIGHT 1080
 # define PI 3.141592
 # define EPS 1e-6
 # define NAME_WINDOWS "miniRT by chdonnat / olthorel"
@@ -204,12 +204,12 @@ int			ft_isdouble(char *str);
 int			ft_isint(char *str);
 int			ft_isvector(char *str);
 size_t		str_array_size(char **array);
-// utils_free.c
 void		ft_free(void **ptr);
 void		delete_str_array(char **array);
 void		delete_file(t_file *file);
 void		delete_program(t_program *program);
 void		delete_xpm(t_xpm *xpm);
+void		delete_all_xpm(t_dclst **head);
 
 /* ************************************************************************** */
 /* 							VECTOR                                            */

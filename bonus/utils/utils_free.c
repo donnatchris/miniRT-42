@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 16:50:29 by olthorel          #+#    #+#             */
-/*   Updated: 2025/04/08 10:47:28 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:11:07 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	delete_file(t_file *file)
 		free(file->light_list);
 	}
 	if (file->obj_list)
+	{
+		delete_all_xpm(file->obj_list);
 		dclst_clear(file->obj_list);
+	}
 	ft_free((void **)&file);
 }
 

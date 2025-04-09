@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_xpm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:58:08 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 09:03:12 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:22:43 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

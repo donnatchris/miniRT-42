@@ -37,6 +37,7 @@ SRCS_BONUS  =   bonus/utils/utils_print.c  \
 				bonus/utils/utils_atod.c \
 				bonus/utils/utils_close.c  \
 				bonus/utils/utils_color.c \
+				bonus/utils/utils_delete_xpm.c \
 				bonus/utils/utils_double.c \
 				bonus/utils/utils_int.c \
 				bonus/utils/utils_free.c \

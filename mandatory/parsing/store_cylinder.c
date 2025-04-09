@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 10:13:43 by christophed       #+#    #+#             */
-/*   Updated: 2025/03/31 10:26:07 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:34:35 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static int	fill_cylinder_from_line(t_cylinder *cylinder, char *line)
 	if (store_orientation(&cylinder->orientation, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_double(&cylinder->diameter, arg, line) || cylinder->diameter <= 0)
+	if (store_double(&cylinder->diameter, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
-	if (store_double(&cylinder->height, arg, line) || cylinder->height <= 0)
+	if (store_double(&cylinder->height, arg, line))
 		return (ft_free((void **)&arg), 1);
 	arg = next_and_advance(line, &start, arg);
 	if (store_color(&cylinder->color, arg, line))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_bonus_cone.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:42:16 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 16:34:42 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:32:02 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@ char	*store_co_xpm(t_cone *cone, char *arg, char *line,
 	size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	cone->xpm = store_xpm(arg, cone->mlx_ptr);
+	if (!cone->xpm)
+		cone->xpm = store_xpm(arg, cone->mlx_ptr);
+	else
+	{
+		ft_putstr_fd("Error\nImage: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd("\nfrom line: ", 2);
+		ft_putstr_fd(line, 2);
+		ft_putstr_fd("\nhas been ignored ", 2);
+		ft_putstr_fd("(previous image already stored in object)\n", 2);
+	}
 	return (arg);
 }
 

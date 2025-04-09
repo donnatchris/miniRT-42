@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_bonus_cylinder.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:39:27 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 16:43:18 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:28:36 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@ char	*store_cy_xpm(t_cylinder *cyl, char *arg, char *line,
 	size_t *start)
 {
 	arg = next_and_advance(line, start, arg);
-	cyl->xpm = store_xpm(arg, cyl->mlx_ptr);
+	if (!cyl->xpm)
+		cyl->xpm = store_xpm(arg, cyl->mlx_ptr);
+	else
+	{
+		ft_putstr_fd("Error\nImage: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd("\nfrom line: ", 2);
+		ft_putstr_fd(line, 2);
+		ft_putstr_fd("\nhas been ignored ", 2);
+		ft_putstr_fd("(previous image already stored in object)\n", 2);
+	}
 	return (arg);
 }
 
