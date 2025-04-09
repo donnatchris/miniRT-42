@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/08 14:30:52 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:54:17 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int			store_orientation(t_vector *vector, char *arg, char *line);
 int			mix_colors(int color1, int color2);
 int			add_colors(int color1, int color2);
 int			apply_intensity_to_color(int base_color, int light_color,
-		double intensity);
-// phong.c
+				double intensity);
+// lambert.c
 int			lighting(t_hit hit, t_light light, t_program *prog);
 // rays.c
 t_ray		generate_ray(t_viewport *view, int x, int y);
