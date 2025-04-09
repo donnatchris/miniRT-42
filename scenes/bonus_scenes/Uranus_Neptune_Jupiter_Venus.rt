@@ -4,7 +4,7 @@ C 0,0,-15 0,0,1 70
 
 # L 2.6,8,-10 0.8 255,255,255
 # L -6,8,-10 0.8 255,255,255
-L -6,8,-10 0.8 215,215,215
+L -6,8,-40 0.8 215,215,215
 
 # uranus
 sp 0,0,8 4 209,231,231 xp textures/2k_moon.xpm
@@ -17,3 +17,5 @@ sp -3,-3,20 14 227,123,77 xp textures/2k_jupiter.xpm
 
 # venus
 sp -7,2,7 1 230,205,165 xp textures/2k_mars.xpm
+
+pl 0,0,30 0,0,1 255,255,255 xp textures/milky-way.xpm sc 0.04

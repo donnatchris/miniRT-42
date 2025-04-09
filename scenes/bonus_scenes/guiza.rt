@@ -1,17 +1,17 @@
 # ambient light
-A 0.5 255,255,0
+A 0.5 255,255,255
 
 # camera
 C -3,3,14 0.25,-0.15,-1  66
 
 # light
-L   -12,3,-18   0.5    50,50,200
+L   -12,3,-18   0.5    250,250,250
 
 # floor
 pl  0,0,0    0,1,0   234,176,97 xp textures/cracks.xpm sc 0.1
 
 # sky
-pl  0,0,-20    0,0,1   50,50,200 sh 2 xp textures/milky-way.xpm sc 0.04
+pl  0,0,-20    0,0,1   250,250,250 sh 2 xp textures/milky-way.xpm sc 0.04
 
 # pyramid
 tr 4,0,0   8,0,0   6,2,-2 214,179,112
