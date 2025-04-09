@@ -38,13 +38,22 @@ execute the program with a file.rt (representing a scene) as argument
 
 	./minirt <scene_file.rt>
  
-for exemple you can use the Uranus_Neptune_Jupiter_Venus.rt file in the scenes/valid_scenes directory
+for exemple you can use the mix.rt file in the scenes/mandatory_scenes directory
 
-	./minirt scenes/valid_scenes/Uranus_Neptune_Jupiter_Venus.rt
+	./minirt scenes/mandatory_scenes/Uranus_Neptune_Jupiter_Venus.rt
 
- execute the program with valgrind excluding readline() leaks:
+ compile the bonus program and suppress the .o files:
 
-	make val
+	make bonus && make clean
+
+execute the bonus program with a file.rt (representing a scene) as argument
+
+	./minirt_bonus <scene_file.rt>
+ 
+for exemple you can use the Earth_Mars_Jupiter.rt file in the scenes/bonus_scenes directory
+
+	./minirt scenes/bonus_scenes/Earth_Mars_Jupiter.rt
+
 
 ## ARCHITECTURE:
 
@@ -53,11 +62,12 @@ for exemple you can use the Uranus_Neptune_Jupiter_Venus.rt file in the scenes/v
 - libft/ directory with the libft (+ get_next_line and ft_printf)
 - scenes/ directory with scenes to be used as argument for the program
 	- invalid_scenes/ directory with invalid scene files
-	- valid_scenes/ directory with valid scene files
-- src/ directory containing the main files of the project
-- utils/ directory for secondary files
-Makefile (with rules: make bonus clean fclean re)
-readme.md for explanations and main commands of the project
+	- mandatory_scenes/ directory with valid scene files for the mandatory executable
+	- bonus_scenes/ directory with valid scene files for the bonus executable
+- mandatory/ directory containing the mandatory part of the project
+- bonus/ directory for bonus part
+- Makefile (with rules: make bonus clean fclean re)
+- readme.md for explanations and main commands of the project
 
 ## PROJECT OVERVIEW (of the mandatory part):
 
@@ -293,13 +303,6 @@ The resulting vector is perpendicular to the plane formed by v1 and v2.
 Example:  
 Used when constructing the camera's orientation or computing the normal of a triangle surface.
 
-Parfait, avec ces deux précisions essentielles pour miniRT :
-
-- Le **FOV est horizontal** (pas vertical comme dans beaucoup de moteurs 3D)
-- La **distance entre la caméra et le viewport est configurable**
-
-Voici la version corrigée et bien adaptée pour ton `README.md` — en anglais et prête à intégrer :
-
 ---
 
 ## VIEWPORT
@@ -395,8 +398,6 @@ In **miniRT**, the viewport:
 
 Accurate viewport computation ensures your rays align with the camera’s view and that your rendered image matches the intended field of vision.
 
-Très bonne remarque ! Tu as raison, l’étape du **rayon d’ombre (shadow ray)** est essentielle dans le **ray casting complet**. Voici la version mise à jour avec cette étape intégrée proprement dans le déroulement logique — toujours en anglais, et formatée pour ton `README.md` :
-
 ---
 
 ## RAY CASTING STEP BY STEP
@@ -482,45 +483,5 @@ Write the computed color to the image buffer at the corresponding pixel location
 Absolutely! Here's a clean and concise **English markdown summary** you can use in your GitHub `README.md` for explaining how lighting is handled in your `miniRT` project:
 
 ---
-
-## Multiples lights in miniRT
-
-The rendering pipeline in `miniRT` follows a **ray tracing** approach with support for **multiple point lights**, ambient light, and a basic **Phong lighting model**.
-
-### Step-by-Step Lighting per Pixel
-
-1. **Cast a primary ray** from the camera through the current pixel.
-2. **Find the closest intersection** between the ray and any object in the scene.
-3. **If no object is hit**, the pixel is set to the background color.
-4. **If an object is hit**:
-   - Start with the **ambient light**, computed as:
-
-     ```c
-     final_color = object_color * ambient_intensity;
-     ```
-
-   - For each **point light source** in the scene:
-     1. **Cast a shadow ray** from the intersection point to the light.
-     2. If the shadow ray hits another object before reaching the light, the point is **in shadow** → skip this light.
-     3. Otherwise, compute **diffuse** and optional **specular** components:
-        - **Diffuse**:
-          ```c
-          diffuse = max(0, dot(normal, light_dir)) * light_intensity;
-          ```
-        - **Specular** (Phong):
-          ```c
-          specular = pow(max(0, dot(reflect_dir, view_dir)), shininess);
-          ```
-     4. Add the light contribution to the final color.
-
-5. **Clamp the final color** to the [0, 1] range (or [0, 255] depending on your color system).
-
-### Summary
-
-- Ambient light **multiplies** the object color (global tint).
-- Each point light is **added** only if it is visible from the hit point.
-- Shadows are supported via **shadow rays**.
-- The model supports realistic lighting with multiple light sources.
-
 
 
