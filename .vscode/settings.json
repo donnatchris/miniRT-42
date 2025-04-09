@@ -8,7 +8,8 @@
 		"random": "c",
 		"queue": "c",
 		"stack": "c",
-		"vector": "c"
+		"vector": "c",
+		"minirt_bonus.h": "c"
 	},
     "C_Cpp.errorSquiggles": "disabled"
 }
