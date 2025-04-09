@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_threading.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/09 15:24:14 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 15:26:46 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
