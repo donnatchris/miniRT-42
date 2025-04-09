@@ -19,14 +19,11 @@ It also emphasizes clean code structure, geometric reasoning, and the importance
 
 ### BONUS PART:
 
-- Add new object types: cones, disks, cubes, etc.
-- Implement reflections and recursive ray tracing
-- Add anti-aliasing (e.g., supersampling)
-- Enable camera movement or scene animation
-- Implement multi-light support, colored lights, or spotlights
-- Export the rendered image to a file (e.g., .bmp, .png)
-- Support textures and normal mapping
-- Add GUI elements or interactive scene manipulation
+- Add a new object type: cones, cubes, etc.
+- Implement specular lighting (Phong Lighting)
+- Implement multi-light support and colored lights
+- Support textures and bump mapping
+- Implement checkerboard
 
 ## SOME COMMANDS YOU CAN USE:
 
