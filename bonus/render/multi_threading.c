@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/09 11:28:19 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:44:11 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,19 @@ int	multi_threading(t_program *prog)
 	pthread_t	thread[4];
 	int			i;
 
-	pthread_create(&thread[0], NULL, render_thread0, prog);
-	pthread_create(&thread[1], NULL, render_thread1, prog);
-	pthread_create(&thread[2], NULL, render_thread2, prog);
-	pthread_create(&thread[3], NULL, render_thread3, prog);
+	if (pthread_create(&thread[0], NULL, render_thread0, prog))
+		return (1);
+	if (pthread_create(&thread[1], NULL, render_thread1, prog))
+		return (1);
+	if (pthread_create(&thread[2], NULL, render_thread2, prog))
+		return (1);
+	if (pthread_create(&thread[3], NULL, render_thread3, prog))
+		return (1);
 	i = -1;
 	while (i++ < 4)
-		pthread_join(thread[i], NULL);
+	{
+		if (pthread_join(thread[i], NULL))
+			return (1);
+	}
 	return (0);
 }
