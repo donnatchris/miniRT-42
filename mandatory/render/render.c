@@ -6,7 +6,7 @@
 /*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 14:26:12 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 13:58:19 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	render(t_program *prog)
 	if (init_img(prog))
 		return ;
 	y = -1;
-	while (y++ < HEIGHT)
+	while (++y < HEIGHT)
 	{
 		x = -1;
-		while (x++ < WIDTH)
+		while (++x < WIDTH)
 		{
 			color = choose_color(prog, x, y);
 			*(int *)(prog->img->addr + ((x + (y * WIDTH))
