@@ -6,7 +6,7 @@
 /*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:03:11 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/09 09:54:32 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:25:08 by chdonnat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <limits.h>
+# include <pthread.h>
 
 // headers
 # include "../libft/includes/libft.h"
@@ -177,6 +178,8 @@ int			mix_colors(int color1, int color2, double reflectivity);
 int			add_colors(int color1, int color2);
 int			apply_intensity_to_color(int base_color, int light_color,
 				double intensity);
+// multi_threading.c
+int			multi_threading(t_program *prog);
 // other_lightnings.c
 int			apply_reflection(t_program *prog, t_reflection data);
 int			ambient_lighting(t_hit hit, t_ambient_light ambient);
