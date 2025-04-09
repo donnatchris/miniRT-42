@@ -23,7 +23,7 @@ SRCS        =   mandatory/utils/utils_print.c  \
 				mandatory/intersection/intersect_plan.c \
 				mandatory/intersection/intersect_sphere.c \
 				mandatory/render/color.c \
-				mandatory/render/phong.c \
+				mandatory/render/lambert.c \
 				mandatory/render/rays.c \
 				mandatory/render/render.c \
 				mandatory/render/viewport.c \

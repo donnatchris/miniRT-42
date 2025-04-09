@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lambert_lightning..c                               :+:      :+:    :+:   */
+/*   lambert.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:48:42 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/08 14:32:10 by christophed      ###   ########.fr       */
+/*   Updated: 2025/04/09 09:43:21 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static double	get_lambert_lighting(t_hit hit, t_light light, t_program *prog)
 int	lighting(t_hit hit, t_light light, t_program *prog)
 {
 	double	intensity;
-	t_rgb	rgb;
 
 	intensity = get_lambert_lighting(hit, light, prog);
 	return (apply_intensity_to_color(hit.color, light.color, intensity));
