@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_threading.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/09 14:22:21 by olthorel         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:24:14 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int	multi_threading(t_program *prog)
 	{
 		if (pthread_join(thread[i], NULL))
 			return (1);
-		i++;
 	}
 	return (0);
 }
