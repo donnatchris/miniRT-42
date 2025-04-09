@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_delete_xpm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:11:22 by chdonnat          #+#    #+#             */
-/*   Updated: 2025/04/09 09:34:06 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:49:35 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	delete_all_xpm(t_dclst **head)
 {
 	t_dclst	*current;
 
+	if (!head || !*head)
+		return ;
 	current = *head;
 	while (1)
 	{

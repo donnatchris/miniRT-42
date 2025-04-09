@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_threading.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdonnat <chdonnat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: christophedonnat <christophedonnat@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 22:32:59 by christophed       #+#    #+#             */
-/*   Updated: 2025/04/09 11:44:11 by chdonnat         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:54:24 by christophed      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	*render_thread0(void *prog)
 	int	color;
 
 	y = -1;
-	while (y++ < HEIGHT / 2)
+	while (++y < HEIGHT / 2)
 	{
 		x = -1;
-		while (x++ < WIDTH / 2)
+		while (++x < WIDTH / 2)
 		{
 			color = choose_color(prog, x, y);
 			*(int *)(((t_program *) prog)->img->addr
@@ -40,10 +40,10 @@ static void	*render_thread1(void *prog)
 	int	color;
 
 	y = HEIGHT / 2 - 1;
-	while (y++ < HEIGHT)
+	while (++y < HEIGHT)
 	{
 		x = -1;
-		while (x++ < WIDTH / 2)
+		while (++x < WIDTH / 2)
 		{
 			color = choose_color(prog, x, y);
 			*(int *)(((t_program *) prog)->img->addr
@@ -61,10 +61,10 @@ static void	*render_thread2(void *prog)
 	int	color;
 
 	y = -1;
-	while (y++ < HEIGHT / 2)
+	while (++y < HEIGHT / 2)
 	{
 		x = WIDTH / 2 - 1;
-		while (x++ < WIDTH)
+		while (++x < WIDTH)
 		{
 			color = choose_color(prog, x, y);
 			*(int *)(((t_program *) prog)->img->addr
@@ -82,10 +82,10 @@ static void	*render_thread3(void *prog)
 	int	color;
 
 	y = HEIGHT / 2 - 1;
-	while (y++ < HEIGHT)
+	while (++y < HEIGHT)
 	{
 		x = WIDTH / 2 - 1;
-		while (x++ < WIDTH)
+		while (++x < WIDTH)
 		{
 			color = choose_color(prog, x, y);
 			*(int *)(((t_program *) prog)->img->addr
@@ -110,7 +110,7 @@ int	multi_threading(t_program *prog)
 	if (pthread_create(&thread[3], NULL, render_thread3, prog))
 		return (1);
 	i = -1;
-	while (i++ < 4)
+	while (++i < 4)
 	{
 		if (pthread_join(thread[i], NULL))
 			return (1);
