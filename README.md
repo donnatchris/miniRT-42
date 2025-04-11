@@ -478,10 +478,6 @@ Write the computed color to the image buffer at the corresponding pixel location
 
 ---
 
-Sure! Here's the full translation of your Lambert and Phong lighting models section for your `README.md`, in clear and professional English:
-
----
-
 ## LIGHTING MODELS: LAMBERT & PHONG
 
 In ray tracing, simulating realistic lighting is essential to make objects visible and expressive. Two fundamental models are used in **miniRT**: Lambert model (mandatory part) and Phong model (bonus part).
