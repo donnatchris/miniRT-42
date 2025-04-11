@@ -476,9 +476,80 @@ Clamp or normalize the result into a valid RGB color.
 
 Write the computed color to the image buffer at the corresponding pixel location.
 
+---
 
-Absolutely! Here's a clean and concise **English markdown summary** you can use in your GitHub `README.md` for explaining how lighting is handled in your `miniRT` project:
+Sure! Here's the full translation of your Lambert and Phong lighting models section for your `README.md`, in clear and professional English:
 
 ---
 
+## LIGHTING MODELS: LAMBERT & PHONG
 
+In ray tracing, simulating realistic lighting is essential to make objects visible and expressive. Two fundamental models are used in **miniRT**: Lambert model (mandatory part) and Phong model (bonus part).
+
+### **Lambert Model (Diffuse)**
+
+#### **What is it for?**  
+The Lambert model simulates **diffuse lighting**, which is the way light spreads evenly in all directions when it hits a rough or matte surface (like plaster or fabric).  
+It gives an idea of **how much light a point receives directly from a light source**, depending on its orientation.
+
+#### **Concept**  
+The perceived light intensity depends on **the angle between the light direction and the surface normal**.
+
+Formula:
+```c
+diffuse = max(0.0, dot(normal, light_dir)) * light_color * object_color;
+```
+
+- `normal`: surface normal at the point
+- `light_dir`: normalized vector from the point to the light source
+- `light_color`: color/intensity of the light
+- `object_color`: base color of the object
+
+#### 🛠️ **Implementation**  
+1. Compute the normal at the intersection point.  
+2. Normalize the direction to the light.  
+3. Take the dot product of the two vectors.  
+4. Multiply the result by the light color and the object color.
+
+---
+
+### **Phong Model (Specular)**
+
+#### **What is it for?**  
+The Phong model adds **specular highlights** (shininess) to the lighting, simulating how light reflects off smooth surfaces (metal, plastic, water, etc.).
+
+It enhances realism by adding visible light reflections where the **reflection angle matches the camera direction**.
+
+#### **Concept**  
+We compute the **reflected direction** of the light relative to the surface normal, and check how closely it aligns with the **view direction** (toward the camera).
+
+Formula:
+```c
+specular = pow(max(0.0, dot(view_dir, reflect_dir)), shininess) * light_color;
+```
+
+- `view_dir`: normalized vector from the point to the camera
+- `reflect_dir`: reflected light direction based on the surface normal
+- `shininess`: shininess factor (higher = tighter, sharper highlights)
+
+#### **Implementation**  
+1. Compute the reflection vector:
+```c
+reflect_dir = reflect(-light_dir, normal);
+```
+2. Take the dot product of `view_dir` and `reflect_dir`.  
+3. Raise it to the power of `shininess` for a concentrated highlight.  
+4. Multiply by the light color/intensity.
+
+### 🎯 **Final Result**  
+The total lighting at a point is often the **sum of both models**, weighted based on the material:
+```c
+color = ambient + diffuse + specular;
+```
+
+### 📌 Notes  
+- `dot(...)` returns a value between -1 and 1, clamped using `max(0, ...)`.  
+- It’s important to **normalize all vectors** to maintain consistent results.  
+- The Phong model is **empirical**, meaning it's based on realistic observation rather than strict physical simulation.
+
+---
