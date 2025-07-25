@@ -1,4 +1,4 @@
-# 🌐 MiniRT - Projet 42
+# PROJET MINIRT DE 42
 
 Par chdonnat (Christophe Donnat) et olthorel (Olivier Thorel) de 42 Perpignan, France
 
