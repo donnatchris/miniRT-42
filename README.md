@@ -4,7 +4,7 @@ By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan,
 
 [🇫🇷 Voir la version française](README.fr.md)
 
-![temple](img/templ.png)
+![temple](img/temple.png)
 
 ---
 
