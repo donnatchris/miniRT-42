@@ -1,4 +1,4 @@
-# Project MiniRT from 42
+# PROJECT MINIRT FOR 42
 
 By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan, France
 
