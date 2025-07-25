@@ -2,9 +2,9 @@
 
 Par chdonnat (Christophe Donnat) et olthorel (Olivier Thorel) de 42 Perpignan, France
 
-<p align="center">
-  <img src="https://github.com/donnatchris/miniRT/blob/main/img/Earth_Mars_Jupiter.png" />
-</p>
+![temple](img/temple.png)
+
+![planetes](img/Earth_Mars_Jupiter.png)
 
 ---
 
