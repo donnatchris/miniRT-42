@@ -4,9 +4,7 @@ By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan,
 
 [🇫🇷 Voir la version française](README.fr.md)
 
-<p align="center">
-  <img src="https://github.com/donnatchris/miniRT/blob/main/img/Earth_Mars_Jupiter.png" />
-</p>
+![temple](img/templ.png)
 
 ---
 
