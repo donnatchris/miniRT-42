@@ -1,8 +1,8 @@
+##### [🇫🇷 Version française](README.fr.md) / [🇬🇧 English version](README.md)
+
 # PROJECT MINIRT FOR 42
 
 By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan, France
-
-[🇫🇷 Voir la version française](README.fr.md)
 
 ![temple](img/temple.png)
 
