@@ -2,6 +2,8 @@
 
 Par chdonnat (Christophe Donnat) et olthorel (Olivier Thorel) de 42 Perpignan, France
 
+[🇬🇧 Go to English version](README.md)
+
 ![temple](img/temple.png)
 
 ![planetes](img/Earth_Mars_Jupiter.png)
