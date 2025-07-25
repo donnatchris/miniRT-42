@@ -6,6 +6,8 @@ By chdonnat (Christophe Donnat) and olthorel (Olivier Thorel) from 42 Perpignan,
 
 ![temple](img/temple.png)
 
+![planetes](img/Earth_Mars_Jupiter.png)
+
 ---
 
 ## AIM OF THE PROJECT:
